@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
 
@@ -12,14 +13,22 @@ public class Tests
     [Test]
     public void Test1()
     {
-        var input = CharStreams.fromString("@startuml\n\nclass Fruit {\n  - vitamins int\n  + eat()\n}\n\n@enduml\n");
+        var input = CharStreams.fromString("@startuml\r\rclass Fruit {\r  - vitamins int\r  + eat()\r}\r\r@enduml\r");
+
+
+        // process
         var lexer = new PumlgLexer(input);
         var tokens = new CommonTokenStream(lexer);
         var parser = new PumlgParser(tokens);
-        var tree = parser.uml(); // 'diagram' = point d'entrée dans la grammaire
+        var tree = parser.uml();
 
-        Console.WriteLine(tree.ToStringTree());
+        var visitor = new PlantUmlReconstructor();
+        var reconstructed = visitor.Visit(tree);
 
+        Console.WriteLine("Original:\r" + input);
+        Console.WriteLine("Reconstructed:\r" + reconstructed);
+
+        Assert.That(input.ToString() ?? string.Empty,  Is.EqualTo(reconstructed));
         Assert.Pass();
     }
 }

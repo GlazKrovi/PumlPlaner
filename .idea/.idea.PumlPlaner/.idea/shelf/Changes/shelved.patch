@@ -1,0 +1,81 @@
+Index: PumlPlaner/UnitTest1.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Antlr4.Runtime;\n\nnamespace PumlPlaner;\n\npublic class Tests\n{\n    [SetUp]\n    public void Setup()\n    {\n    }\n\n    [Test]\n    public void Test1()\n    {\n        var input = CharStreams.fromString(\"@startuml\\n\\nclass Fruit {\\n  - vitamins int\\n  + eat()\\n}\\n\\n@enduml\\n\");\n        var lexer = new PumlgLexer(input);\n        var tokens = new CommonTokenStream(lexer);\n        var parser = new PumlgParser(tokens);\n        var tree = parser.uml(); // 'diagram' = point d'entrée dans la grammaire\n\n        Console.WriteLine(tree.ToStringTree());\n\n        Assert.Pass();\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/PumlPlaner/UnitTest1.cs b/PumlPlaner/UnitTest1.cs
+--- a/PumlPlaner/UnitTest1.cs	(revision 5402e63187080d6838b665eb4f4c925a25602836)
++++ b/PumlPlaner/UnitTest1.cs	(date 1754931345248)
+@@ -1,7 +1,42 @@
+-using Antlr4.Runtime;
++// using Antlr4.Runtime;
+ 
+ namespace PumlPlaner;
+ 
++// public class UmlClass
++// {
++//     public string Name { get; set; }
++//     public List<string> Attributes { get; set; } = new();
++//     public List<string> Methods { get; set; } = new();
++// }
++//
++// public class UmlDiagram
++// {
++//     public List<UmlClass> Classes { get; set; } = new();
++// }
++//
++// public class PumlgVisitor : PumlgBaseVisitor<object>
++// {
++//     public UmlDiagram Diagram { get; } = new UmlDiagram();
++//
++//     public override object VisitClass_declaration(PumlgParser.Class_declarationContext context)
++//     {
++//         var umlClass = new UmlClass
++//         {
++//             Name = context.ident().GetText()
++//         };
++//
++//         foreach (var attrCtx in context.attribute())
++//             umlClass.Attributes.Add(attrCtx.GetText());
++//
++//         foreach (var methodCtx in context.method())
++//             umlClass.Methods.Add(methodCtx.GetText());
++//
++//         Diagram.Classes.Add(umlClass);
++//         return null;
++//     }
++// }
++
++
+ public class Tests
+ {
+     [SetUp]
+@@ -12,13 +47,19 @@
+     [Test]
+     public void Test1()
+     {
+-        var input = CharStreams.fromString("@startuml\n\nclass Fruit {\n  - vitamins int\n  + eat()\n}\n\n@enduml\n");
+-        var lexer = new PumlgLexer(input);
+-        var tokens = new CommonTokenStream(lexer);
+-        var parser = new PumlgParser(tokens);
+-        var tree = parser.uml(); // 'diagram' = point d'entrée dans la grammaire
+-
+-        Console.WriteLine(tree.ToStringTree());
++        // var input = CharStreams.fromString("@startuml\n\nclass Fruit {\n  - vitamins int\n  + eat()\n}\n\n@enduml\n");
++        // var lexer = new PumlgLexer(input);
++        // var tokens = new CommonTokenStream(lexer);
++        // var parser = new PumlgParser(tokens);
++        // var tree = parser.uml();
++        //
++        // Console.WriteLine(tree.ToInfoString(parser));
++        // Console.WriteLine();
++        // Console.WriteLine();
++        // Console.WriteLine(tree.ToStringTree());
++        // Console.WriteLine();
++        // Console.WriteLine();
++        // Console.WriteLine(tree.ToString());
+ 
+         Assert.Pass();
+     }

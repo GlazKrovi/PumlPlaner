@@ -1,0 +1,127 @@
+Index: .idea/.idea.PumlPlaner/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"8a772007-c64a-4ed1-9ffe-105ada61c06b\" name=\"Changes\" comment=\"\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/PumlPlaner/UnitTest1.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/PumlPlaner/UnitTest1.cs\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"MetaFilesCheckinStateConfiguration\" checkMetaFiles=\"true\" />\n  <component name=\"ProjectColorInfo\">{\n  &quot;customColor&quot;: &quot;&quot;,\n  &quot;associatedIndex&quot;: 5\n}</component>\n  <component name=\"ProjectId\" id=\"313zFFKNMtG9Iz1l3tkr713ioyb\" />\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\"><![CDATA[{\n  \"keyToString\": {\n    \"4ec2f5f0-ec56-45ec-8a4e-7f3ae91247c3.executor\": \"Run\",\n    \"ModuleVcsDetector.initialDetectionPerformed\": \"true\",\n    \"RunOnceActivity.ShowReadmeOnStart\": \"true\",\n    \"RunOnceActivity.git.unshallow\": \"true\",\n    \"git-widget-placeholder\": \"master\",\n    \"node.js.detected.package.eslint\": \"true\",\n    \"node.js.detected.package.tslint\": \"true\",\n    \"node.js.selected.package.eslint\": \"(autodetect)\",\n    \"node.js.selected.package.tslint\": \"(autodetect)\",\n    \"nodejs_package_manager_path\": \"npm\",\n    \"settings.editor.selected.configurable\": \"settings.sync\",\n    \"vue.rearranger.settings.migration\": \"true\"\n  }\n}]]></component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"8a772007-c64a-4ed1-9ffe-105ada61c06b\" name=\"Changes\" comment=\"\" />\n      <created>1754767439006</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1754767439006</updated>\n      <workItem from=\"1754767440190\" duration=\"701000\" />\n      <workItem from=\"1754768519944\" duration=\"529000\" />\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"init project\">\n      <option name=\"closed\" value=\"true\" />\n      <created>1754767888025</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1754767888025</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"UnityCheckinConfiguration\" checkUnsavedScenes=\"true\" />\n  <component name=\"UnityProjectConfiguration\" hasMinimizedUI=\"false\" />\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"CLEAR_INITIAL_COMMIT_MESSAGE\" value=\"true\" />\n    <MESSAGE value=\"init project\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"init project\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.OperationCanceledException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.OperationCanceledException\" />\n          <option name=\"timeStamp\" value=\"1\" />\n        </breakpoint>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.Threading.Tasks.TaskCanceledException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.Threading.Tasks.TaskCanceledException\" />\n          <option name=\"timeStamp\" value=\"2\" />\n        </breakpoint>\n        <breakpoint enabled=\"true\" type=\"DotNet_Exception_Breakpoints\">\n          <properties exception=\"System.Threading.ThreadAbortException\" breakIfHandledByOtherCode=\"false\" displayValue=\"System.Threading.ThreadAbortException\" />\n          <option name=\"timeStamp\" value=\"3\" />\n        </breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.PumlPlaner/.idea/workspace.xml b/.idea/.idea.PumlPlaner/.idea/workspace.xml
+--- a/.idea/.idea.PumlPlaner/.idea/workspace.xml	(revision 5402e63187080d6838b665eb4f4c925a25602836)
++++ b/.idea/.idea.PumlPlaner/.idea/workspace.xml	(date 1754931838700)
+@@ -4,18 +4,38 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
++    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="visitor complex">
++      <change afterPath="$PROJECT_DIR$/PumlPlaner/Pumlg.g4" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/Pumlg.interp" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/Pumlg.tokens" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgBaseListener.cs" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgLexer.cs" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgLexer.interp" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgLexer.tokens" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgListener.cs" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg/PumlgParser.cs" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/PumlPlaner/PumlPlaner.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/PumlPlaner.csproj" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/PumlPlaner/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/UnitTest1.cs" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
++  </component>
++  <component name="DpaMonitoringSettings">
++    <option name="firstShow" value="false" />
+   </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="HighlightingSettingsPerFile">
++    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/09190d4d899c4e68827ef2ee0d8f96282ee00/db/1fe7d371/AbstractParseTreeVisitor`1.cs" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/98514e314f1feddb3082dbe8507ecec1a81b6491c0db7dc53c2e8c13949e4360/Assert.cs" root0="FORCE_HIGHLIGHTING" />
++    <setting file="file://$PROJECT_DIR$/PumlPlaner/UnitTest1.cs" root0="FORCE_HIGHLIGHTING" />
++  </component>
+   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+   <component name="ProjectColorInfo">{
+   &quot;customColor&quot;: &quot;&quot;,
+@@ -26,22 +46,22 @@
+     <option name="hideEmptyMiddlePackages" value="true" />
+     <option name="showLibraryContents" value="true" />
+   </component>
+-  <component name="PropertiesComponent"><![CDATA[{
+-  "keyToString": {
+-    "4ec2f5f0-ec56-45ec-8a4e-7f3ae91247c3.executor": "Run",
+-    "ModuleVcsDetector.initialDetectionPerformed": "true",
+-    "RunOnceActivity.ShowReadmeOnStart": "true",
+-    "RunOnceActivity.git.unshallow": "true",
+-    "git-widget-placeholder": "master",
+-    "node.js.detected.package.eslint": "true",
+-    "node.js.detected.package.tslint": "true",
+-    "node.js.selected.package.eslint": "(autodetect)",
+-    "node.js.selected.package.tslint": "(autodetect)",
+-    "nodejs_package_manager_path": "npm",
+-    "settings.editor.selected.configurable": "settings.sync",
+-    "vue.rearranger.settings.migration": "true"
++  <component name="PropertiesComponent">{
++  &quot;keyToString&quot;: {
++    &quot;4ec2f5f0-ec56-45ec-8a4e-7f3ae91247c3.executor&quot;: &quot;Run&quot;,
++    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
++    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
++    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
++    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
++    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
++    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
++    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
++    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
++    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;,
++    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+   }
+-}]]></component>
++}</component>
+   <component name="TaskManager">
+     <task active="true" id="Default" summary="Default task">
+       <changelist id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
+@@ -50,7 +70,9 @@
+       <option name="presentableId" value="Default" />
+       <updated>1754767439006</updated>
+       <workItem from="1754767440190" duration="701000" />
+-      <workItem from="1754768519944" duration="529000" />
++      <workItem from="1754768519944" duration="4175000" />
++      <workItem from="1754926723713" duration="211000" />
++      <workItem from="1754928352194" duration="3451000" />
+     </task>
+     <task id="LOCAL-00001" summary="init project">
+       <option name="closed" value="true" />
+@@ -60,7 +82,15 @@
+       <option name="project" value="LOCAL" />
+       <updated>1754767888025</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="add antlr to parse uml">
++      <option name="closed" value="true" />
++      <created>1754769136259</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1754769136259</updated>
++    </task>
++    <option name="localTasksCounter" value="3" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -71,7 +101,9 @@
+   <component name="VcsManagerConfiguration">
+     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+     <MESSAGE value="init project" />
+-    <option name="LAST_COMMIT_MESSAGE" value="init project" />
++    <MESSAGE value="add antlr to parse uml" />
++    <MESSAGE value="visitor complex" />
++    <option name="LAST_COMMIT_MESSAGE" value="visitor complex" />
+   </component>
+   <component name="XDebuggerManager">
+     <breakpoint-manager>
