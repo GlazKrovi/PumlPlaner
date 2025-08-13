@@ -29,7 +29,6 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
             sb.Append(Visit(classDecl));
         }
 
-        // Ajoute ici d'autres visites si besoin (connections, enums...)
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }
@@ -38,27 +37,27 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        // Type de la classe : "class", "abstract", "interface"...
+
         var classType = context.class_type().GetText();
 
-        // Nom de la classe (ident)
+
         var className = context.ident().GetText();
 
         sb.Append($"{classType} {className}");
 
-        // Si la classe a un corps (attributs/méthodes)
-        if (context.ChildCount > 2) // typiquement { ... }
+
+        if (context.ChildCount > 2)
         {
             sb.AppendLine(" {");
 
-            // Attributs
+
             foreach (var attr in context.attribute())
             {
                 sb.Append("  ");
                 sb.AppendLine(Visit(attr).TrimEnd());
             }
 
-            // Méthodes
+
             foreach (var method in context.method())
             {
                 sb.Append("  ");
@@ -79,21 +78,21 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        // Visibilité (+, -, #)
+
         if (context.visibility() != null)
             sb.Append(context.visibility().GetText());
 
-        // Modifiers (static, abstract)
+
         if (context.modifiers() != null)
             sb.Append(context.modifiers().GetText());
 
-        // Type
+
         if (context.type_declaration() != null)
             sb.Append(" " + context.type_declaration().GetText());
         else
             sb.Append(" ");
 
-        // Nom de l'attribut
+
         sb.Append(" " + context.ident().GetText());
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
@@ -103,24 +102,24 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        // Visibilité (+, -, #)
+
         if (context.visibility() != null)
             sb.Append(context.visibility().GetText());
 
-        // Modifiers (static, abstract)
+
         if (context.modifiers() != null)
             sb.Append(context.modifiers().GetText());
 
-        // Type de retour
+
         if (context.type_declaration() != null)
             sb.Append(" " + context.type_declaration().GetText());
         else
             sb.Append(" ");
 
-        // Nom de la méthode
+
         sb.Append(" " + context.ident().GetText());
 
-        // Arguments
+
         sb.Append("(");
         if (context.function_argument_list() != null)
         {
