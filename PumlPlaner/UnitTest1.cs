@@ -14,7 +14,19 @@ public class Tests
     [Test]
     public void Test1()
     {
-        var input = CharStreams.fromString( StringHelper.NormalizeBreakLines("@startuml\r\rclass Fruit {\r  - vitamins int\r  + eat()\r}\r\r@enduml\r"));
+        var rawInput = """
+                       @startuml
+
+                       class Fruit {
+                         - vitamins int
+                         + eat()
+                       }
+
+                       @enduml
+                       """;
+        rawInput = StringHelper.NormalizeBreakLines(rawInput);
+        rawInput = StringHelper.RemoveMultipleBreaks(rawInput);
+        var input = CharStreams.fromString(rawInput);
 
         // process
         var lexer = new PumlgLexer(input);
@@ -23,12 +35,12 @@ public class Tests
         var tree = parser.uml();
 
         var visitor = new PlantUmlReconstructor();
-        var reconstructed = visitor.Visit(tree);
+        var reconstructed = visitor.VisitUml(tree);
 
         Console.WriteLine("Original:\r" + input);
         Console.WriteLine("Reconstructed:\r" + reconstructed);
 
-        Assert.That(input.ToString() ?? string.Empty,  Is.EqualTo(reconstructed));
+        Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));
         Assert.Pass();
     }
 }

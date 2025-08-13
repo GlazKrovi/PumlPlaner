@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/UnitTest1.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +55,7 @@
       <workItem from="1754933900231" duration="127000" />
       <workItem from="1754934048790" duration="69000" />
       <workItem from="1754934183663" duration="1851000" />
-      <workItem from="1755109440317" duration="608000" />
+      <workItem from="1755109440317" duration="1792000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -72,7 +73,23 @@
       <option name="project" value="LOCAL" />
       <updated>1754938613133</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="normalize break lines">
+      <option name="closed" value="true" />
+      <created>1755110288646</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1755110288646</updated>
+    </task>
+    <task id="LOCAL-00004" summary="remove comments">
+      <option name="closed" value="true" />
+      <created>1755110307559</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1755110307559</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -84,7 +101,9 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="init project" />
     <MESSAGE value="regenerate vocabulary with a visitor and use it to rebuild the initial schema" />
-    <option name="LAST_COMMIT_MESSAGE" value="regenerate vocabulary with a visitor and use it to rebuild the initial schema" />
+    <MESSAGE value="normalize break lines" />
+    <MESSAGE value="remove comments" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove comments" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
