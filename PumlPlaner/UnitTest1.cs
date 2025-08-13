@@ -26,13 +26,23 @@ public class Tests
                        """;
         rawInput = StringHelper.NormalizeBreakLines(rawInput);
         rawInput = StringHelper.RemoveMultipleBreaks(rawInput);
+        rawInput = StringHelper.NormalizeEndOfFile(rawInput);
         var input = CharStreams.fromString(rawInput);
 
         // process
-        var lexer = new PumlgLexer(input);
-        var tokens = new CommonTokenStream(lexer);
-        var parser = new PumlgParser(tokens);
-        var tree = parser.uml();
+        PumlgParser.UmlContext tree;
+        try
+        {
+            var lexer = new PumlgLexer(input);
+            var tokens = new CommonTokenStream(lexer);
+            var parser = new PumlgParser(tokens);
+            tree = parser.uml();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("AST build error: " + e);
+            throw;
+        }
 
         var visitor = new PlantUmlReconstructor();
         var reconstructed = visitor.VisitUml(tree);
@@ -41,6 +51,5 @@ public class Tests
         Console.WriteLine("Reconstructed:\r" + reconstructed);
 
         Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));
-        Assert.Pass();
     }
 }

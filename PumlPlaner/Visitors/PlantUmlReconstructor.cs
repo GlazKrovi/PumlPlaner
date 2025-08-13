@@ -102,23 +102,23 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-
         if (context.visibility() != null)
             sb.Append(context.visibility().GetText());
-
 
         if (context.modifiers() != null)
             sb.Append(context.modifiers().GetText());
 
-
         if (context.type_declaration() != null)
-            sb.Append(" " + context.type_declaration().GetText());
-        else
+        {
+            sb.Append(" ");
+            sb.Append(context.type_declaration().GetText());
+        }
+
+
+        if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
             sb.Append(" ");
 
-
-        sb.Append(" " + context.ident().GetText());
-
+        sb.Append(context.ident().GetText());
 
         sb.Append("(");
         if (context.function_argument_list() != null)

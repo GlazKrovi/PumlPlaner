@@ -15,6 +15,12 @@ public static partial class StringHelper
         return MultiBreaksRegex().Replace(text, "\n");
     }
 
+    internal static string NormalizeEndOfFile(string text)
+    {
+        if (text.EndsWith('\n')) return text;
+        return text + "\n";
+    }
+
     [GeneratedRegex(@"\n{2,}")]
     private static partial Regex MultiBreaksRegex();
 }
