@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using PumlPlaner.Helpers;
 
 namespace PumlPlaner.Visitors;
 
@@ -13,9 +14,10 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
         {
             sb.Append(Visit(child));
         }
+
         sb.AppendLine("@enduml");
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitClass_diagram(PumlgParser.Class_diagramContext context)
@@ -29,7 +31,7 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
 
         // Ajoute ici d'autres visites si besoin (connections, enums...)
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitClass_declaration(PumlgParser.Class_declarationContext context)
@@ -70,7 +72,7 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
             sb.AppendLine();
         }
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitAttribute(PumlgParser.AttributeContext context)
@@ -94,7 +96,7 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
         // Nom de l'attribut
         sb.Append(" " + context.ident().GetText());
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitMethod(PumlgParser.MethodContext context)
@@ -124,9 +126,10 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
         {
             sb.Append(Visit(context.function_argument_list()));
         }
+
         sb.Append(")");
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
@@ -136,7 +139,8 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
         {
             args.Add(Visit(arg));
         }
-        return string.Join(", ", args);
+
+        return StringHelper.NormalizeBreakLines(string.Join(", ", args));
     }
 
     public override string VisitFunction_argument(PumlgParser.Function_argumentContext context)
@@ -148,6 +152,6 @@ public class PlantUmlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(context.ident().GetText());
 
-        return sb.ToString();
+        return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using PumlPlaner.Helpers;
 using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
@@ -13,8 +14,7 @@ public class Tests
     [Test]
     public void Test1()
     {
-        var input = CharStreams.fromString("@startuml\r\rclass Fruit {\r  - vitamins int\r  + eat()\r}\r\r@enduml\r");
-
+        var input = CharStreams.fromString( StringHelper.NormalizeBreakLines("@startuml\r\rclass Fruit {\r  - vitamins int\r  + eat()\r}\r\r@enduml\r"));
 
         // process
         var lexer = new PumlgLexer(input);
