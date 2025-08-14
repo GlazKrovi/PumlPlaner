@@ -4,7 +4,7 @@ using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
 
-public class Tests
+public class AstTests
 {
     [SetUp]
     public void Setup()
