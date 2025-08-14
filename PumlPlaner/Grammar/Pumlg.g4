@@ -1,5 +1,7 @@
 grammar Pumlg;
 
+// we can't use PascalCase because of g4 syntax rules
+
 uml:
     '@startuml'
     (NEWLINE | class_diagram)
