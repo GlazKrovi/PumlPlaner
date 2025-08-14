@@ -6,8 +6,10 @@ public static partial class StringHelper
 {
     internal static string NormalizeBreakLines(string text)
     {
-        return text.Replace("\r\n", "\n")
-            .Replace("\r", "\n");
+        return text
+            .Replace("\r", "\n")
+            .Replace("\\r", "\n")
+            .Replace("\\n", "\n");
     }
 
     internal static string RemoveMultipleBreaks(string text)
@@ -21,6 +23,6 @@ public static partial class StringHelper
         return text + "\n";
     }
 
-    [GeneratedRegex(@"\n{2,}")]
+    [GeneratedRegex(@"\n\s*\n")]
     private static partial Regex MultiBreaksRegex();
 }

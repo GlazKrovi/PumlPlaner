@@ -5,14 +5,13 @@ namespace PumlPlaner;
 
 public class NormalizedInput
 {
-    private string RawInput { get; set;  }
+    private string RawInput { get; }
 
     public NormalizedInput(string rawInput)
     {
         RawInput = StringHelper.NormalizeBreakLines(rawInput);
-        RawInput = StringHelper.RemoveMultipleBreaks(rawInput);
-        RawInput = StringHelper.NormalizeEndOfFile(rawInput);
-        Console.WriteLine("at creation : " + RawInput);
+        RawInput = StringHelper.RemoveMultipleBreaks(RawInput);
+        RawInput = StringHelper.NormalizeEndOfFile(RawInput);
     }
 
     public override string ToString()
@@ -22,6 +21,6 @@ public class NormalizedInput
 
     public ICharStream ToCharStream()
     {
-        return  CharStreams.fromString(RawInput);
+        return CharStreams.fromString(RawInput);
     }
 }

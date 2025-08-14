@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlPlaner/NormalizedInput.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/NormalizedInput.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/NormalizerTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/NormalizerTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +59,8 @@
       <workItem from="1754934048790" duration="69000" />
       <workItem from="1754934183663" duration="1851000" />
       <workItem from="1755109440317" duration="2587000" />
-      <workItem from="1755188290062" duration="1373000" />
+      <workItem from="1755188290062" duration="2118000" />
+      <workItem from="1755194090784" duration="733000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -126,7 +126,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755188968694</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="add tests for each function of normalizer">
+      <option name="closed" value="true" />
+      <created>1755190101602</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1755190101602</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,7 +152,8 @@
     <MESSAGE value="Get the exact same schema" />
     <MESSAGE value="rename tests for cleaner code" />
     <MESSAGE value="create a test for input normalization" />
-    <option name="LAST_COMMIT_MESSAGE" value="create a test for input normalization" />
+    <MESSAGE value="add tests for each function of normalizer" />
+    <option name="LAST_COMMIT_MESSAGE" value="add tests for each function of normalizer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

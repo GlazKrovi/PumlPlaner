@@ -84,6 +84,7 @@ public class StringHelperTests
                                        + eat()
                                      }
                                      @enduml
+                                     
                                      """;
 
         Assert.That(normalized.ToString(), Is.Not.EqualTo(rawInput));
