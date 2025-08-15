@@ -4,7 +4,7 @@ using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
 
-public class PlantUmlMerger : PumlgBaseVisitor<string>
+public class PlantUmlMerger : PlantUmlReconstructor
 {
     public string VisitUml(params PumlgParser.UmlContext[] contexts)
     {
@@ -26,6 +26,6 @@ public class PlantUmlMerger : PumlgBaseVisitor<string>
         }
 
         sb.AppendLine("@enduml");
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return new NormalizedInput(sb.ToString()).ToString();
     }
 }

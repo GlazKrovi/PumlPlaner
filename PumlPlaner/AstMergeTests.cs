@@ -39,6 +39,8 @@ public class AstMergeTests
                                      + hit()
                                    }
                                    @enduml
+                                   
+                                   
                                    """;
 
         // process
@@ -48,6 +50,6 @@ public class AstMergeTests
         var visitor = new PlantUmlMerger();
         var merged = visitor.VisitUml(firstAst.Tree, secondAst.Tree);
 
-        Assert.That(merged.ToString() ?? string.Empty, Is.EqualTo(expectedResult));
+        Assert.That(merged, Is.EqualTo(expectedResult));
     }
 }
