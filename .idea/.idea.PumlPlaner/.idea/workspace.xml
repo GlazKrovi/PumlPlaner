@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AnalysisUIOptions">
+    <option name="SCOPE_TYPE" value="8" />
+    <option name="CUSTOM_SCOPE_NAME" value="Solution" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/PlantUmlMerger.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/PlantUmlMerger.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner.sln.DotSettings.user" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +164,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755262811096</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="sort files">
+      <option name="closed" value="true" />
+      <created>1755264614389</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1755264614389</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -179,7 +194,8 @@
     <MESSAGE value="pass test of normalizer" />
     <MESSAGE value="no pascal case" />
     <MESSAGE value="should merge ast" />
-    <option name="LAST_COMMIT_MESSAGE" value="should merge ast" />
+    <MESSAGE value="sort files" />
+    <option name="LAST_COMMIT_MESSAGE" value="sort files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

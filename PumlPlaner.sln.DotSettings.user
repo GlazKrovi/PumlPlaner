@@ -6,5 +6,6 @@
     &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.NormalizeEndOfFile_ShouldAppendNewlineIfMissing&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.ShouldNormalizeEntries&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.AstMergeTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.Tests.PlantUmlDeduplicatorTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
