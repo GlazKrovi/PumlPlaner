@@ -4,7 +4,7 @@ namespace PumlPlaner.Helpers;
 
 public static partial class StringHelper
 {
-    internal static string NormalizeBreakLines(string text)
+    public static string NormalizeBreakLines(string text)
     {
         return text
             .Replace("\r", "\n")
@@ -12,12 +12,12 @@ public static partial class StringHelper
             .Replace("\\n", "\n");
     }
 
-    internal static string RemoveMultipleBreaks(string text)
+    public static string RemoveMultipleBreaks(string text)
     {
         return MultiBreaksRegex().Replace(text, "\n");
     }
 
-    internal static string NormalizeEndOfFile(string text)
+    public static string NormalizeEndOfFile(string text)
     {
         if (text.EndsWith('\n')) return text;
         return text + "\n";
