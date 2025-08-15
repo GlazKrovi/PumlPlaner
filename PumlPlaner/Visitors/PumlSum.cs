@@ -1,8 +1,7 @@
 ﻿using System.Text;
 using PumlPlaner.Helpers;
-using PumlPlaner.Visitors;
 
-namespace PumlPlaner;
+namespace PumlPlaner.Visitors;
 
 public class PumlSum : PumlReconstructor
 {

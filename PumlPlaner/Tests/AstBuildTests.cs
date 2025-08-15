@@ -3,7 +3,7 @@ using PumlPlaner.AST;
 using PumlPlaner.Helpers;
 using PumlPlaner.Visitors;
 
-namespace PumlPlaner;
+namespace PumlPlaner.Tests;
 
 public class AstBuildTests
 {

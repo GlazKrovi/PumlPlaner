@@ -1,6 +1,7 @@
 ﻿using PumlPlaner.AST;
+using PumlPlaner.Visitors;
 
-namespace PumlPlaner;
+namespace PumlPlaner.Tests;
 
 public class AstSumTests
 {

@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime;
-using PumlPlaner.Helpers;
 
-namespace PumlPlaner;
+namespace PumlPlaner.Helpers;
 
 public class NormalizedInput
 {

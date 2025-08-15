@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using PumlPlaner.AST;
+using PumlPlaner.Visitors;
 
 namespace PumlPlaner.Tests
 {

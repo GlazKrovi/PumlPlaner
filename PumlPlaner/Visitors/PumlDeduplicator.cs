@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using PumlPlaner.Helpers;
-using PumlPlaner.Visitors;
 
-namespace PumlPlaner
+namespace PumlPlaner.Visitors
 {
     public class PumlDeduplicator : PumlReconstructor
     {
