@@ -1,6 +1,6 @@
 ﻿using PumlPlaner.Helpers;
 
-namespace PumlPlaner.Tests;
+namespace PumlPlanerTester;
 
 public class StringHelperTests
 {

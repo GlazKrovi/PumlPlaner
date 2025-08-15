@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PumlPlanerTester", "PumlPlanerTester\PumlPlanerTester.csproj", "{6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PumlPlaner", "PumlPlaner\PumlPlaner.csproj", "{3C57B5EF-B616-439C-92F5-918F4E9C8367}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

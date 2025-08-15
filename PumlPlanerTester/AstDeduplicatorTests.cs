@@ -1,8 +1,8 @@
 ﻿using PumlPlaner.AST;
-using PumlPlaner.Visitors;
 using PumlPlaner.Helpers;
+using PumlPlaner.Visitors;
 
-namespace PumlPlaner.Tests;
+namespace PumlPlanerTester;
 
 public class PlantUmlDeduplicatorTests
 {
