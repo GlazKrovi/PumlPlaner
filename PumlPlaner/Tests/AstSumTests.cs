@@ -1,5 +1,6 @@
 ﻿using PumlPlaner.AST;
 using PumlPlaner.Visitors;
+using PumlPlaner.Helpers;
 
 namespace PumlPlaner.Tests;
 
@@ -26,7 +27,7 @@ public class AstSumTests
                                    @enduml
                                    """;
 
-        const string expectedResult = """
+        var expectedResult = StringHelper.NormalizeBreakLines("""
                                       @startuml
                                       class Charachter {
                                         - string name
@@ -38,7 +39,7 @@ public class AstSumTests
                                       }
                                       @enduml
 
-                                      """;
+                                      """);
 
         // process
         var firstAst = new SchemeAst(firstInput);

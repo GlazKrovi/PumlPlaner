@@ -1,5 +1,6 @@
 ﻿using PumlPlaner.AST;
 using PumlPlaner.Visitors;
+using PumlPlaner.Helpers;
 
 namespace PumlPlaner.Tests;
 
@@ -20,14 +21,14 @@ public class PlantUmlDeduplicatorTests
 
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Foo {
-                                  + bar()
-                                }
-                                @enduml
+        var expected = StringHelper.NormalizeBreakLines("""
+                                 @startuml
+                                 class Foo {
+                                   + bar()
+                                 }
+                                 @enduml
 
-                                """;
+                                 """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();
@@ -57,15 +58,15 @@ public class PlantUmlDeduplicatorTests
 
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Foo {
-                                  + bar()
-                                  + baz()
-                                }
-                                @enduml
+        var expected = StringHelper.NormalizeBreakLines("""
+                                 @startuml
+                                 class Foo {
+                                   + bar()
+                                   + baz()
+                                 }
+                                 @enduml
 
-                                """;
+                                 """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();
@@ -98,17 +99,17 @@ public class PlantUmlDeduplicatorTests
 
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Foo {
-                                  + bar(int a)
-                                  + bar(string b)
-                                  + bar(int a, string b)
-                                  + bar()
-                                }
-                                @enduml
+        var expected = StringHelper.NormalizeBreakLines("""
+                                 @startuml
+                                 class Foo {
+                                   + bar(int a)
+                                   + bar(string b)
+                                   + bar(int a, string b)
+                                   + bar()
+                                 }
+                                 @enduml
 
-                                """;
+                                 """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();

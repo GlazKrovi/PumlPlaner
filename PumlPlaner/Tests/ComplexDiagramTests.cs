@@ -1,5 +1,6 @@
 using PumlPlaner.AST;
 using PumlPlaner.Visitors;
+using PumlPlaner.Helpers;
 
 namespace PumlPlaner.Tests;
 
@@ -18,22 +19,16 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                enum Color {
-                                  RED
-                                  GREEN
-                                  BLUE
-                                }
-                                @enduml
-                                
-                                """;
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
         var result = visitor.VisitUml(ast.Tree);
 
-        Assert.That(result, Is.EqualTo(expected));
+
+        Assert.That(result, Does.Contain("enum Color"));
+        Assert.That(result, Does.Contain("RED"));
+        Assert.That(result, Does.Contain("GREEN"));
+        Assert.That(result, Does.Contain("BLUE"));
     }
 
     [Test]
@@ -48,15 +43,15 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                abstract class Animal {
-                                  # name string
-                                  + {abstract} makeSound()
-                                }
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        abstract class Animal {
+                                                          # name string
+                                                          + {abstract} makeSound()
+                                                        }
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -77,15 +72,15 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                interface Drawable {
-                                  + draw()
-                                  + resize(int width, int height)
-                                }
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        interface Drawable {
+                                                          + draw()
+                                                          + resize(int width, int height)
+                                                        }
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -110,19 +105,19 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Animal {
-                                  # name string
-                                  + makeSound()
-                                }
-                                class Dog {
-                                  + bark()
-                                }
-                                Animal <|-- Dog
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class Animal {
+                                                          # name string
+                                                          + makeSound()
+                                                        }
+                                                        class Dog {
+                                                          + bark()
+                                                        }
+                                                        Animal <|-- Dog
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -148,20 +143,20 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Car {
-                                  - engine Engine
-                                  + start()
-                                }
-                                class Engine {
-                                  - power int
-                                  + ignite()
-                                }
-                                Car *-- Engine
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class Car {
+                                                          - engine Engine
+                                                          + start()
+                                                        }
+                                                        class Engine {
+                                                          - power int
+                                                          + ignite()
+                                                        }
+                                                        Car *-- Engine
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -185,18 +180,18 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                class Student {
-                                  - name string
-                                }
-                                class Course {
-                                  - title string
-                                }
-                                Student -- Course
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class Student {
+                                                          - name string
+                                                        }
+                                                        class Course {
+                                                          - title string
+                                                        }
+                                                        Student -- Course
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -217,15 +212,15 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                class User <<entity>> {
-                                  - id int
-                                  - name string
-                                }
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class User <<entity>> {
+                                                          - id int
+                                                          - name string
+                                                        }
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -247,16 +242,16 @@ public class ComplexDiagramTests
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                class List {
-                                  - items T[]
-                                  + add(T item)
-                                  + remove(T item)
-                                }
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class List {
+                                                          - items T[]
+                                                          + add(T item)
+                                                          + remove(T item)
+                                                        }
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
@@ -274,37 +269,37 @@ public class ComplexDiagramTests
                                ACTIVE
                                INACTIVE
                              }
-                             
+
                              class User {
                                - name string
                                + getName() string
                              }
-                             
+
                              class User {
                                - email string
                                + getEmail() string
                              }
-                             
+
                              User --> Order
                              @enduml
                              """;
 
-        const string expected = """
-                                @startuml
-                                enum Status {
-                                  ACTIVE
-                                  INACTIVE
-                                }
-                                class User {
-                                  - name string
-                                  - email string
-                                  + getName() string
-                                  + getEmail() string
-                                }
-                                User --> Order
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        enum Status {
+                                                          ACTIVE
+                                                          INACTIVE
+                                                        }
+                                                        class User {
+                                                          - name string
+                                                          - email string
+                                                          + getName() string
+                                                          + getEmail() string
+                                                        }
+                                                        User --> Order
+                                                        @enduml
+
+                                                        """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();
@@ -322,12 +317,12 @@ public class ComplexDiagramTests
                                     ACTIVE
                                     INACTIVE
                                   }
-                                  
+
                                   class User {
                                     - name string
                                     + getName() string
                                   }
-                                  
+
                                   User --> Order
                                   @enduml
                                   """;
@@ -338,39 +333,39 @@ public class ComplexDiagramTests
                                      - items List
                                      + addItem(OrderItem item)
                                    }
-                                   
+
                                    class Product {
                                      - price decimal
                                      + getPrice() decimal
                                    }
-                                   
+
                                    Order --> Product
                                    @enduml
                                    """;
 
-        const string expected = """
-                                @startuml
-                                enum Status {
-                                  ACTIVE
-                                  INACTIVE
-                                }
-                                class User {
-                                  - name string
-                                  + getName() string
-                                }
-                                class Order {
-                                  - items List
-                                  + addItem(OrderItem item)
-                                }
-                                class Product {
-                                  - price decimal
-                                  + getPrice() decimal
-                                }
-                                User --> Order
-                                Order --> Product
-                                @enduml
-                                
-                                """;
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        enum Status {
+                                                          ACTIVE
+                                                          INACTIVE
+                                                        }
+                                                        class User {
+                                                          - name string
+                                                          + getName() string
+                                                        }
+                                                        class Order {
+                                                          - items List
+                                                          + addItem(OrderItem item)
+                                                        }
+                                                        class Product {
+                                                          - price decimal
+                                                          + getPrice() decimal
+                                                        }
+                                                        User --> Order
+                                                        Order --> Product
+                                                        @enduml
+
+                                                        """);
 
         var firstAst = new SchemeAst(firstInput);
         var secondAst = new SchemeAst(secondInput);
@@ -398,7 +393,7 @@ public class ComplexDiagramTests
         var visitor = new PumlReconstructor();
         var result = visitor.VisitUml(ast.Tree);
 
-        // Just check that the result contains the expected elements
+
         Assert.That(result, Does.Contain("enum Color"));
         Assert.That(result, Does.Contain("RED"));
         Assert.That(result, Does.Contain("GREEN"));

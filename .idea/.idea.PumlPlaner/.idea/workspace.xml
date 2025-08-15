@@ -9,9 +9,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Tests/AstSumTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Tests/AstSumTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Tests/ComplexDiagramTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Tests/ComplexDiagramTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +69,7 @@
       <workItem from="1755188290062" duration="2118000" />
       <workItem from="1755194090784" duration="2265000" />
       <workItem from="1755248146166" duration="3766000" />
-      <workItem from="1755267630591" duration="1774000" />
+      <workItem from="1755267630591" duration="2158000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -255,7 +255,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755268523951</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="manage complex schemas">
+      <option name="closed" value="true" />
+      <created>1755269500848</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1755269500848</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -287,7 +295,8 @@
     <MESSAGE value="fix namespaces" />
     <MESSAGE value="cleanup code" />
     <MESSAGE value="cleanup code, according to rider ide" />
-    <option name="LAST_COMMIT_MESSAGE" value="cleanup code, according to rider ide" />
+    <MESSAGE value="manage complex schemas" />
+    <option name="LAST_COMMIT_MESSAGE" value="manage complex schemas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
