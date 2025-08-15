@@ -1,16 +1,12 @@
 ﻿using Antlr4.Runtime;
+using PumlPlaner.AST;
 using PumlPlaner.Helpers;
 using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
 
-public class AstTests
+public class AstBuildTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public void ShouldRecreateFromSource()
     {
@@ -49,6 +45,34 @@ public class AstTests
 
         Console.WriteLine("Original:\r" + input);
         Console.WriteLine("Reconstructed:\r" + reconstructed);
+
+        Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));
+    }
+
+
+    [Test]
+    public void ShouldRecreateFromSourceWithClass()
+    {
+        var rawInput = """
+                       @startuml
+
+                       class Fruit {
+                         - vitamins int
+                         + eat()
+                       }
+
+                       @enduml
+                       """;
+        rawInput = StringHelper.NormalizeBreakLines(rawInput);
+        rawInput = StringHelper.RemoveMultipleBreaks(rawInput);
+        rawInput = StringHelper.NormalizeEndOfFile(rawInput);
+        var input = CharStreams.fromString(rawInput);
+
+        // process
+        var ast = new SchemeAst(input);
+
+        var visitor = new PlantUmlReconstructor();
+        var reconstructed = visitor.VisitUml(ast.Tree);
 
         Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));
     }

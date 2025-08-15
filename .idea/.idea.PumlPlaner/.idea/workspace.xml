@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/PumlPlaner/AST/SchemeAst.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlaner/AstMergeTests.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlaner/PlantUmlMerger.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/AstTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/AstBuildTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,8 @@
       <workItem from="1754934183663" duration="1851000" />
       <workItem from="1755109440317" duration="2587000" />
       <workItem from="1755188290062" duration="2118000" />
-      <workItem from="1755194090784" duration="1918000" />
+      <workItem from="1755194090784" duration="2265000" />
+      <workItem from="1755248146166" duration="3304000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -141,7 +145,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755195266369</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="no pascal case">
+      <option name="closed" value="true" />
+      <created>1755196172583</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1755196172583</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,7 +173,8 @@
     <MESSAGE value="create a test for input normalization" />
     <MESSAGE value="add tests for each function of normalizer" />
     <MESSAGE value="pass test of normalizer" />
-    <option name="LAST_COMMIT_MESSAGE" value="pass test of normalizer" />
+    <MESSAGE value="no pascal case" />
+    <option name="LAST_COMMIT_MESSAGE" value="no pascal case" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
