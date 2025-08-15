@@ -4,11 +4,6 @@ namespace PumlPlaner.AST;
 
 public class SchemeAst
 {
-    public PumlgLexer Lexer { get; private set; }
-    public CommonTokenStream Tokens { get; private set; }
-    public PumlgParser Parser { get; private set; }
-    public PumlgParser.UmlContext Tree { get; private set; }
-
     public SchemeAst(string input)
     {
         try
@@ -21,7 +16,7 @@ public class SchemeAst
         catch (Exception e)
         {
             Console.WriteLine("AST build error: " + e);
-            throw new Exception("AST build error: " + e) ;
+            throw new Exception("AST build error: " + e);
         }
     }
 
@@ -37,7 +32,12 @@ public class SchemeAst
         catch (Exception e)
         {
             Console.WriteLine("AST build error: " + e);
-            throw new Exception("AST build error: " + e) ;
+            throw new Exception("AST build error: " + e);
         }
     }
+
+    public PumlgLexer Lexer { get; }
+    public CommonTokenStream Tokens { get; }
+    public PumlgParser Parser { get; }
+    public PumlgParser.UmlContext Tree { get; private set; }
 }

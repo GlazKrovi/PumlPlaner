@@ -11,17 +11,15 @@ public class PumlSum : PumlReconstructor
         sb.AppendLine("@startuml");
 
         foreach (var ctx in contexts)
+        foreach (var child in ctx.children)
         {
-            foreach (var child in ctx.children)
-            {
-                var text = child.GetText();
-                if (text is "@startuml" or "@enduml")
-                    continue;
+            var text = child.GetText();
+            if (text is "@startuml" or "@enduml")
+                continue;
 
-                var merged = Visit(child);
-                if (!string.IsNullOrWhiteSpace(merged))
-                    sb.AppendLine(merged.TrimEnd());
-            }
+            var merged = Visit(child);
+            if (!string.IsNullOrWhiteSpace(merged))
+                sb.AppendLine(merged.TrimEnd());
         }
 
         sb.AppendLine("@enduml");

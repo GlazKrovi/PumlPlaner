@@ -18,27 +18,27 @@ public class AstSumTests
                                   """;
 
         const string secondInput = """
-                         @startuml
-                         class Weapon {
-                           - float power
-                           + hit()
-                         }
-                         @enduml
-                         """;
-
-        const string expectedResult = """
                                    @startuml
-                                   class Charachter {
-                                     - string name
-                                     + attack()
-                                   }
                                    class Weapon {
                                      - float power
                                      + hit()
                                    }
                                    @enduml
-                                   
                                    """;
+
+        const string expectedResult = """
+                                      @startuml
+                                      class Charachter {
+                                        - string name
+                                        + attack()
+                                      }
+                                      class Weapon {
+                                        - float power
+                                        + hit()
+                                      }
+                                      @enduml
+
+                                      """;
 
         // process
         var firstAst = new SchemeAst(firstInput);

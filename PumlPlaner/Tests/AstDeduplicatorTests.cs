@@ -1,127 +1,125 @@
-﻿using NUnit.Framework;
-using PumlPlaner.AST;
+﻿using PumlPlaner.AST;
 using PumlPlaner.Visitors;
 
-namespace PumlPlaner.Tests
+namespace PumlPlaner.Tests;
+
+public class PlantUmlDeduplicatorTests
 {
-    public class PlantUmlDeduplicatorTests
+    [Test]
+    public void ShouldRemoveExactDuplicates()
     {
-        [Test]
-        public void ShouldRemoveExactDuplicates()
-        {
-            const string input = """
-            @startuml
-            class Foo {
-              + bar()
-            }
-            class Foo {
-              + bar()
-            }
-            @enduml
-            
-            """;
+        const string input = """
+                             @startuml
+                             class Foo {
+                               + bar()
+                             }
+                             class Foo {
+                               + bar()
+                             }
+                             @enduml
 
-            const string expected = """
-            @startuml
-            class Foo {
-              + bar()
-            }
-            @enduml
-            
-            """;
+                             """;
 
-            var ast = new SchemeAst(input);
-            var deduplicator = new PumlDeduplicator();
-            var result = deduplicator.VisitUml(ast.Tree);
+        const string expected = """
+                                @startuml
+                                class Foo {
+                                  + bar()
+                                }
+                                @enduml
 
-            Console.WriteLine("expected: ");
-            Console.WriteLine(expected);
-            Console.WriteLine("----------------");
-            Console.WriteLine("Visitor's result: ");
-            Console.WriteLine(result);
+                                """;
 
-            Assert.That(result, Is.EqualTo(expected));
-        }
+        var ast = new SchemeAst(input);
+        var deduplicator = new PumlDeduplicator();
+        var result = deduplicator.VisitUml(ast.Tree);
 
-        [Test]
-        public void ShouldMergeClassesWithDifferentMethods()
-        {
-            const string input = """
-            @startuml
-            class Foo {
-              + bar()
-            }
-            class Foo {
-              + baz()
-            }
-            @enduml
-            
-            """;
+        Console.WriteLine("expected: ");
+        Console.WriteLine(expected);
+        Console.WriteLine("----------------");
+        Console.WriteLine("Visitor's result: ");
+        Console.WriteLine(result);
 
-            const string expected = """
-            @startuml
-            class Foo {
-              + bar()
-              + baz()
-            }
-            @enduml
-            
-            """;
+        Assert.That(result, Is.EqualTo(expected));
+    }
 
-            var ast = new SchemeAst(input);
-            var deduplicator = new PumlDeduplicator();
-            var result = deduplicator.VisitUml(ast.Tree);
+    [Test]
+    public void ShouldMergeClassesWithDifferentMethods()
+    {
+        const string input = """
+                             @startuml
+                             class Foo {
+                               + bar()
+                             }
+                             class Foo {
+                               + baz()
+                             }
+                             @enduml
 
-            Console.WriteLine("expected: ");
-            Console.WriteLine(expected);
-            Console.WriteLine("----------------");
-            Console.WriteLine("Visitor's result: ");
-            Console.WriteLine(result);
+                             """;
 
-            Assert.That(result, Is.EqualTo(expected));
-        }
+        const string expected = """
+                                @startuml
+                                class Foo {
+                                  + bar()
+                                  + baz()
+                                }
+                                @enduml
 
-        [Test]
-        public void ShouldHandleMethodOverloadsWithDifferences()
-        {
-            const string input = """
-            @startuml
-            class Foo {
-              + bar(int a)
-              + bar(string b)
-              + bar(int a, string b)
-            }
-            class Foo {
-              + bar(int a)
-              + bar()
-            }
-            @enduml
-            
-            """;
+                                """;
 
-            const string expected = """
-            @startuml
-            class Foo {
-              + bar(int a)
-              + bar(string b)
-              + bar(int a, string b)
-              + bar()
-            }
-            @enduml
-            
-            """;
+        var ast = new SchemeAst(input);
+        var deduplicator = new PumlDeduplicator();
+        var result = deduplicator.VisitUml(ast.Tree);
 
-            var ast = new SchemeAst(input);
-            var deduplicator = new PumlDeduplicator();
-            var result = deduplicator.VisitUml(ast.Tree);
+        Console.WriteLine("expected: ");
+        Console.WriteLine(expected);
+        Console.WriteLine("----------------");
+        Console.WriteLine("Visitor's result: ");
+        Console.WriteLine(result);
 
-            Console.WriteLine("expected: ");
-            Console.WriteLine(expected);
-            Console.WriteLine("----------------");
-            Console.WriteLine("Visitor's result: ");
-            Console.WriteLine(result);
+        Assert.That(result, Is.EqualTo(expected));
+    }
 
-            Assert.That(result, Is.EqualTo(expected));
-        }
+    [Test]
+    public void ShouldHandleMethodOverloadsWithDifferences()
+    {
+        const string input = """
+                             @startuml
+                             class Foo {
+                               + bar(int a)
+                               + bar(string b)
+                               + bar(int a, string b)
+                             }
+                             class Foo {
+                               + bar(int a)
+                               + bar()
+                             }
+                             @enduml
+
+                             """;
+
+        const string expected = """
+                                @startuml
+                                class Foo {
+                                  + bar(int a)
+                                  + bar(string b)
+                                  + bar(int a, string b)
+                                  + bar()
+                                }
+                                @enduml
+
+                                """;
+
+        var ast = new SchemeAst(input);
+        var deduplicator = new PumlDeduplicator();
+        var result = deduplicator.VisitUml(ast.Tree);
+
+        Console.WriteLine("expected: ");
+        Console.WriteLine(expected);
+        Console.WriteLine("----------------");
+        Console.WriteLine("Visitor's result: ");
+        Console.WriteLine(result);
+
+        Assert.That(result, Is.EqualTo(expected));
     }
 }

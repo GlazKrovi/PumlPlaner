@@ -10,10 +10,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         var sb = new StringBuilder();
 
         sb.AppendLine("@startuml");
-        foreach (var child in context.children)
-        {
-            sb.Append(Visit(child));
-        }
+        foreach (var child in context.children) sb.Append(Visit(child));
 
         sb.AppendLine("@enduml");
 
@@ -24,10 +21,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        foreach (var classDecl in context.class_declaration())
-        {
-            sb.Append(Visit(classDecl));
-        }
+        foreach (var classDecl in context.class_declaration()) sb.Append(Visit(classDecl));
 
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
@@ -121,10 +115,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         sb.Append(context.ident().GetText());
 
         sb.Append("(");
-        if (context.function_argument_list() != null)
-        {
-            sb.Append(Visit(context.function_argument_list()));
-        }
+        if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
 
         sb.Append(")");
 
@@ -134,10 +125,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
     {
         var args = new List<string>();
-        foreach (var arg in context.function_argument())
-        {
-            args.Add(Visit(arg));
-        }
+        foreach (var arg in context.function_argument()) args.Add(Visit(arg));
 
         return StringHelper.NormalizeBreakLines(string.Join(", ", args));
     }

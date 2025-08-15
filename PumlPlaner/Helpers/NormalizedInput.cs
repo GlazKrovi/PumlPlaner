@@ -4,14 +4,14 @@ namespace PumlPlaner.Helpers;
 
 public class NormalizedInput
 {
-    private string RawInput { get; }
-
     public NormalizedInput(string rawInput)
     {
         RawInput = StringHelper.NormalizeBreakLines(rawInput);
         RawInput = StringHelper.RemoveMultipleBreaks(RawInput);
         RawInput = StringHelper.NormalizeEndOfFile(RawInput);
     }
+
+    private string RawInput { get; }
 
     public override string ToString()
     {
