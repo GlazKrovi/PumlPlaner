@@ -33,6 +33,12 @@ namespace PumlPlaner.Tests
             var deduplicator = new PlantUmlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
 
+            Console.WriteLine("expected: ");
+            Console.WriteLine(expected);
+            Console.WriteLine("----------------");
+            Console.WriteLine("Visitor's result: ");
+            Console.WriteLine(result);
+
             Assert.That(result, Is.EqualTo(expected));
         }
 
@@ -64,6 +70,12 @@ namespace PumlPlaner.Tests
             var ast = new SchemeAst(input);
             var deduplicator = new PlantUmlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
+
+            Console.WriteLine("expected: ");
+            Console.WriteLine(expected);
+            Console.WriteLine("----------------");
+            Console.WriteLine("Visitor's result: ");
+            Console.WriteLine(result);
 
             Assert.That(result, Is.EqualTo(expected));
         }
@@ -101,6 +113,12 @@ namespace PumlPlaner.Tests
             var ast = new SchemeAst(input);
             var deduplicator = new PlantUmlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
+
+            Console.WriteLine("expected: ");
+            Console.WriteLine(expected);
+            Console.WriteLine("----------------");
+            Console.WriteLine("Visitor's result: ");
+            Console.WriteLine(result);
 
             Assert.That(result, Is.EqualTo(expected));
         }

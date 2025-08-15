@@ -10,8 +10,7 @@ namespace PumlPlaner
     {
         public override string VisitUml(PumlgParser.UmlContext context)
         {
-            var classes = new Dictionary<string, ClassRepresentation>();
-
+            var classDict = new Dictionary<string, ClassRepresentation>();
 
             foreach (var child in context.children)
             {
@@ -19,13 +18,13 @@ namespace PumlPlaner
                 {
                     var rep = ParseClass(classCtx);
 
-                    if (classes.TryGetValue(rep.Name, out var existing))
+                    if (classDict.TryGetValue(rep.Name, out var existing))
                     {
                         existing.Merge(rep);
                     }
                     else
                     {
-                        classes[rep.Name] = rep;
+                        classDict[rep.Name] = rep;
                     }
                 }
             }
@@ -33,8 +32,10 @@ namespace PumlPlaner
             var sb = new StringBuilder();
             sb.AppendLine("@startuml");
 
-            foreach (var c in classes.Values)
-                sb.AppendLine(c.ToPlantUml());
+            foreach (var cls in classDict.Values)
+            {
+                sb.AppendLine(cls.ToPlantUml());
+            }
 
 
             foreach (var child in context.children)
@@ -49,66 +50,86 @@ namespace PumlPlaner
 
             sb.AppendLine("@enduml");
 
-
             return new NormalizedInput(sb.ToString()).ToString();
         }
 
-
         private ClassRepresentation ParseClass(PumlgParser.Class_declarationContext ctx)
         {
-            var rep = new ClassRepresentation
-            {
-                Name = ctx.ident().GetText(),
-                Type = ctx.class_type().GetText()
-            };
+            var rep = new ClassRepresentation(ctx.class_type().GetText(), ctx.ident().GetText());
 
             foreach (var attrCtx in ctx.attribute())
             {
-                var attr = Visit(attrCtx).Trim();
-                rep.Attributes.Add(attr);
+                var attrRep = ParseAttribute(attrCtx);
+                rep.AddAttribute(attrRep);
             }
 
-            foreach (var mCtx in ctx.method())
+            foreach (var methodCtx in ctx.method())
             {
-                var methodSignature = Visit(mCtx).Trim();
-                rep.AddMethodFromSignature(methodSignature);
+                var methodRep = ParseMethod(methodCtx);
+                rep.AddMethod(methodRep);
             }
 
             return rep;
         }
 
-        private class ClassRepresentation
+        private AttributeRepresentation ParseAttribute(PumlgParser.AttributeContext ctx)
         {
-            public string Name;
-            public string Type;
-            public HashSet<string> Attributes = new HashSet<string>();
-            private Dictionary<string, string> MethodsBySignature = new Dictionary<string, string>();
+            var text = Visit(ctx).Trim();
 
-            public void AddMethodFromSignature(string methodSignature)
+            return new AttributeRepresentation(text);
+        }
+
+        private MethodRepresentation ParseMethod(PumlgParser.MethodContext ctx)
+        {
+            var methodName = ctx.ident().GetText();
+            var parameters = new List<string>();
+
+            if (ctx.function_argument_list() != null)
             {
-                var key = GenerateMethodKey(methodSignature);
-                if (!MethodsBySignature.ContainsKey(key))
-                    MethodsBySignature[key] = methodSignature;
+                foreach (var arg in ctx.function_argument_list().function_argument())
+                {
+                    var typeText = arg.type_declaration()?.GetText() ?? "";
+                    var identText = arg.ident().GetText();
+                    parameters.Add($"{typeText} {identText}".Trim());
+                }
             }
 
-            private string GenerateMethodKey(string methodSignature)
+            var fullSignature = Visit(ctx).Trim();
+
+            return new MethodRepresentation(methodName, parameters, fullSignature);
+        }
+
+        private class ClassRepresentation
+        {
+            public string Type { get; }
+            public string Name { get; }
+            private Dictionary<string, AttributeRepresentation> Attributes = new();
+            private Dictionary<string, MethodRepresentation> Methods = new();
+
+            public ClassRepresentation(string type, string name)
             {
-                var idxStartParams = methodSignature.IndexOf('(');
-                var idxEndParams = methodSignature.IndexOf(')');
-                if (idxStartParams < 0 || idxEndParams < 0) return methodSignature;
+                Type = type;
+                Name = name;
+            }
 
-                var methodName = methodSignature.Substring(0, idxStartParams).Trim();
-                var parameters = methodSignature.Substring(idxStartParams + 1, idxEndParams - idxStartParams - 1)
-                    .Trim();
+            public void AddAttribute(AttributeRepresentation attr)
+            {
+                if (!Attributes.ContainsKey(attr.Id))
+                    Attributes[attr.Id] = attr;
+            }
 
-                return $"{methodName}({parameters})";
+            public void AddMethod(MethodRepresentation method)
+            {
+                if (!Methods.ContainsKey(method.Id))
+                    Methods[method.Id] = method;
             }
 
             public void Merge(ClassRepresentation other)
             {
-                Attributes.UnionWith(other.Attributes);
-                foreach (var m in other.MethodsBySignature.Values)
-                    AddMethodFromSignature(m);
+                foreach (var attr in other.Attributes.Values)
+                    AddAttribute(attr);
+                foreach (var method in other.Methods.Values)
+                    AddMethod(method);
             }
 
             public string ToPlantUml()
@@ -116,15 +137,52 @@ namespace PumlPlaner
                 var sb = new StringBuilder();
                 sb.AppendLine($"{Type} {Name} {{");
 
-                foreach (var attr in Attributes)
-                    sb.AppendLine("  " + attr.Trim());
-
-                foreach (var method in MethodsBySignature.Values)
-                    sb.AppendLine("  " + method.Trim());
+                foreach (var attr in Attributes.Values)
+                    sb.AppendLine($"  {attr.Text}");
+                foreach (var method in Methods.Values)
+                    sb.AppendLine($"  {method.Text}");
 
                 sb.AppendLine("}");
-
                 return sb.ToString();
+            }
+        }
+
+        private class AttributeRepresentation
+        {
+            public string Text { get; }
+            public string Id { get; }
+
+            public AttributeRepresentation(string text)
+            {
+                Text = text;
+                Id = text;
+            }
+        }
+
+        private class MethodRepresentation
+        {
+            public string Name { get; }
+            public List<string> Parameters { get; }
+            public string Text { get; }
+            public string Id { get; }
+
+            public MethodRepresentation(string name, List<string> parameters, string text)
+            {
+                Name = name;
+                Parameters = parameters;
+                Text = text;
+
+                Id = GenerateId();
+            }
+
+            private string GenerateId()
+            {
+                var paramTypes = Parameters
+                    .Select(p => p.Split(' ')[0])
+                    .DefaultIfEmpty("")
+                    .Aggregate((a, b) => a + "," + b);
+
+                return $"{Name}({paramTypes})";
             }
         }
     }

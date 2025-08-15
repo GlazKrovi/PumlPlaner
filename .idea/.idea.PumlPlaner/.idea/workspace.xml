@@ -9,6 +9,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -177,7 +179,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755265355683</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="better format">
+      <option name="closed" value="true" />
+      <created>1755265427831</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1755265427831</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,7 +211,8 @@
     <MESSAGE value="should merge ast" />
     <MESSAGE value="sort files" />
     <MESSAGE value="deduplication is correct, even for complex class diagrams, but the format isn't perfect" />
-    <option name="LAST_COMMIT_MESSAGE" value="deduplication is correct, even for complex class diagrams, but the format isn't perfect" />
+    <MESSAGE value="better format" />
+    <option name="LAST_COMMIT_MESSAGE" value="better format" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
