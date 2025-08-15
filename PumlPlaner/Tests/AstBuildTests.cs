@@ -40,7 +40,7 @@ public class AstBuildTests
             throw;
         }
 
-        var visitor = new PlantUmlReconstructor();
+        var visitor = new PumlReconstructor();
         var reconstructed = visitor.VisitUml(tree);
 
         Console.WriteLine("Original:\r" + input);
@@ -71,7 +71,7 @@ public class AstBuildTests
         // process
         var ast = new SchemeAst(input);
 
-        var visitor = new PlantUmlReconstructor();
+        var visitor = new PumlReconstructor();
         var reconstructed = visitor.VisitUml(ast.Tree);
 
         Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));

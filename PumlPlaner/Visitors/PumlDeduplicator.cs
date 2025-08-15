@@ -6,7 +6,7 @@ using PumlPlaner.Visitors;
 
 namespace PumlPlaner
 {
-    public class PlantUmlDeduplicator : PlantUmlReconstructor
+    public class PumlDeduplicator : PumlReconstructor
     {
         private Dictionary<string, ClassInfo> _classMap = new Dictionary<string, ClassInfo>();
 

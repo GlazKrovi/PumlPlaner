@@ -30,7 +30,7 @@ namespace PumlPlaner.Tests
             """;
 
             var ast = new SchemeAst(input);
-            var deduplicator = new PlantUmlDeduplicator();
+            var deduplicator = new PumlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
 
             Console.WriteLine("expected: ");
@@ -68,7 +68,7 @@ namespace PumlPlaner.Tests
             """;
 
             var ast = new SchemeAst(input);
-            var deduplicator = new PlantUmlDeduplicator();
+            var deduplicator = new PumlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
 
             Console.WriteLine("expected: ");
@@ -111,7 +111,7 @@ namespace PumlPlaner.Tests
             """;
 
             var ast = new SchemeAst(input);
-            var deduplicator = new PlantUmlDeduplicator();
+            var deduplicator = new PumlDeduplicator();
             var result = deduplicator.VisitUml(ast.Tree);
 
             Console.WriteLine("expected: ");

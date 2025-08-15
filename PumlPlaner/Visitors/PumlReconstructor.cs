@@ -3,7 +3,7 @@ using PumlPlaner.Helpers;
 
 namespace PumlPlaner.Visitors;
 
-public class PlantUmlReconstructor : PumlgBaseVisitor<string>
+public class PumlReconstructor : PumlgBaseVisitor<string>
 {
     public override string VisitUml(PumlgParser.UmlContext context)
     {
