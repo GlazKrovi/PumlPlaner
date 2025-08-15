@@ -8,182 +8,192 @@ namespace PumlPlaner
 {
     public class PlantUmlDeduplicator : PlantUmlReconstructor
     {
+        private Dictionary<string, ClassInfo> _classMap = new Dictionary<string, ClassInfo>();
+
+        private class ClassInfo
+        {
+            public string ClassType { get; set; } = string.Empty;
+            public string ClassName { get; set; } = string.Empty;
+            public List<string> Attributes { get; set; } = new List<string>();
+            public List<string> Methods { get; set; } = new List<string>();
+            public HashSet<string> MethodSignatures { get; set; } = new HashSet<string>();
+        }
+
         public override string VisitUml(PumlgParser.UmlContext context)
         {
-            var classDict = new Dictionary<string, ClassRepresentation>();
-
-            foreach (var child in context.children)
+            // Reset the class map for each new UML diagram
+            _classMap.Clear();
+            
+            // First pass: collect all class information
+            if (context.class_diagram() != null)
             {
-                if (child is PumlgParser.Class_declarationContext classCtx)
-                {
-                    var rep = ParseClass(classCtx);
-
-                    if (classDict.TryGetValue(rep.Name, out var existing))
-                    {
-                        existing.Merge(rep);
-                    }
-                    else
-                    {
-                        classDict[rep.Name] = rep;
-                    }
-                }
+                VisitClass_diagram(context.class_diagram());
             }
 
+            // Second pass: reconstruct the UML with deduplicated classes
             var sb = new StringBuilder();
             sb.AppendLine("@startuml");
-
-            foreach (var cls in classDict.Values)
+            
+            foreach (var classInfo in _classMap.Values)
             {
-                sb.AppendLine(cls.ToPlantUml());
-            }
-
-
-            foreach (var child in context.children)
-            {
-                if (!(child is PumlgParser.Class_declarationContext))
+                sb.Append($"{classInfo.ClassType} {classInfo.ClassName}");
+                
+                if (classInfo.Attributes.Any() || classInfo.Methods.Any())
                 {
-                    var other = Visit(child);
-                    if (!string.IsNullOrWhiteSpace(other))
-                        sb.AppendLine(other.TrimEnd());
+                    sb.AppendLine(" {");
+                    
+                    foreach (var attr in classInfo.Attributes)
+                    {
+                        sb.AppendLine($"  {attr}");
+                    }
+                    
+                    foreach (var method in classInfo.Methods)
+                    {
+                        sb.AppendLine($"  {method}");
+                    }
+                    
+                    sb.AppendLine("}");
+                }
+                else
+                {
+                    sb.AppendLine();
                 }
             }
-
+            
             sb.AppendLine("@enduml");
-
-            return new NormalizedInput(sb.ToString()).ToString();
+            
+            var result = sb.ToString();
+            result = StringHelper.NormalizeBreakLines(result);
+            result = StringHelper.RemoveMultipleBreaks(result);
+            result = StringHelper.NormalizeEndOfFile(result);
+            
+            return result;
         }
 
-        private ClassRepresentation ParseClass(PumlgParser.Class_declarationContext ctx)
+        public override string VisitClass_diagram(PumlgParser.Class_diagramContext context)
         {
-            var rep = new ClassRepresentation(ctx.class_type().GetText(), ctx.ident().GetText());
-
-            foreach (var attrCtx in ctx.attribute())
+            // Collect all class declarations
+            foreach (var classDecl in context.class_declaration())
             {
-                var attrRep = ParseAttribute(attrCtx);
-                rep.AddAttribute(attrRep);
+                VisitClass_declaration(classDecl);
             }
-
-            foreach (var methodCtx in ctx.method())
-            {
-                var methodRep = ParseMethod(methodCtx);
-                rep.AddMethod(methodRep);
-            }
-
-            return rep;
+            
+            return string.Empty; // We don't return anything here as we're collecting data
         }
 
-        private AttributeRepresentation ParseAttribute(PumlgParser.AttributeContext ctx)
+        public override string VisitClass_declaration(PumlgParser.Class_declarationContext context)
         {
-            var text = Visit(ctx).Trim();
-
-            return new AttributeRepresentation(text);
-        }
-
-        private MethodRepresentation ParseMethod(PumlgParser.MethodContext ctx)
-        {
-            var methodName = ctx.ident().GetText();
-            var parameters = new List<string>();
-
-            if (ctx.function_argument_list() != null)
+            var classType = context.class_type().GetText();
+            var className = context.ident().GetText();
+            
+            // Get or create class info
+            if (!_classMap.ContainsKey(className))
             {
-                foreach (var arg in ctx.function_argument_list().function_argument())
+                _classMap[className] = new ClassInfo
                 {
-                    var typeText = arg.type_declaration()?.GetText() ?? "";
-                    var identText = arg.ident().GetText();
-                    parameters.Add($"{typeText} {identText}".Trim());
+                    ClassType = classType,
+                    ClassName = className
+                };
+            }
+            
+            var classInfo = _classMap[className];
+            
+            // Collect attributes
+            foreach (var attr in context.attribute())
+            {
+                var attrText = Visit(attr).TrimEnd();
+                if (!classInfo.Attributes.Contains(attrText))
+                {
+                    classInfo.Attributes.Add(attrText);
                 }
             }
-
-            var fullSignature = Visit(ctx).Trim();
-
-            return new MethodRepresentation(methodName, parameters, fullSignature);
+            
+            // Collect methods
+            foreach (var method in context.method())
+            {
+                var methodText = Visit(method).TrimEnd();
+                if (!classInfo.MethodSignatures.Contains(methodText))
+                {
+                    classInfo.MethodSignatures.Add(methodText);
+                    classInfo.Methods.Add(methodText);
+                }
+            }
+            
+            return string.Empty; // We don't return anything here as we're collecting data
         }
 
-        private class ClassRepresentation
+        public override string VisitMethod(PumlgParser.MethodContext context)
         {
-            public string Type { get; }
-            public string Name { get; }
-            private Dictionary<string, AttributeRepresentation> Attributes = new();
-            private Dictionary<string, MethodRepresentation> Methods = new();
+            var sb = new StringBuilder();
 
-            public ClassRepresentation(string type, string name)
+            if (context.visibility() != null)
+                sb.Append(context.visibility().GetText());
+
+            if (context.modifiers() != null)
+                sb.Append(context.modifiers().GetText());
+
+            if (context.type_declaration() != null)
             {
-                Type = type;
-                Name = name;
+                sb.Append(" ");
+                sb.Append(context.type_declaration().GetText());
             }
 
-            public void AddAttribute(AttributeRepresentation attr)
+            if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
+                sb.Append(" ");
+
+            sb.Append(context.ident().GetText());
+
+            sb.Append("(");
+            if (context.function_argument_list() != null)
             {
-                if (!Attributes.ContainsKey(attr.Id))
-                    Attributes[attr.Id] = attr;
+                sb.Append(Visit(context.function_argument_list()));
             }
+            sb.Append(")");
 
-            public void AddMethod(MethodRepresentation method)
-            {
-                if (!Methods.ContainsKey(method.Id))
-                    Methods[method.Id] = method;
-            }
-
-            public void Merge(ClassRepresentation other)
-            {
-                foreach (var attr in other.Attributes.Values)
-                    AddAttribute(attr);
-                foreach (var method in other.Methods.Values)
-                    AddMethod(method);
-            }
-
-            public string ToPlantUml()
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine($"{Type} {Name} {{");
-
-                foreach (var attr in Attributes.Values)
-                    sb.AppendLine($"  {attr.Text}");
-                foreach (var method in Methods.Values)
-                    sb.AppendLine($"  {method.Text}");
-
-                sb.AppendLine("}");
-                return sb.ToString();
-            }
+            return StringHelper.NormalizeBreakLines(sb.ToString());
         }
 
-        private class AttributeRepresentation
+        public override string VisitAttribute(PumlgParser.AttributeContext context)
         {
-            public string Text { get; }
-            public string Id { get; }
+            var sb = new StringBuilder();
 
-            public AttributeRepresentation(string text)
-            {
-                Text = text;
-                Id = text;
-            }
+            if (context.visibility() != null)
+                sb.Append(context.visibility().GetText());
+
+            if (context.modifiers() != null)
+                sb.Append(context.modifiers().GetText());
+
+            if (context.type_declaration() != null)
+                sb.Append(" " + context.type_declaration().GetText());
+            else
+                sb.Append(" ");
+
+            sb.Append(" " + context.ident().GetText());
+
+            return StringHelper.NormalizeBreakLines(sb.ToString());
         }
 
-        private class MethodRepresentation
+        public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
         {
-            public string Name { get; }
-            public List<string> Parameters { get; }
-            public string Text { get; }
-            public string Id { get; }
-
-            public MethodRepresentation(string name, List<string> parameters, string text)
+            var args = new List<string>();
+            foreach (var arg in context.function_argument())
             {
-                Name = name;
-                Parameters = parameters;
-                Text = text;
-
-                Id = GenerateId();
+                args.Add(Visit(arg));
             }
 
-            private string GenerateId()
-            {
-                var paramTypes = Parameters
-                    .Select(p => p.Split(' ')[0])
-                    .DefaultIfEmpty("")
-                    .Aggregate((a, b) => a + "," + b);
+            return StringHelper.NormalizeBreakLines(string.Join(", ", args));
+        }
 
-                return $"{Name}({paramTypes})";
-            }
+        public override string VisitFunction_argument(PumlgParser.Function_argumentContext context)
+        {
+            var sb = new StringBuilder();
+
+            if (context.type_declaration() != null)
+                sb.Append(context.type_declaration().GetText() + " ");
+
+            sb.Append(context.ident().GetText());
+
+            return StringHelper.NormalizeBreakLines(sb.ToString());
         }
     }
 }
