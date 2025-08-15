@@ -8,11 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Tests/AstDeduplicatorTests.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
-    </list>
+    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -66,6 +62,7 @@
       <workItem from="1755188290062" duration="2118000" />
       <workItem from="1755194090784" duration="2265000" />
       <workItem from="1755248146166" duration="3766000" />
+      <workItem from="1755267630591" duration="377000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -187,7 +184,31 @@
       <option name="project" value="LOCAL" />
       <updated>1755265427831</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="correctly implement deduplicator">
+      <option name="closed" value="true" />
+      <created>1755267834930</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1755267834930</updated>
+    </task>
+    <task id="LOCAL-00017" summary="remove unexpected line break in test &quot;right&quot; result">
+      <option name="closed" value="true" />
+      <created>1755267932740</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1755267932740</updated>
+    </task>
+    <task id="LOCAL-00018" summary="remove unexpected line break in test &quot;right&quot; result">
+      <option name="closed" value="true" />
+      <created>1755267988243</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1755267988243</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -212,7 +233,9 @@
     <MESSAGE value="sort files" />
     <MESSAGE value="deduplication is correct, even for complex class diagrams, but the format isn't perfect" />
     <MESSAGE value="better format" />
-    <option name="LAST_COMMIT_MESSAGE" value="better format" />
+    <MESSAGE value="correctly implement deduplicator" />
+    <MESSAGE value="remove unexpected line break in test &quot;right&quot; result" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove unexpected line break in test &quot;right&quot; result" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

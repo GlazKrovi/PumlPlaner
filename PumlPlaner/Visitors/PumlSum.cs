@@ -4,7 +4,7 @@ using PumlPlaner.Visitors;
 
 namespace PumlPlaner;
 
-public class PlantUmlMerger : PlantUmlReconstructor
+public class PumlSum : PlantUmlReconstructor
 {
     public string VisitUml(params PumlgParser.UmlContext[] contexts)
     {

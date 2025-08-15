@@ -1,14 +1,11 @@
-﻿using Antlr4.Runtime;
-using PumlPlaner.AST;
-using PumlPlaner.Helpers;
-using PumlPlaner.Visitors;
+﻿using PumlPlaner.AST;
 
 namespace PumlPlaner;
 
-public class AstMergeTests
+public class AstSumTests
 {
     [Test]
-    public void ShouldMergeTwoSimpleSchemas()
+    public void ShouldSumTwoSimpleSchemas()
     {
         const string firstInput = """
                                   @startuml
@@ -46,7 +43,7 @@ public class AstMergeTests
         var firstAst = new SchemeAst(firstInput);
         var secondAst = new SchemeAst(secondInput);
 
-        var visitor = new PlantUmlMerger();
+        var visitor = new PumlSum();
         var merged = visitor.VisitUml(firstAst.Tree, secondAst.Tree);
 
         Assert.That(merged, Is.EqualTo(expectedResult));
