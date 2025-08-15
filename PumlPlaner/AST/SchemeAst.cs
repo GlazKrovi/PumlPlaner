@@ -36,8 +36,8 @@ public class SchemeAst
         }
     }
 
-    public PumlgLexer Lexer { get; }
-    public CommonTokenStream Tokens { get; }
-    public PumlgParser Parser { get; }
+    private PumlgLexer Lexer { get; }
+    private CommonTokenStream Tokens { get; }
+    private PumlgParser Parser { get; }
     public PumlgParser.UmlContext Tree { get; private set; }
 }

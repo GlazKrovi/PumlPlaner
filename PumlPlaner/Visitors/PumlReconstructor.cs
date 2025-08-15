@@ -84,7 +84,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.type_declaration() != null)
             sb.Append(" " + context.type_declaration().GetText());
         else
-            sb.Append(" ");
+            sb.Append(' ');
 
 
         sb.Append(" " + context.ident().GetText());
@@ -104,28 +104,27 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         if (context.type_declaration() != null)
         {
-            sb.Append(" ");
+            sb.Append(' ');
             sb.Append(context.type_declaration().GetText());
         }
 
 
         if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
-            sb.Append(" ");
+            sb.Append(' ');
 
         sb.Append(context.ident().GetText());
 
-        sb.Append("(");
+        sb.Append('(');
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
 
-        sb.Append(")");
+        sb.Append(')');
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }
 
     public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
     {
-        var args = new List<string>();
-        foreach (var arg in context.function_argument()) args.Add(Visit(arg));
+        var args = context.function_argument().Select(Visit).ToList();
 
         return StringHelper.NormalizeBreakLines(string.Join(", ", args));
     }

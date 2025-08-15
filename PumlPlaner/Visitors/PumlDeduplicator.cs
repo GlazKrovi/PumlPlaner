@@ -9,13 +9,12 @@ public class PumlDeduplicator : PumlReconstructor
 
     public override string VisitUml(PumlgParser.UmlContext context)
     {
-        // Reset the class map for each new UML diagram
         _classMap.Clear();
 
-        // First pass: collect all class information
+
         if (context.class_diagram() != null) VisitClass_diagram(context.class_diagram());
 
-        // Second pass: reconstruct the UML with deduplicated classes
+
         var sb = new StringBuilder();
         sb.AppendLine("@startuml");
 
@@ -23,7 +22,7 @@ public class PumlDeduplicator : PumlReconstructor
         {
             sb.Append($"{classInfo.ClassType} {classInfo.ClassName}");
 
-            if (classInfo.Attributes.Any() || classInfo.Methods.Any())
+            if (classInfo.Attributes.Count != 0 || classInfo.Methods.Count != 0)
             {
                 sb.AppendLine(" {");
 
@@ -51,10 +50,9 @@ public class PumlDeduplicator : PumlReconstructor
 
     public override string VisitClass_diagram(PumlgParser.Class_diagramContext context)
     {
-        // Collect all class declarations
         foreach (var classDecl in context.class_declaration()) VisitClass_declaration(classDecl);
 
-        return string.Empty; // We don't return anything here as we're collecting data
+        return string.Empty;
     }
 
     public override string VisitClass_declaration(PumlgParser.Class_declarationContext context)
@@ -62,7 +60,7 @@ public class PumlDeduplicator : PumlReconstructor
         var classType = context.class_type().GetText();
         var className = context.ident().GetText();
 
-        // Get or create class info
+
         if (!_classMap.ContainsKey(className))
             _classMap[className] = new ClassInfo
             {
@@ -72,25 +70,22 @@ public class PumlDeduplicator : PumlReconstructor
 
         var classInfo = _classMap[className];
 
-        // Collect attributes
+
         foreach (var attr in context.attribute())
         {
             var attrText = Visit(attr).TrimEnd();
             if (!classInfo.Attributes.Contains(attrText)) classInfo.Attributes.Add(attrText);
         }
 
-        // Collect methods
+
         foreach (var method in context.method())
         {
             var methodText = Visit(method).TrimEnd();
-            if (!classInfo.MethodSignatures.Contains(methodText))
-            {
-                classInfo.MethodSignatures.Add(methodText);
-                classInfo.Methods.Add(methodText);
-            }
+            if (!classInfo.MethodSignatures.Add(methodText)) continue;
+            classInfo.Methods.Add(methodText);
         }
 
-        return string.Empty; // We don't return anything here as we're collecting data
+        return string.Empty;
     }
 
     public override string VisitMethod(PumlgParser.MethodContext context)
@@ -105,18 +100,18 @@ public class PumlDeduplicator : PumlReconstructor
 
         if (context.type_declaration() != null)
         {
-            sb.Append(" ");
+            sb.Append(' ');
             sb.Append(context.type_declaration().GetText());
         }
 
         if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
-            sb.Append(" ");
+            sb.Append(' ');
 
         sb.Append(context.ident().GetText());
 
-        sb.Append("(");
+        sb.Append('(');
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
-        sb.Append(")");
+        sb.Append(')');
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }
@@ -134,7 +129,7 @@ public class PumlDeduplicator : PumlReconstructor
         if (context.type_declaration() != null)
             sb.Append(" " + context.type_declaration().GetText());
         else
-            sb.Append(" ");
+            sb.Append(' ');
 
         sb.Append(" " + context.ident().GetText());
 
@@ -143,8 +138,7 @@ public class PumlDeduplicator : PumlReconstructor
 
     public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
     {
-        var args = new List<string>();
-        foreach (var arg in context.function_argument()) args.Add(Visit(arg));
+        var args = context.function_argument().Select(Visit).ToList();
 
         return StringHelper.NormalizeBreakLines(string.Join(", ", args));
     }
@@ -163,10 +157,10 @@ public class PumlDeduplicator : PumlReconstructor
 
     private class ClassInfo
     {
-        public string ClassType { get; set; } = string.Empty;
-        public string ClassName { get; set; } = string.Empty;
-        public List<string> Attributes { get; } = new();
-        public List<string> Methods { get; } = new();
-        public HashSet<string> MethodSignatures { get; } = new();
+        public string ClassType { get; init; } = string.Empty;
+        public string ClassName { get; init; } = string.Empty;
+        public List<string> Attributes { get; } = [];
+        public List<string> Methods { get; } = [];
+        public HashSet<string> MethodSignatures { get; } = [];
     }
 }
