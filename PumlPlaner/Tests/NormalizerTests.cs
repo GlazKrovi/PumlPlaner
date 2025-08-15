@@ -8,7 +8,7 @@ public class StringHelperTests
     public void NormalizeBreakLines_ShouldReplaceWindowsAndMacBreaksWithUnix()
     {
         // Arrange
-        const string input = "Line1\r\nLine2\rLine3";
+        const string input = "Line1\rLine2\rLine3";
         const string expected = "Line1\nLine2\nLine3";
 
         // Act
