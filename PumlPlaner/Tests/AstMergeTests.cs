@@ -40,7 +40,6 @@ public class AstMergeTests
                                    }
                                    @enduml
                                    
-                                   
                                    """;
 
         // process
