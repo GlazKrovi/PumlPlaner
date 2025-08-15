@@ -7,11 +7,6 @@ namespace PumlPlaner;
 
 public class AstMergeTests
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
-
     [Test]
     public void ShouldMergeTwoSimpleSchemas()
     {
