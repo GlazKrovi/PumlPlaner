@@ -8,7 +8,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
+    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,6 +20,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlaner/Visitors/PumlDeduplicator.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -62,7 +69,7 @@
       <workItem from="1755188290062" duration="2118000" />
       <workItem from="1755194090784" duration="2265000" />
       <workItem from="1755248146166" duration="3766000" />
-      <workItem from="1755267630591" duration="377000" />
+      <workItem from="1755267630591" duration="1774000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -208,7 +215,47 @@
       <option name="project" value="LOCAL" />
       <updated>1755267988243</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="rename &quot;merge&quot; into &quot;sum&quot;, while it's a very simple sum operation, not a complex merge">
+      <option name="closed" value="true" />
+      <created>1755268160802</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1755268160802</updated>
+    </task>
+    <task id="LOCAL-00020" summary="rename">
+      <option name="closed" value="true" />
+      <created>1755268192052</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1755268192052</updated>
+    </task>
+    <task id="LOCAL-00021" summary="fix namespaces">
+      <option name="closed" value="true" />
+      <created>1755268239261</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1755268239261</updated>
+    </task>
+    <task id="LOCAL-00022" summary="cleanup code">
+      <option name="closed" value="true" />
+      <created>1755268269231</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1755268269231</updated>
+    </task>
+    <task id="LOCAL-00023" summary="cleanup code, according to rider ide">
+      <option name="closed" value="true" />
+      <created>1755268523951</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1755268523951</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -235,7 +282,12 @@
     <MESSAGE value="better format" />
     <MESSAGE value="correctly implement deduplicator" />
     <MESSAGE value="remove unexpected line break in test &quot;right&quot; result" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove unexpected line break in test &quot;right&quot; result" />
+    <MESSAGE value="rename &quot;merge&quot; into &quot;sum&quot;, while it's a very simple sum operation, not a complex merge" />
+    <MESSAGE value="rename" />
+    <MESSAGE value="fix namespaces" />
+    <MESSAGE value="cleanup code" />
+    <MESSAGE value="cleanup code, according to rider ide" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup code, according to rider ide" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

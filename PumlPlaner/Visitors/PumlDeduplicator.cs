@@ -6,18 +6,42 @@ namespace PumlPlaner.Visitors;
 public class PumlDeduplicator : PumlReconstructor
 {
     private readonly Dictionary<string, ClassInfo> _classMap = new();
+    private readonly Dictionary<string, EnumInfo> _enumMap = new();
+    private readonly List<string> _connections = new();
+    private readonly List<string> _hideDeclarations = new();
 
     public override string VisitUml(PumlgParser.UmlContext context)
     {
         _classMap.Clear();
-
+        _enumMap.Clear();
+        _connections.Clear();
+        _hideDeclarations.Clear();
 
         if (context.class_diagram() != null) VisitClass_diagram(context.class_diagram());
-
 
         var sb = new StringBuilder();
         sb.AppendLine("@startuml");
 
+        // Output enums
+        foreach (var enumInfo in _enumMap.Values)
+        {
+            sb.Append($"enum {enumInfo.EnumName}");
+            if (enumInfo.Items.Count > 0)
+            {
+                sb.AppendLine(" {");
+                foreach (var item in enumInfo.Items)
+                {
+                    sb.AppendLine($"  {item}");
+                }
+                sb.AppendLine("}");
+            }
+            else
+            {
+                sb.AppendLine();
+            }
+        }
+
+        // Output classes
         foreach (var classInfo in _classMap.Values)
         {
             sb.Append($"{classInfo.ClassType} {classInfo.ClassName}");
@@ -38,6 +62,18 @@ public class PumlDeduplicator : PumlReconstructor
             }
         }
 
+        // Output connections
+        foreach (var connection in _connections)
+        {
+            sb.AppendLine(connection);
+        }
+
+        // Output hide declarations
+        foreach (var hideDecl in _hideDeclarations)
+        {
+            sb.AppendLine(hideDecl);
+        }
+
         sb.AppendLine("@enduml");
 
         var result = sb.ToString();
@@ -51,6 +87,9 @@ public class PumlDeduplicator : PumlReconstructor
     public override string VisitClass_diagram(PumlgParser.Class_diagramContext context)
     {
         foreach (var classDecl in context.class_declaration()) VisitClass_declaration(classDecl);
+        foreach (var enumDecl in context.enum_declaration()) VisitEnum_declaration(enumDecl);
+        foreach (var connection in context.connection()) VisitConnection(connection);
+        foreach (var hideDecl in context.hide_declaration()) VisitHide_declaration(hideDecl);
 
         return string.Empty;
     }
@@ -59,7 +98,6 @@ public class PumlDeduplicator : PumlReconstructor
     {
         var classType = context.class_type().GetText();
         var className = context.ident().GetText();
-
 
         if (!_classMap.ContainsKey(className))
             _classMap[className] = new ClassInfo
@@ -70,19 +108,68 @@ public class PumlDeduplicator : PumlReconstructor
 
         var classInfo = _classMap[className];
 
-
         foreach (var attr in context.attribute())
         {
             var attrText = Visit(attr).TrimEnd();
             if (!classInfo.Attributes.Contains(attrText)) classInfo.Attributes.Add(attrText);
         }
 
-
         foreach (var method in context.method())
         {
             var methodText = Visit(method).TrimEnd();
             if (!classInfo.MethodSignatures.Add(methodText)) continue;
             classInfo.Methods.Add(methodText);
+        }
+
+        return string.Empty;
+    }
+
+    public override string VisitEnum_declaration(PumlgParser.Enum_declarationContext context)
+    {
+        var enumName = context.ident().GetText();
+
+        if (!_enumMap.ContainsKey(enumName))
+        {
+            _enumMap[enumName] = new EnumInfo
+            {
+                EnumName = enumName
+            };
+        }
+
+        var enumInfo = _enumMap[enumName];
+
+        if (context.item_list() != null)
+        {
+            foreach (var item in context.item_list().ident())
+            {
+                var itemText = item.GetText();
+                if (!enumInfo.Items.Contains(itemText))
+                {
+                    enumInfo.Items.Add(itemText);
+                }
+            }
+        }
+
+        return string.Empty;
+    }
+
+    public override string VisitConnection(PumlgParser.ConnectionContext context)
+    {
+        var connectionText = base.VisitConnection(context).TrimEnd();
+        if (!_connections.Contains(connectionText))
+        {
+            _connections.Add(connectionText);
+        }
+
+        return string.Empty;
+    }
+
+    public override string VisitHide_declaration(PumlgParser.Hide_declarationContext context)
+    {
+        var hideText = base.VisitHide_declaration(context).TrimEnd();
+        if (!_hideDeclarations.Contains(hideText))
+        {
+            _hideDeclarations.Add(hideText);
         }
 
         return string.Empty;
@@ -162,5 +249,11 @@ public class PumlDeduplicator : PumlReconstructor
         public List<string> Attributes { get; } = [];
         public List<string> Methods { get; } = [];
         public HashSet<string> MethodSignatures { get; } = [];
+    }
+
+    private class EnumInfo
+    {
+        public string EnumName { get; init; } = string.Empty;
+        public List<string> Items { get; } = [];
     }
 }
