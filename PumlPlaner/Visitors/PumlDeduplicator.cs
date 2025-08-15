@@ -10,10 +10,9 @@ namespace PumlPlaner
     {
         public override string VisitUml(PumlgParser.UmlContext context)
         {
-            // Collecter les classes
             var classes = new Dictionary<string, ClassRepresentation>();
 
-            // Visiter les enfants et collecter les classes
+
             foreach (var child in context.children)
             {
                 if (child is PumlgParser.Class_declarationContext classCtx)
@@ -34,14 +33,9 @@ namespace PumlPlaner
             var sb = new StringBuilder();
             sb.AppendLine("@startuml");
 
-            // Ajouter toutes les classes fusionnées
             foreach (var c in classes.Values)
-            {
                 sb.AppendLine(c.ToPlantUml());
-            }
 
-            // Ici, si tu veux gérer aussi d’autres éléments du schéma (enums, connexions...),
-            // il faudrait aussi les visiter et les ajouter, par exemple :
 
             foreach (var child in context.children)
             {
@@ -55,8 +49,10 @@ namespace PumlPlaner
 
             sb.AppendLine("@enduml");
 
-            return StringHelper.NormalizeBreakLines(sb.ToString());
+
+            return new NormalizedInput(sb.ToString()).ToString();
         }
+
 
         private ClassRepresentation ParseClass(PumlgParser.Class_declarationContext ctx)
         {
@@ -102,7 +98,8 @@ namespace PumlPlaner
                 if (idxStartParams < 0 || idxEndParams < 0) return methodSignature;
 
                 var methodName = methodSignature.Substring(0, idxStartParams).Trim();
-                var parameters = methodSignature.Substring(idxStartParams + 1, idxEndParams - idxStartParams - 1).Trim();
+                var parameters = methodSignature.Substring(idxStartParams + 1, idxEndParams - idxStartParams - 1)
+                    .Trim();
 
                 return $"{methodName}({parameters})";
             }
@@ -120,13 +117,14 @@ namespace PumlPlaner
                 sb.AppendLine($"{Type} {Name} {{");
 
                 foreach (var attr in Attributes)
-                    sb.AppendLine("  " + attr);
+                    sb.AppendLine("  " + attr.Trim());
 
                 foreach (var method in MethodsBySignature.Values)
-                    sb.AppendLine("  " + method);
+                    sb.AppendLine("  " + method.Trim());
 
                 sb.AppendLine("}");
-                return new NormalizedInput(sb.ToString()).ToString();
+
+                return sb.ToString();
             }
         }
     }
