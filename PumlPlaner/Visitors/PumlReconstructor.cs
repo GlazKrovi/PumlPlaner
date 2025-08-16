@@ -43,6 +43,13 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append($"{classType} {className}");
 
+        // Add stereotype if present
+        if (context.stereotype() != null)
+        {
+            sb.Append(" ");
+            sb.Append(Visit(context.stereotype()));
+        }
+
         if (context.ChildCount > 2)
         {
             sb.AppendLine(" {");

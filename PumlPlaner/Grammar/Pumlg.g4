@@ -13,7 +13,7 @@ class_diagram
     ;
 
 class_declaration:
-    class_type ident ('{'
+    class_type ident stereotype? ('{'
     (attribute | method | NEWLINE)*
     '}' )?
     ;
@@ -24,7 +24,7 @@ hide_declaration:
 attribute:
     visibility?
     modifiers?
-    type_declaration
+    type_declaration?
     ident
     NEWLINE
     ;
@@ -54,7 +54,7 @@ connection:
     NEWLINE
     ;
 
-multiplicity: ('*' | '0..1' '0..*' | '1..*' | '1');
+multiplicity: ('*' | '0..1' | '0..*' | '1..*' | '1');
 
 visibility:
     '+'     # visibility_public
@@ -69,7 +69,6 @@ function_argument:
 function_argument_list:
     function_argument (',' function_argument)*
     ;
-
 
 template_argument:
     type_declaration
@@ -94,7 +93,7 @@ modifiers:
     ;
 
 stereotype:
-    '<<' name=ident('(' args+=ident ')')? '>>'
+    '<<' name=ident ('(' args+=ident ')')? '>>'
     ;
 
 type_declaration:
@@ -164,6 +163,7 @@ IDENT : NONDIGIT ( DIGIT | NONDIGIT )*;
 // Tokens pour les crochets de tableau (doivent être avant CONNECTOR pour éviter l'ambiguïté)
 LBRACKET : '[' ;
 RBRACKET : ']' ;
+
 COMMENT :
     ('/' '/' .*? '\n' | '/*' .*? '*/') -> channel(HIDDEN)
     ;
