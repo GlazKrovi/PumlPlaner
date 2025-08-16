@@ -47,19 +47,32 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         {
             sb.AppendLine(" {");
 
-            foreach (var attr in context.attribute())
+            var attributes = context.attribute().ToList();
+            var methods = context.method().ToList();
+
+            // Add attributes
+            for (int i = 0; i < attributes.Count; i++)
             {
                 sb.Append("  ");
-                sb.AppendLine(Visit(attr).TrimEnd());
+                sb.Append(Visit(attributes[i]).TrimEnd());
+                if (i < attributes.Count - 1 || methods.Count > 0)
+                {
+                    sb.AppendLine();
+                }
             }
 
-            foreach (var method in context.method())
+            // Add methods
+            for (int i = 0; i < methods.Count; i++)
             {
                 sb.Append("  ");
-                sb.Append(Visit(method).TrimEnd());
+                sb.Append(Visit(methods[i]).TrimEnd());
+                if (i < methods.Count - 1)
+                {
+                    sb.AppendLine();
+                }
             }
 
-            sb.AppendLine("}");
+            sb.AppendLine("\n}");
         }
         else
         {
