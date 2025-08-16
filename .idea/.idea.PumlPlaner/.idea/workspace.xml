@@ -8,7 +8,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
+    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -306,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755352402454</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="reformat the result, while the last property does not need a line break">
+      <option name="closed" value="true" />
+      <created>1755353182833</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1755353182833</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +337,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="remove comments" />
     <MESSAGE value="RemoveMultipleBreaks" />
     <MESSAGE value="Get the exact same schema" />
     <MESSAGE value="rename tests for cleaner code" />
@@ -352,7 +361,8 @@
     <MESSAGE value="tmp" />
     <MESSAGE value="fix test" />
     <MESSAGE value="format result" />
-    <option name="LAST_COMMIT_MESSAGE" value="format result" />
+    <MESSAGE value="reformat the result, while the last property does not need a line break" />
+    <option name="LAST_COMMIT_MESSAGE" value="reformat the result, while the last property does not need a line break" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

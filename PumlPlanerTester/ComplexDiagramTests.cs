@@ -57,6 +57,8 @@ public class ComplexDiagramTests
         var visitor = new PumlReconstructor();
         var result = visitor.VisitUml(ast.Tree);
 
+        Console.WriteLine(result);
+
         Assert.That(result, Is.EqualTo(expected));
     }
 

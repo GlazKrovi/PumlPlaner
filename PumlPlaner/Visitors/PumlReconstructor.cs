@@ -214,7 +214,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(context.visibility().GetText());
 
         if (context.modifiers() != null)
-            sb.Append(context.modifiers().GetText());
+            sb.Append(" " + context.modifiers().GetText());
 
         if (context.type_declaration() != null)
             sb.Append(" " + context.type_declaration().GetText());
@@ -234,7 +234,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(context.visibility().GetText());
 
         if (context.modifiers() != null)
-            sb.Append(context.modifiers().GetText());
+            sb.Append(" " + context.modifiers().GetText());
 
         if (context.type_declaration() != null)
         {

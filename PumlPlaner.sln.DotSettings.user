@@ -1,12 +1,4 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=4ec2f5f0_002Dec56_002D45ec_002D8a4e_002D7f3ae91247c3/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Test1" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.NormalizeBreakLines_ShouldReplaceWindowsAndMacBreaksWithUnix&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.RemoveMultipleBreaks_ShouldReduceToSingleBreak&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.NormalizeEndOfFile_ShouldAppendNewlineIfMissing&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.StringHelperTests.ShouldNormalizeEntries&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.AstMergeTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.Tests.PlantUmlDeduplicatorTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6ECAE0F7-FBAE-49E2-896B-BD49AE0FD0C0::net9.0::PumlPlaner.Tests.ComplexDiagramTests.ShouldHandleEnumDeclaration&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Solution /&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
