@@ -275,9 +275,9 @@ public class ComplexDiagramTests
         const string input = """
                              @startuml
                              class List {
-                               - items T[]
-                               + add(T item)
-                               + remove(T item)
+                               - items : string[]
+                               + add(item : string)
+                               + remove(item : string)
                              }
                              @enduml
                              """;
@@ -285,9 +285,9 @@ public class ComplexDiagramTests
         var expected = StringHelper.NormalizeBreakLines("""
                                                         @startuml
                                                         class List {
-                                                          - items T[]
-                                                          + add(T item)
-                                                          + remove(T item)
+                                                          - items : string[]
+                                                          + add(item : string)
+                                                          + remove(item : string)
                                                         }
                                                         @enduml
 
@@ -301,7 +301,7 @@ public class ComplexDiagramTests
     }
 
     [Test]
-    public void ShouldDeduplicateSimpleComplexDiagram()
+    public void ShouldDeduplicateComplexDiagram()
     {
         const string input = """
                              @startuml

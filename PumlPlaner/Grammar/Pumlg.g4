@@ -24,7 +24,7 @@ hide_declaration:
 attribute:
     visibility?
     modifiers?
-    type_declaration?
+    type_declaration
     ident
     NEWLINE
     ;
@@ -99,7 +99,7 @@ stereotype:
 
 type_declaration:
     ident '<' template_argument_list? '>'               # template_type
-    | ident '[' ']'                                     # list_type
+    | ident LBRACKET RBRACKET                           # list_type
     | ident                                             # simple_type
     ;
 
@@ -160,6 +160,10 @@ NEWPAGE : 'newpage' -> channel(HIDDEN)
 NEWLINE  :   [\r\n];
 
 IDENT : NONDIGIT ( DIGIT | NONDIGIT )*;
+
+// Tokens pour les crochets de tableau (doivent être avant CONNECTOR pour éviter l'ambiguïté)
+LBRACKET : '[' ;
+RBRACKET : ']' ;
 COMMENT :
     ('/' '/' .*? '\n' | '/*' .*? '*/') -> channel(HIDDEN)
     ;
