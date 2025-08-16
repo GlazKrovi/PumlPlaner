@@ -86,6 +86,11 @@ ident:
 modifiers:
     static_mod='{static}'
     | abstract_mod='{abstract}'
+    | override_mod='{override}'
+    | virtual_mod='{virtual}'
+    | sealed_mod='{sealed}'
+    | readonly_mod='{readonly}'
+    | const_mod='{const}'
     ;
 
 stereotype:

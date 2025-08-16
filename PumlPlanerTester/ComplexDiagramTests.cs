@@ -102,7 +102,7 @@ public class ComplexDiagramTests
                              }
                              class Dog {
                                + {override} makeSound()
-                               + {override} toString() string
+                               + {override} string toString()
                              }
                              @enduml
                              """;
@@ -114,7 +114,7 @@ public class ComplexDiagramTests
                                                         }
                                                         class Dog {
                                                           + {override} makeSound()
-                                                          + {override} toString() string
+                                                          + {override} string toString()
                                                         }
                                                         @enduml
 

@@ -9,7 +9,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +93,7 @@
       <workItem from="1755194090784" duration="2265000" />
       <workItem from="1755248146166" duration="3766000" />
       <workItem from="1755267630591" duration="3049000" />
-      <workItem from="1755353415102" duration="629000" />
+      <workItem from="1755353415102" duration="1117000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -325,7 +335,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755353757770</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="create test for  {override}">
+      <option name="closed" value="true" />
+      <created>1755354264986</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1755354264986</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -346,7 +364,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="Get the exact same schema" />
     <MESSAGE value="rename tests for cleaner code" />
     <MESSAGE value="create a test for input normalization" />
     <MESSAGE value="add tests for each function of normalizer" />
@@ -371,7 +388,8 @@
     <MESSAGE value="format result" />
     <MESSAGE value="reformat the result, while the last property does not need a line break" />
     <MESSAGE value="add abstract in reconstructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="add abstract in reconstructor" />
+    <MESSAGE value="create test for  {override}" />
+    <option name="LAST_COMMIT_MESSAGE" value="create test for  {override}" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
