@@ -14,7 +14,7 @@ public class AstBuildTests
                        @startuml
 
                        class Fruit {
-                         - vitamins int
+                         - int vitamins
                          + eat()
                        }
 
@@ -46,7 +46,7 @@ public class AstBuildTests
         Console.WriteLine("Original:\r" + input);
         Console.WriteLine("Reconstructed:\r" + reconstructed);
 
-        Assert.That(input.ToString() ?? string.Empty, Is.EqualTo(reconstructed));
+        Assert.That(rawInput, Is.EqualTo(reconstructed));
     }
 
 
