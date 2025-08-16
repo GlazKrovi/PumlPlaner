@@ -37,7 +37,7 @@ public class ComplexDiagramTests
         const string input = """
                              @startuml
                              abstract class Animal {
-                               # name string
+                               # {abstract} name string
                                + {abstract} makeSound()
                              }
                              @enduml
@@ -46,7 +46,7 @@ public class ComplexDiagramTests
         var expected = StringHelper.NormalizeBreakLines("""
                                                         @startuml
                                                         abstract class Animal {
-                                                          # name string
+                                                          # {abstract} name string
                                                           + {abstract} makeSound()
                                                         }
                                                         @enduml
@@ -61,6 +61,7 @@ public class ComplexDiagramTests
 
         Assert.That(result, Is.EqualTo(expected));
     }
+
 
     [Test]
     public void ShouldHandleInterface()
@@ -87,6 +88,43 @@ public class ComplexDiagramTests
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
         var result = visitor.VisitUml(ast.Tree);
+
+        Assert.That(result, Is.EqualTo(expected));
+    }
+
+    [Test]
+    public void ShouldHandleOverrideMethods()
+    {
+        const string input = """
+                             @startuml
+                             class Animal {
+                               + {abstract} makeSound()
+                             }
+                             class Dog {
+                               + {override} makeSound()
+                               + {override} toString() string
+                             }
+                             @enduml
+                             """;
+
+        var expected = StringHelper.NormalizeBreakLines("""
+                                                        @startuml
+                                                        class Animal {
+                                                          + {abstract} makeSound()
+                                                        }
+                                                        class Dog {
+                                                          + {override} makeSound()
+                                                          + {override} toString() string
+                                                        }
+                                                        @enduml
+
+                                                        """);
+
+        var ast = new SchemeAst(input);
+        var visitor = new PumlReconstructor();
+        var result = visitor.VisitUml(ast.Tree);
+
+        Console.WriteLine(result);
 
         Assert.That(result, Is.EqualTo(expected));
     }
