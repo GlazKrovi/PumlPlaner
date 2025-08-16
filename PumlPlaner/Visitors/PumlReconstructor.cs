@@ -11,10 +11,9 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.AppendLine("@startuml");
         foreach (var child in context.children) sb.Append(Visit(child));
-
         sb.AppendLine("@enduml");
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return new NormalizedInput(sb.ToString()).ToString();
     }
 
     public override string VisitClass_diagram(PumlgParser.Class_diagramContext context)
@@ -26,7 +25,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         foreach (var connection in context.connection()) sb.Append(Visit(connection));
         foreach (var hideDecl in context.hide_declaration()) sb.Append(Visit(hideDecl));
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitClass_declaration(PumlgParser.Class_declarationContext context)
@@ -57,7 +56,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             foreach (var method in context.method())
             {
                 sb.Append("  ");
-                sb.AppendLine(Visit(method).TrimEnd());
+                sb.Append(Visit(method).TrimEnd());
             }
 
             sb.AppendLine("}");
@@ -67,7 +66,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.AppendLine();
         }
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitEnum_declaration(PumlgParser.Enum_declarationContext context)
@@ -88,7 +87,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.AppendLine();
         }
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitItem_list(PumlgParser.Item_listContext context)
@@ -100,7 +99,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.AppendLine($"  {item.GetText()}");
         }
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitConnection(PumlgParser.ConnectionContext context)
@@ -127,7 +126,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.AppendLine();
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitConnection_left(PumlgParser.Connection_leftContext context)
@@ -145,7 +144,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             }
         }
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitConnection_right(PumlgParser.Connection_rightContext context)
@@ -164,7 +163,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(context.instance.GetText());
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitStereotype(PumlgParser.StereotypeContext context)
@@ -182,7 +181,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(">>");
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitHide_declaration(PumlgParser.Hide_declarationContext context)
@@ -191,7 +190,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.AppendLine($"hide {context.ident().GetText()}");
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitAttribute(PumlgParser.AttributeContext context)
@@ -211,7 +210,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(" " + context.ident().GetText());
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitMethod(PumlgParser.MethodContext context)
@@ -240,14 +239,14 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(')');
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitFunction_argument_list(PumlgParser.Function_argument_listContext context)
     {
         var args = context.function_argument().Select(Visit).ToList();
 
-        return StringHelper.NormalizeBreakLines(string.Join(", ", args));
+        return string.Join(", ", args);
     }
 
     public override string VisitFunction_argument(PumlgParser.Function_argumentContext context)
@@ -259,7 +258,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(context.ident().GetText());
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitTemplate_type(PumlgParser.Template_typeContext context)
@@ -276,7 +275,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append('>');
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitList_type(PumlgParser.List_typeContext context)
@@ -286,33 +285,33 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         sb.Append(context.ident().GetText());
         sb.Append("[]");
 
-        return StringHelper.NormalizeBreakLines(sb.ToString());
+        return sb.ToString();
     }
 
     public override string VisitSimple_type(PumlgParser.Simple_typeContext context)
     {
-        return StringHelper.NormalizeBreakLines(context.ident().GetText());
+        return context.ident().GetText();
     }
 
     public override string VisitTemplate_argument_list(PumlgParser.Template_argument_listContext context)
     {
         var args = context.template_argument().Select(Visit).ToList();
 
-        return StringHelper.NormalizeBreakLines(string.Join(", ", args));
+        return string.Join(", ", args);
     }
 
     public override string VisitTemplate_argument(PumlgParser.Template_argumentContext context)
     {
-        return StringHelper.NormalizeBreakLines(Visit(context.type_declaration()));
+        return Visit(context.type_declaration());
     }
 
     public override string VisitModifiers(PumlgParser.ModifiersContext context)
     {
-        return StringHelper.NormalizeBreakLines(context.GetText());
+        return context.GetText();
     }
 
     public override string VisitMultiplicity(PumlgParser.MultiplicityContext context)
     {
-        return StringHelper.NormalizeBreakLines(context.GetText());
+        return context.GetText();
     }
 }
