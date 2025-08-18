@@ -274,20 +274,22 @@ public class ComplexDiagramTests
     {
         const string input = """
                              @startuml
-                             class List {
-                               - items : string[]
-                               + add(item : string)
-                               + remove(item : string)
+                             class List<T> {
+                               - items T[]
+                               + void add(T item)
+                               + T get(int index)
+                               + T[] getAll()
                              }
                              @enduml
                              """;
 
         var expected = StringHelper.NormalizeBreakLines("""
                                                         @startuml
-                                                        class List {
-                                                          - items : string[]
-                                                          + add(item : string)
-                                                          + remove(item : string)
+                                                        class List<T> {
+                                                          - items T[]
+                                                          + void add(T item)
+                                                          + T get(int index)
+                                                          + T[] getAll()
                                                         }
                                                         @enduml
 

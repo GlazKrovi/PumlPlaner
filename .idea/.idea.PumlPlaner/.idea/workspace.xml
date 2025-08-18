@@ -8,10 +8,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
-    </list>
+    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +80,7 @@
       <workItem from="1755267630591" duration="3049000" />
       <workItem from="1755353415102" duration="1117000" />
       <workItem from="1755357641752" duration="474000" />
-      <workItem from="1755531043175" duration="1073000" />
+      <workItem from="1755531043175" duration="1698000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -333,7 +330,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755354264986</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="fix deduplicate complex">
+      <option name="closed" value="true" />
+      <created>1755533009528</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1755533009528</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,7 +359,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="rename tests for cleaner code" />
     <MESSAGE value="create a test for input normalization" />
     <MESSAGE value="add tests for each function of normalizer" />
     <MESSAGE value="pass test of normalizer" />
@@ -379,7 +383,8 @@
     <MESSAGE value="reformat the result, while the last property does not need a line break" />
     <MESSAGE value="add abstract in reconstructor" />
     <MESSAGE value="create test for  {override}" />
-    <option name="LAST_COMMIT_MESSAGE" value="create test for  {override}" />
+    <MESSAGE value="fix deduplicate complex" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix deduplicate complex" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
