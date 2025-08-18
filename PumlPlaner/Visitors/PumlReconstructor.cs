@@ -56,6 +56,13 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(Visit(context.stereotype()));
         }
 
+        // Add inheritance declaration if present
+        if (context.inheritance_declaration() != null)
+        {
+            sb.Append(" ");
+            sb.Append(Visit(context.inheritance_declaration()));
+        }
+
         if (context.ChildCount > 2)
         {
             sb.AppendLine(" {");
@@ -99,6 +106,50 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         else
         {
             sb.AppendLine();
+        }
+
+        return sb.ToString();
+    }
+
+    public override string VisitInheritance_declaration(PumlgParser.Inheritance_declarationContext context)
+    {
+        var sb = new StringBuilder();
+
+        if (context.extends_declaration() != null)
+        {
+            sb.Append(Visit(context.extends_declaration()));
+        }
+
+        if (context.implements_declaration() != null)
+        {
+            if (context.extends_declaration() != null)
+            {
+                sb.Append(" ");
+            }
+            sb.Append(Visit(context.implements_declaration()));
+        }
+
+        return sb.ToString();
+    }
+
+    public override string VisitExtends_declaration(PumlgParser.Extends_declarationContext context)
+    {
+        return $"extends {context.ident().GetText()}";
+    }
+
+    public override string VisitImplements_declaration(PumlgParser.Implements_declarationContext context)
+    {
+        var sb = new StringBuilder();
+        sb.Append("implements ");
+
+        var identifiers = context.ident().ToList();
+        for (int i = 0; i < identifiers.Count; i++)
+        {
+            sb.Append(identifiers[i].GetText());
+            if (i < identifiers.Count - 1)
+            {
+                sb.Append(", ");
+            }
         }
 
         return sb.ToString();

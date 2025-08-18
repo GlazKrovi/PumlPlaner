@@ -13,9 +13,22 @@ class_diagram
     ;
 
 class_declaration:
-    class_type ident template_parameter_list? stereotype? ('{'
+    class_type ident template_parameter_list? stereotype? inheritance_declaration? ('{'
     (class_member | NEWLINE)*
     '}' )?
+    ;
+
+inheritance_declaration:
+    extends_declaration implements_declaration?
+    | implements_declaration
+    ;
+
+extends_declaration:
+    'extends' ident
+    ;
+
+implements_declaration:
+    'implements' ident (',' ident)*
     ;
 
 class_member:

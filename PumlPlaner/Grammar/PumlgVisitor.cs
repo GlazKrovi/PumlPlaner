@@ -50,6 +50,24 @@ public interface IPumlgVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitClass_declaration([NotNull] PumlgParser.Class_declarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.inheritance_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitInheritance_declaration([NotNull] PumlgParser.Inheritance_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.extends_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExtends_declaration([NotNull] PumlgParser.Extends_declarationContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.implements_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitImplements_declaration([NotNull] PumlgParser.Implements_declarationContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PumlgParser.class_member"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>

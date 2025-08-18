@@ -63,6 +63,28 @@ public class PumlSum : PumlReconstructor
                 sb.Append(" " + classInfo.Stereotype);
             }
 
+            // Add inheritance declarations
+            if (!string.IsNullOrEmpty(classInfo.Extends) || classInfo.Implements.Count > 0)
+            {
+                if (!string.IsNullOrEmpty(classInfo.Extends))
+                {
+                    sb.Append($" extends {classInfo.Extends}");
+                }
+
+                if (classInfo.Implements.Count > 0)
+                {
+                    if (!string.IsNullOrEmpty(classInfo.Extends))
+                    {
+                        sb.Append(" implements ");
+                    }
+                    else
+                    {
+                        sb.Append(" implements ");
+                    }
+                    sb.Append(string.Join(", ", classInfo.Implements));
+                }
+            }
+
             if (classInfo.Attributes.Count != 0 || classInfo.Methods.Count != 0)
             {
                 sb.AppendLine(" {");
@@ -145,6 +167,12 @@ public class PumlSum : PumlReconstructor
             }
         }
 
+        // Handle inheritance declarations
+        if (context.inheritance_declaration() != null)
+        {
+            VisitInheritance_declaration(context.inheritance_declaration(), _classMap[className]);
+        }
+
         // Add members
         foreach (var member in context.class_member())
         {
@@ -222,6 +250,26 @@ public class PumlSum : PumlReconstructor
         return string.Empty;
     }
 
+    private void VisitInheritance_declaration(PumlgParser.Inheritance_declarationContext context, ClassInfo classInfo)
+    {
+        if (context.extends_declaration() != null)
+        {
+            classInfo.Extends = context.extends_declaration().ident().GetText();
+        }
+
+        if (context.implements_declaration() != null)
+        {
+            foreach (var ident in context.implements_declaration().ident())
+            {
+                var interfaceName = ident.GetText();
+                if (!classInfo.Implements.Contains(interfaceName))
+                {
+                    classInfo.Implements.Add(interfaceName);
+                }
+            }
+        }
+    }
+
     private class ClassInfo
     {
         public string ClassType { get; init; } = string.Empty;
@@ -230,6 +278,8 @@ public class PumlSum : PumlReconstructor
         public List<string> Methods { get; set; } = [];
         public string? TemplateParameters { get; set; }
         public string? Stereotype { get; set; }
+        public string? Extends { get; set; }
+        public List<string> Implements { get; set; } = [];
     }
 
     private class EnumInfo

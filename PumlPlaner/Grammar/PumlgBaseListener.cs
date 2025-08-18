@@ -72,6 +72,42 @@ public partial class PumlgBaseListener : IPumlgListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitClass_declaration([NotNull] PumlgParser.Class_declarationContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.inheritance_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterInheritance_declaration([NotNull] PumlgParser.Inheritance_declarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.inheritance_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitInheritance_declaration([NotNull] PumlgParser.Inheritance_declarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.extends_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExtends_declaration([NotNull] PumlgParser.Extends_declarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.extends_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExtends_declaration([NotNull] PumlgParser.Extends_declarationContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.implements_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterImplements_declaration([NotNull] PumlgParser.Implements_declarationContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.implements_declaration"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitImplements_declaration([NotNull] PumlgParser.Implements_declarationContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PumlgParser.class_member"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
