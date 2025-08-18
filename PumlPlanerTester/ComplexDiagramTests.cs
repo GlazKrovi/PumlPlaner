@@ -364,7 +364,7 @@ public class ComplexDiagramTests
 
                                   class User {
                                     - name string
-                                    + getName() string
+                                    + getName() : string
                                   }
 
                                   User --> Order
@@ -380,7 +380,7 @@ public class ComplexDiagramTests
 
                                    class Product {
                                      - price decimal
-                                     + getPrice() decimal
+                                     + getPrice() : decimal
                                    }
 
                                    Order --> Product
@@ -395,7 +395,7 @@ public class ComplexDiagramTests
                                                         }
                                                         class User {
                                                           - name string
-                                                          + getName() string
+                                                          + getName() : string
                                                         }
                                                         class Order {
                                                           - items List
@@ -403,7 +403,7 @@ public class ComplexDiagramTests
                                                         }
                                                         class Product {
                                                           - price decimal
-                                                          + getPrice() decimal
+                                                          + getPrice() : decimal
                                                         }
                                                         User --> Order
                                                         Order --> Product

@@ -10,20 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

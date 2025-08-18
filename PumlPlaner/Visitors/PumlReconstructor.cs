@@ -252,6 +252,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
+        // Vérifier que l'identifiant existe
+        if (context.ident() == null)
+        {
+            return sb.ToString(); // Retourner ce qui a été construit jusqu'ici
+        }
+
         // Gérer les deux syntaxes : type ident() ou ident() : type
         if (context.type_declaration() != null)
         {
