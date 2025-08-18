@@ -61,6 +61,16 @@ public interface IPumlgListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitClass_declaration([NotNull] PumlgParser.Class_declarationContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.class_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterClass_member([NotNull] PumlgParser.Class_memberContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.class_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitClass_member([NotNull] PumlgParser.Class_memberContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PumlgParser.hide_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -207,6 +217,26 @@ public interface IPumlgListener : IParseTreeListener {
 	/// <param name="context">The parse tree.</param>
 	void ExitTemplate_argument_list([NotNull] PumlgParser.Template_argument_listContext context);
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.template_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTemplate_parameter_list([NotNull] PumlgParser.Template_parameter_listContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.template_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTemplate_parameter_list([NotNull] PumlgParser.Template_parameter_listContext context);
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="PumlgParser.template_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterTemplate_parameter([NotNull] PumlgParser.Template_parameterContext context);
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="PumlgParser.template_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitTemplate_parameter([NotNull] PumlgParser.Template_parameterContext context);
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="PumlgParser.ident"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -260,6 +290,30 @@ public interface IPumlgListener : IParseTreeListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	void ExitList_type([NotNull] PumlgParser.List_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>generic_list_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGeneric_list_type([NotNull] PumlgParser.Generic_list_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>generic_list_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGeneric_list_type([NotNull] PumlgParser.Generic_list_typeContext context);
+	/// <summary>
+	/// Enter a parse tree produced by the <c>generic_simple_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void EnterGeneric_simple_type([NotNull] PumlgParser.Generic_simple_typeContext context);
+	/// <summary>
+	/// Exit a parse tree produced by the <c>generic_simple_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	void ExitGeneric_simple_type([NotNull] PumlgParser.Generic_simple_typeContext context);
 	/// <summary>
 	/// Enter a parse tree produced by the <c>simple_type</c>
 	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.

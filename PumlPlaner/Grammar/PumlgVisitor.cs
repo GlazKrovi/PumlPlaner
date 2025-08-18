@@ -50,6 +50,12 @@ public interface IPumlgVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitClass_declaration([NotNull] PumlgParser.Class_declarationContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.class_member"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitClass_member([NotNull] PumlgParser.Class_memberContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PumlgParser.hide_declaration"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -137,6 +143,18 @@ public interface IPumlgVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitTemplate_argument_list([NotNull] PumlgParser.Template_argument_listContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.template_parameter_list"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTemplate_parameter_list([NotNull] PumlgParser.Template_parameter_listContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="PumlgParser.template_parameter"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTemplate_parameter([NotNull] PumlgParser.Template_parameterContext context);
+	/// <summary>
 	/// Visit a parse tree produced by <see cref="PumlgParser.ident"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
@@ -168,6 +186,20 @@ public interface IPumlgVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitList_type([NotNull] PumlgParser.List_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>generic_list_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGeneric_list_type([NotNull] PumlgParser.Generic_list_typeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>generic_simple_type</c>
+	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGeneric_simple_type([NotNull] PumlgParser.Generic_simple_typeContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>simple_type</c>
 	/// labeled alternative in <see cref="PumlgParser.type_declaration"/>.

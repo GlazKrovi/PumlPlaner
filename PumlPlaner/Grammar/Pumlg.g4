@@ -9,13 +9,18 @@ uml:
     ;
 
 class_diagram
-    : (class_declaration | connection | enum_declaration | hide_declaration | NEWLINE)*
+    : (class_declaration | enum_declaration | connection | hide_declaration | NEWLINE)*
     ;
 
 class_declaration:
-    class_type ident stereotype? ('{'
-    (attribute | method | NEWLINE)*
+    class_type ident template_parameter_list? stereotype? ('{'
+    (class_member | NEWLINE)*
     '}' )?
+    ;
+
+class_member:
+    attribute
+    | method
     ;
 
 hide_declaration:
@@ -24,17 +29,14 @@ hide_declaration:
 attribute:
     visibility?
     modifiers?
-    type_declaration?
-    ident
+    (type_declaration? ident | ident ':' type_declaration)
     NEWLINE
     ;
 
 method:
     visibility?
     modifiers?
-    type_declaration?
-    ident
-    '(' function_argument_list? ')'
+    (type_declaration? ident '(' function_argument_list? ')' | ident '(' function_argument_list? ')' ':' type_declaration)
     NEWLINE
     ;
 
@@ -78,6 +80,14 @@ template_argument_list:
     template_argument (',' template_argument)*
     ;
 
+template_parameter_list:
+    '<' template_parameter (',' template_parameter)* '>'
+    ;
+
+template_parameter:
+    ident
+    ;
+
 ident:
     IDENT
     ;
@@ -99,6 +109,8 @@ stereotype:
 type_declaration:
     ident '<' template_argument_list? '>'               # template_type
     | ident LBRACKET RBRACKET                           # list_type
+    | template_parameter LBRACKET RBRACKET              # generic_list_type
+    | template_parameter                                 # generic_simple_type
     | ident                                             # simple_type
     ;
 

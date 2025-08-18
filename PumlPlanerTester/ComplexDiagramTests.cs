@@ -275,10 +275,10 @@ public class ComplexDiagramTests
         const string input = """
                              @startuml
                              class List<T> {
-                               - items T[]
-                               + void add(T item)
-                               + T get(int index)
-                               + T[] getAll()
+                               - items : T[]
+                               + add(T item) : void
+                               + get(int index) : T
+                               + getAll() : T[]
                              }
                              @enduml
                              """;
@@ -286,10 +286,10 @@ public class ComplexDiagramTests
         var expected = StringHelper.NormalizeBreakLines("""
                                                         @startuml
                                                         class List<T> {
-                                                          - items T[]
-                                                          + void add(T item)
-                                                          + T get(int index)
-                                                          + T[] getAll()
+                                                          - items : T[]
+                                                          + add(T item) : void
+                                                          + get(int index) : T
+                                                          + getAll() : T[]
                                                         }
                                                         @enduml
 
@@ -298,6 +298,8 @@ public class ComplexDiagramTests
         var ast = new SchemeAst(input);
         var visitor = new PumlReconstructor();
         var result = visitor.VisitUml(ast.Tree);
+
+        Console.WriteLine(result);
 
         Assert.That(result, Is.EqualTo(expected));
     }

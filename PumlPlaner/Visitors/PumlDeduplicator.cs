@@ -108,19 +108,20 @@ public class PumlDeduplicator : PumlReconstructor
 
         var classInfo = _classMap[className];
 
-        foreach (var attr in context.attribute())
+        foreach (var member in context.class_member())
         {
-            // Utiliser la méthode du parent (PumlReconstructor) pour préserver toutes les caractéristiques
-            var attrText = base.VisitAttribute(attr).TrimEnd();
-            if (!classInfo.Attributes.Contains(attrText)) classInfo.Attributes.Add(attrText);
-        }
-
-        foreach (var method in context.method())
-        {
-            // Utiliser la méthode du parent (PumlReconstructor) pour préserver toutes les caractéristiques
-            var methodText = base.VisitMethod(method).TrimEnd();
-            if (!classInfo.MethodSignatures.Add(methodText)) continue;
-            classInfo.Methods.Add(methodText);
+            var memberText = base.VisitClass_member(member).TrimEnd();
+            
+            // Déterminer si c'est un attribut ou une méthode
+            if (member.attribute() != null)
+            {
+                if (!classInfo.Attributes.Contains(memberText)) classInfo.Attributes.Add(memberText);
+            }
+            else if (member.method() != null)
+            {
+                if (!classInfo.MethodSignatures.Add(memberText)) continue;
+                classInfo.Methods.Add(memberText);
+            }
         }
 
         return string.Empty;
@@ -185,22 +186,41 @@ public class PumlDeduplicator : PumlReconstructor
             sb.Append(context.visibility().GetText());
 
         if (context.modifiers() != null)
-            sb.Append(context.modifiers().GetText());
+            sb.Append(" " + context.modifiers().GetText());
 
+        // Gérer les deux syntaxes : type ident() ou ident() : type
         if (context.type_declaration() != null)
         {
-            sb.Append(' ');
-            sb.Append(context.type_declaration().GetText());
+            // Si le type est avant l'identifiant (ancienne syntaxe)
+            if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
+            {
+                sb.Append(" " + Visit(context.type_declaration()));
+                sb.Append(" " + context.ident().GetText());
+            }
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            else
+            {
+                sb.Append(" " + context.ident().GetText());
+            }
         }
-
-        if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
-            sb.Append(' ');
-
-        sb.Append(context.ident().GetText());
+        else
+        {
+            sb.Append(" " + context.ident().GetText());
+        }
 
         sb.Append('(');
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
         sb.Append(')');
+
+        if (context.type_declaration() != null)
+        {
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            if (context.type_declaration().Start.TokenIndex > context.ident().Start.TokenIndex)
+            {
+                sb.Append(" : ");
+                sb.Append(Visit(context.type_declaration()));
+            }
+        }
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }
@@ -213,14 +233,29 @@ public class PumlDeduplicator : PumlReconstructor
             sb.Append(context.visibility().GetText());
 
         if (context.modifiers() != null)
-            sb.Append(context.modifiers().GetText());
+            sb.Append(" " + context.modifiers().GetText());
 
+        // Gérer les deux syntaxes : type ident ou ident : type
         if (context.type_declaration() != null)
-            sb.Append(" " + context.type_declaration().GetText());
+        {
+            // Si le type est avant l'identifiant (ancienne syntaxe)
+            if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
+            {
+                sb.Append(" " + Visit(context.type_declaration()));
+                sb.Append(" " + context.ident().GetText());
+            }
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            else
+            {
+                sb.Append(" " + context.ident().GetText());
+                sb.Append(" : ");
+                sb.Append(Visit(context.type_declaration()));
+            }
+        }
         else
-            sb.Append(' ');
-
-        sb.Append(" " + context.ident().GetText());
+        {
+            sb.Append(" " + context.ident().GetText());
+        }
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }

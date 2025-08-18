@@ -43,6 +43,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append($"{classType} {className}");
 
+        // Add template parameters if present
+        if (context.template_parameter_list() != null)
+        {
+            sb.Append(Visit(context.template_parameter_list()));
+        }
+
         // Add stereotype if present
         if (context.stereotype() != null)
         {
@@ -54,26 +60,14 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         {
             sb.AppendLine(" {");
 
-            var attributes = context.attribute().ToList();
-            var methods = context.method().ToList();
+            var members = context.class_member().ToList();
 
-            // Add attributes
-            for (int i = 0; i < attributes.Count; i++)
+            // Add all members
+            for (int i = 0; i < members.Count; i++)
             {
                 sb.Append("  ");
-                sb.Append(Visit(attributes[i]).TrimEnd());
-                if (i < attributes.Count - 1 || methods.Count > 0)
-                {
-                    sb.AppendLine();
-                }
-            }
-
-            // Add methods
-            for (int i = 0; i < methods.Count; i++)
-            {
-                sb.Append("  ");
-                sb.Append(Visit(methods[i]).TrimEnd());
-                if (i < methods.Count - 1)
+                sb.Append(Visit(members[i]).TrimEnd());
+                if (i < members.Count - 1)
                 {
                     sb.AppendLine();
                 }
@@ -223,12 +217,27 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
+        // Gérer les deux syntaxes : type ident ou ident : type
         if (context.type_declaration() != null)
-            sb.Append(" " + context.type_declaration().GetText());
+        {
+            // Si le type est avant l'identifiant (ancienne syntaxe)
+            if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
+            {
+                sb.Append(" " + Visit(context.type_declaration()));
+                sb.Append(" " + context.ident().GetText());
+            }
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            else
+            {
+                sb.Append(" " + context.ident().GetText());
+                sb.Append(" : ");
+                sb.Append(Visit(context.type_declaration()));
+            }
+        }
         else
-            sb.Append(' ');
-
-        sb.Append(" " + context.ident().GetText());
+        {
+            sb.Append(" " + context.ident().GetText());
+        }
 
         return sb.ToString();
     }
@@ -243,21 +252,39 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
+        // Gérer les deux syntaxes : type ident() ou ident() : type
         if (context.type_declaration() != null)
         {
-            sb.Append(' ');
-            sb.Append(context.type_declaration().GetText());
+            // Si le type est avant l'identifiant (ancienne syntaxe)
+            if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
+            {
+                sb.Append(" " + Visit(context.type_declaration()));
+                sb.Append(" " + context.ident().GetText());
+            }
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            else
+            {
+                sb.Append(" " + context.ident().GetText());
+            }
         }
-
-        if (context.visibility() != null || context.modifiers() != null || context.type_declaration() != null)
-            sb.Append(' ');
-
-        sb.Append(context.ident().GetText());
+        else
+        {
+            sb.Append(" " + context.ident().GetText());
+        }
 
         sb.Append('(');
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
-
         sb.Append(')');
+
+        if (context.type_declaration() != null)
+        {
+            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+            if (context.type_declaration().Start.TokenIndex > context.ident().Start.TokenIndex)
+            {
+                sb.Append(" : ");
+                sb.Append(Visit(context.type_declaration()));
+            }
+        }
 
         return sb.ToString();
     }
@@ -313,6 +340,21 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         return context.ident().GetText();
     }
 
+    public override string VisitGeneric_list_type(PumlgParser.Generic_list_typeContext context)
+    {
+        var sb = new StringBuilder();
+        
+        sb.Append(context.template_parameter().GetText());
+        sb.Append("[]");
+        
+        return sb.ToString();
+    }
+
+    public override string VisitGeneric_simple_type(PumlgParser.Generic_simple_typeContext context)
+    {
+        return context.template_parameter().GetText();
+    }
+
     public override string VisitTemplate_argument_list(PumlgParser.Template_argument_listContext context)
     {
         var args = context.template_argument().Select(Visit).ToList();
@@ -323,6 +365,33 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public override string VisitTemplate_argument(PumlgParser.Template_argumentContext context)
     {
         return Visit(context.type_declaration());
+    }
+
+    public override string VisitTemplate_parameter_list(PumlgParser.Template_parameter_listContext context)
+    {
+        var sb = new StringBuilder();
+        
+        sb.Append('<');
+        var parameters = context.template_parameter().Select(Visit).ToList();
+        sb.Append(string.Join(", ", parameters));
+        sb.Append('>');
+        
+        return sb.ToString();
+    }
+
+    public override string VisitTemplate_parameter(PumlgParser.Template_parameterContext context)
+    {
+        return context.ident().GetText();
+    }
+
+    public override string VisitClass_member(PumlgParser.Class_memberContext context)
+    {
+        if (context.attribute() != null)
+            return Visit(context.attribute());
+        else if (context.method() != null)
+            return Visit(context.method());
+        else
+            return string.Empty;
     }
 
     public override string VisitModifiers(PumlgParser.ModifiersContext context)

@@ -8,11 +8,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="" />
+    <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -24,12 +43,12 @@
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlaner/Visitors/PumlReconstructor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlSum.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstBuildTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstDeduplicatorTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstSumTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlanerTester/ComplexDiagramTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/NormalizerTests.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
@@ -48,6 +67,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;4ec2f5f0-ec56-45ec-8a4e-7f3ae91247c3.executor&quot;: &quot;Run&quot;,
+    &quot;99b563f9-5647-4b27-bf17-57d2e635cebd.executor&quot;: &quot;Debug&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -359,7 +379,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="create a test for input normalization" />
     <MESSAGE value="add tests for each function of normalizer" />
     <MESSAGE value="pass test of normalizer" />
     <MESSAGE value="no pascal case" />
@@ -384,7 +403,8 @@
     <MESSAGE value="add abstract in reconstructor" />
     <MESSAGE value="create test for  {override}" />
     <MESSAGE value="fix deduplicate complex" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix deduplicate complex" />
+    <MESSAGE value="a s'inspirer" />
+    <option name="LAST_COMMIT_MESSAGE" value="a s'inspirer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
