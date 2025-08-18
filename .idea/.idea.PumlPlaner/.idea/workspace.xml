@@ -10,6 +10,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +83,7 @@
       <workItem from="1755267630591" duration="3049000" />
       <workItem from="1755353415102" duration="1117000" />
       <workItem from="1755357641752" duration="474000" />
+      <workItem from="1755531043175" duration="1073000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />

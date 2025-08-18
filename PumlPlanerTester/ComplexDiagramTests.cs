@@ -312,12 +312,12 @@ public class ComplexDiagramTests
 
                              class User {
                                - name string
-                               + getName() string
+                               + string getName()
                              }
 
                              class User {
                                - email string
-                               + getEmail() string
+                               + string getEmail()
                              }
 
                              User --> Order
@@ -333,8 +333,8 @@ public class ComplexDiagramTests
                                                         class User {
                                                           - name string
                                                           - email string
-                                                          + getName() string
-                                                          + getEmail() string
+                                                          + string getName()
+                                                          + string getEmail()
                                                         }
                                                         User --> Order
                                                         @enduml

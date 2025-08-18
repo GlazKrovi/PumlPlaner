@@ -110,13 +110,15 @@ public class PumlDeduplicator : PumlReconstructor
 
         foreach (var attr in context.attribute())
         {
-            var attrText = Visit(attr).TrimEnd();
+            // Utiliser la méthode du parent (PumlReconstructor) pour préserver toutes les caractéristiques
+            var attrText = base.VisitAttribute(attr).TrimEnd();
             if (!classInfo.Attributes.Contains(attrText)) classInfo.Attributes.Add(attrText);
         }
 
         foreach (var method in context.method())
         {
-            var methodText = Visit(method).TrimEnd();
+            // Utiliser la méthode du parent (PumlReconstructor) pour préserver toutes les caractéristiques
+            var methodText = base.VisitMethod(method).TrimEnd();
             if (!classInfo.MethodSignatures.Add(methodText)) continue;
             classInfo.Methods.Add(methodText);
         }
