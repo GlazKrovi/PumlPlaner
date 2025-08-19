@@ -35,7 +35,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         var classType = context.class_type().GetText();
         var className = context.ident().GetText();
 
-        // Add space between abstract and class if needed
+
         if (classType == "abstractclass")
         {
             classType = "abstract class";
@@ -43,23 +43,23 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append($"{classType} {className}");
 
-        // Add template parameters if present
+
         if (context.template_parameter_list() != null)
         {
             sb.Append(Visit(context.template_parameter_list()));
         }
 
-        // Add stereotype if present
+
         if (context.stereotype() != null)
         {
-            sb.Append(" ");
+            sb.Append(' ');
             sb.Append(Visit(context.stereotype()));
         }
 
-        // Add inheritance declaration if present
+
         if (context.inheritance_declaration() != null)
         {
-            sb.Append(" ");
+            sb.Append(' ');
             sb.Append(Visit(context.inheritance_declaration()));
         }
 
@@ -69,8 +69,8 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
             var members = context.class_member().ToList();
 
-            // Add all members
-            for (int i = 0; i < members.Count; i++)
+
+            for (var i = 0; i < members.Count; i++)
             {
                 sb.Append("  ");
                 sb.Append(Visit(members[i]).TrimEnd());
@@ -120,14 +120,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(Visit(context.extends_declaration()));
         }
 
-        if (context.implements_declaration() != null)
+        if (context.implements_declaration() == null) return sb.ToString();
+        if (context.extends_declaration() != null)
         {
-            if (context.extends_declaration() != null)
-            {
-                sb.Append(" ");
-            }
-            sb.Append(Visit(context.implements_declaration()));
+            sb.Append(' ');
         }
+        sb.Append(Visit(context.implements_declaration()));
 
         return sb.ToString();
     }
@@ -143,7 +141,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         sb.Append("implements ");
 
         var identifiers = context.ident().ToList();
-        for (int i = 0; i < identifiers.Count; i++)
+        for (var i = 0; i < identifiers.Count; i++)
         {
             sb.Append(identifiers[i].GetText());
             if (i < identifiers.Count - 1)
@@ -171,19 +169,19 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        // Left side
+
         if (context.left != null)
             sb.Append(Visit(context.left));
 
-        // Connector
+
         if (context.CONNECTOR() != null)
             sb.Append($" {context.CONNECTOR().GetText()} ");
 
-        // Right side
+
         if (context.right != null)
             sb.Append(Visit(context.right));
 
-        // Stereotype
+
         if (context.stereotype() != null)
         {
             sb.Append($" : {Visit(context.stereotype())}");
@@ -200,13 +198,11 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append(context.instance.GetText());
 
-        if (context.attrib != null)
+        if (context.attrib == null) return sb.ToString();
+        sb.Append($" \"{context.attrib.GetText()}\"");
+        if (context.mult != null)
         {
-            sb.Append($" \"{context.attrib.GetText()}\"");
-            if (context.mult != null)
-            {
-                sb.Append(context.mult.GetText());
-            }
+            sb.Append(context.mult.GetText());
         }
 
         return sb.ToString();
@@ -223,7 +219,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             {
                 sb.Append(context.mult.GetText());
             }
-            sb.Append(" ");
+            sb.Append(' ');
         }
 
         sb.Append(context.instance.GetText());
@@ -237,11 +233,11 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         sb.Append($"<<{context.name.GetText()}");
 
-        if (context._args != null && context._args.Count > 0)
+        if (context._args is { Count: > 0 })
         {
-            sb.Append("(");
+            sb.Append('(');
             sb.Append(string.Join(", ", context._args.Select(arg => arg.GetText())));
-            sb.Append(")");
+            sb.Append(')');
         }
 
         sb.Append(">>");
@@ -268,16 +264,16 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
-        // Gérer les deux syntaxes : type ident ou ident : type
+
         if (context.type_declaration() != null)
         {
-            // Si le type est avant l'identifiant (ancienne syntaxe)
+
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
                 sb.Append(" " + context.ident().GetText());
             }
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+
             else
             {
                 sb.Append(" " + context.ident().GetText());
@@ -303,22 +299,22 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
-        // Vérifier que l'identifiant existe
+
         if (context.ident() == null)
         {
-            return sb.ToString(); // Retourner ce qui a été construit jusqu'ici
+            return sb.ToString();
         }
 
-        // Gérer les deux syntaxes : type ident() ou ident() : type
+
         if (context.type_declaration() != null)
         {
-            // Si le type est avant l'identifiant (ancienne syntaxe)
+
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
                 sb.Append(" " + context.ident().GetText());
             }
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+
             else
             {
                 sb.Append(" " + context.ident().GetText());
@@ -333,15 +329,9 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
         sb.Append(')');
 
-        if (context.type_declaration() != null)
-        {
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
-            if (context.type_declaration().Start.TokenIndex > context.ident().Start.TokenIndex)
-            {
-                sb.Append(" : ");
-                sb.Append(Visit(context.type_declaration()));
-            }
-        }
+        if (context.type_declaration() == null || context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex) return sb.ToString();
+        sb.Append(" : ");
+        sb.Append(Visit(context.type_declaration()));
 
         return sb.ToString();
     }

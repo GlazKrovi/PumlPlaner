@@ -7,8 +7,8 @@ public class PumlDeduplicator : PumlReconstructor
 {
     private readonly Dictionary<string, ClassInfo> _classMap = new();
     private readonly Dictionary<string, EnumInfo> _enumMap = new();
-    private readonly List<string> _connections = new();
-    private readonly List<string> _hideDeclarations = new();
+    private readonly List<string> _connections = [];
+    private readonly List<string> _hideDeclarations = [];
 
     public override string VisitUml(PumlgParser.UmlContext context)
     {
@@ -22,7 +22,7 @@ public class PumlDeduplicator : PumlReconstructor
         var sb = new StringBuilder();
         sb.AppendLine("@startuml");
 
-        // Output enums
+
         foreach (var enumInfo in _enumMap.Values)
         {
             sb.Append($"enum {enumInfo.EnumName}");
@@ -33,6 +33,7 @@ public class PumlDeduplicator : PumlReconstructor
                 {
                     sb.AppendLine($"  {item}");
                 }
+
                 sb.AppendLine("}");
             }
             else
@@ -41,12 +42,12 @@ public class PumlDeduplicator : PumlReconstructor
             }
         }
 
-        // Output classes
+
         foreach (var classInfo in _classMap.Values)
         {
             sb.Append($"{classInfo.ClassType} {classInfo.ClassName}");
 
-            // Add inheritance declarations
+
             if (!string.IsNullOrEmpty(classInfo.Extends) || classInfo.Implements.Count > 0)
             {
                 if (!string.IsNullOrEmpty(classInfo.Extends))
@@ -56,14 +57,7 @@ public class PumlDeduplicator : PumlReconstructor
 
                 if (classInfo.Implements.Count > 0)
                 {
-                    if (!string.IsNullOrEmpty(classInfo.Extends))
-                    {
-                        sb.Append(" implements ");
-                    }
-                    else
-                    {
-                        sb.Append(" implements ");
-                    }
+                    sb.Append(" implements ");
                     sb.Append(string.Join(", ", classInfo.Implements));
                 }
             }
@@ -84,13 +78,13 @@ public class PumlDeduplicator : PumlReconstructor
             }
         }
 
-        // Output connections
+
         foreach (var connection in _connections)
         {
             sb.AppendLine(connection);
         }
 
-        // Output hide declarations
+
         foreach (var hideDecl in _hideDeclarations)
         {
             sb.AppendLine(hideDecl);
@@ -130,7 +124,7 @@ public class PumlDeduplicator : PumlReconstructor
 
         var classInfo = _classMap[className];
 
-        // Handle inheritance declarations
+
         if (context.inheritance_declaration() != null)
         {
             VisitInheritance_declaration(context.inheritance_declaration(), classInfo);
@@ -139,8 +133,8 @@ public class PumlDeduplicator : PumlReconstructor
         foreach (var member in context.class_member())
         {
             var memberText = base.VisitClass_member(member).TrimEnd();
-            
-            // Déterminer si c'est un attribut ou une méthode
+
+
             if (member.attribute() != null)
             {
                 if (!classInfo.Attributes.Contains(memberText)) classInfo.Attributes.Add(memberText);
@@ -162,15 +156,13 @@ public class PumlDeduplicator : PumlReconstructor
             classInfo.Extends = context.extends_declaration().ident().GetText();
         }
 
-        if (context.implements_declaration() != null)
+        if (context.implements_declaration() == null) return;
+        foreach (var ident in context.implements_declaration().ident())
         {
-            foreach (var ident in context.implements_declaration().ident())
+            var interfaceName = ident.GetText();
+            if (!classInfo.Implements.Contains(interfaceName))
             {
-                var interfaceName = ident.GetText();
-                if (!classInfo.Implements.Contains(interfaceName))
-                {
-                    classInfo.Implements.Add(interfaceName);
-                }
+                classInfo.Implements.Add(interfaceName);
             }
         }
     }
@@ -179,25 +171,22 @@ public class PumlDeduplicator : PumlReconstructor
     {
         var enumName = context.ident().GetText();
 
-        if (!_enumMap.ContainsKey(enumName))
+        if (!_enumMap.TryGetValue(enumName, out var enumInfo))
         {
-            _enumMap[enumName] = new EnumInfo
+            enumInfo = new EnumInfo
             {
                 EnumName = enumName
             };
+            _enumMap[enumName] = enumInfo;
         }
 
-        var enumInfo = _enumMap[enumName];
-
-        if (context.item_list() != null)
+        if (context.item_list() == null) return string.Empty;
+        foreach (var item in context.item_list().ident())
         {
-            foreach (var item in context.item_list().ident())
+            var itemText = item.GetText();
+            if (!enumInfo.Items.Contains(itemText))
             {
-                var itemText = item.GetText();
-                if (!enumInfo.Items.Contains(itemText))
-                {
-                    enumInfo.Items.Add(itemText);
-                }
+                enumInfo.Items.Add(itemText);
             }
         }
 
@@ -236,16 +225,15 @@ public class PumlDeduplicator : PumlReconstructor
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
-        // Gérer les deux syntaxes : type ident() ou ident() : type
+
         if (context.type_declaration() != null)
         {
-            // Si le type est avant l'identifiant (ancienne syntaxe)
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
                 sb.Append(" " + context.ident().GetText());
             }
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+
             else
             {
                 sb.Append(" " + context.ident().GetText());
@@ -260,15 +248,9 @@ public class PumlDeduplicator : PumlReconstructor
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
         sb.Append(')');
 
-        if (context.type_declaration() != null)
-        {
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
-            if (context.type_declaration().Start.TokenIndex > context.ident().Start.TokenIndex)
-            {
-                sb.Append(" : ");
-                sb.Append(Visit(context.type_declaration()));
-            }
-        }
+        if (context.type_declaration() == null || context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex) return StringHelper.NormalizeBreakLines(sb.ToString());
+        sb.Append(" : ");
+        sb.Append(Visit(context.type_declaration()));
 
         return StringHelper.NormalizeBreakLines(sb.ToString());
     }
@@ -283,16 +265,15 @@ public class PumlDeduplicator : PumlReconstructor
         if (context.modifiers() != null)
             sb.Append(" " + context.modifiers().GetText());
 
-        // Gérer les deux syntaxes : type ident ou ident : type
+
         if (context.type_declaration() != null)
         {
-            // Si le type est avant l'identifiant (ancienne syntaxe)
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
                 sb.Append(" " + context.ident().GetText());
             }
-            // Si le type est après l'identifiant avec : (nouvelle syntaxe)
+
             else
             {
                 sb.Append(" " + context.ident().GetText());

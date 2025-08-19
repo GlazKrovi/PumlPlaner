@@ -9,19 +9,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PumlPlanerTester/InheritKeywordsTest.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.g4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/Pumlg.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgBaseVisitor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.interp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgLexer.tokens" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgListener.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgParser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlaner/Grammar/PumlgVisitor.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -364,7 +352,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755548036770</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="add inherit, extends, implements puml keywords">
+      <option name="closed" value="true" />
+      <created>1755549252209</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1755549252209</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -385,7 +381,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="pass test of normalizer" />
     <MESSAGE value="no pascal case" />
     <MESSAGE value="should merge ast" />
     <MESSAGE value="sort files" />
@@ -410,7 +405,8 @@
     <MESSAGE value="fix deduplicate complex" />
     <MESSAGE value="a s'inspirer" />
     <MESSAGE value="complex diagrams are managed" />
-    <option name="LAST_COMMIT_MESSAGE" value="complex diagrams are managed" />
+    <MESSAGE value="add inherit, extends, implements puml keywords" />
+    <option name="LAST_COMMIT_MESSAGE" value="add inherit, extends, implements puml keywords" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

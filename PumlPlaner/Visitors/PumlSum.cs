@@ -7,8 +7,8 @@ public class PumlSum : PumlReconstructor
 {
     private readonly Dictionary<string, ClassInfo> _classMap = new();
     private readonly Dictionary<string, EnumInfo> _enumMap = new();
-    private readonly List<string> _connections = new();
-    private readonly List<string> _hideDeclarations = new();
+    private readonly List<string> _connections = [];
+    private readonly List<string> _hideDeclarations = [];
 
     public string VisitUml(params PumlgParser.UmlContext[] contexts)
     {
@@ -17,7 +17,7 @@ public class PumlSum : PumlReconstructor
         _connections.Clear();
         _hideDeclarations.Clear();
 
-        // Collecter tous les éléments de tous les contextes
+
         foreach (var ctx in contexts)
         {
             if (ctx.class_diagram() != null)
@@ -29,7 +29,7 @@ public class PumlSum : PumlReconstructor
         var sb = new StringBuilder();
         sb.AppendLine("@startuml");
 
-        // Output enums
+
         foreach (var enumInfo in _enumMap.Values)
         {
             sb.Append($"enum {enumInfo.EnumName}");
@@ -48,7 +48,7 @@ public class PumlSum : PumlReconstructor
             }
         }
 
-        // Output classes
+
         foreach (var classInfo in _classMap.Values)
         {
             sb.Append($"{classInfo.ClassType} {classInfo.ClassName}");
@@ -63,7 +63,7 @@ public class PumlSum : PumlReconstructor
                 sb.Append(" " + classInfo.Stereotype);
             }
 
-            // Add inheritance declarations
+
             if (!string.IsNullOrEmpty(classInfo.Extends) || classInfo.Implements.Count > 0)
             {
                 if (!string.IsNullOrEmpty(classInfo.Extends))
@@ -73,14 +73,7 @@ public class PumlSum : PumlReconstructor
 
                 if (classInfo.Implements.Count > 0)
                 {
-                    if (!string.IsNullOrEmpty(classInfo.Extends))
-                    {
-                        sb.Append(" implements ");
-                    }
-                    else
-                    {
-                        sb.Append(" implements ");
-                    }
+                    sb.Append(" implements ");
                     sb.Append(string.Join(", ", classInfo.Implements));
                 }
             }
@@ -101,13 +94,13 @@ public class PumlSum : PumlReconstructor
             }
         }
 
-        // Output connections
+
         foreach (var connection in _connections)
         {
             sb.AppendLine(connection);
         }
 
-        // Output hide declarations
+
         foreach (var hideDecl in _hideDeclarations)
         {
             sb.AppendLine(hideDecl);
@@ -138,55 +131,54 @@ public class PumlSum : PumlReconstructor
         var classType = context.class_type().GetText();
         var className = context.ident().GetText();
 
-        // Add space between abstract and class if needed
+
         if (classType == "abstractclass")
         {
             classType = "abstract class";
         }
 
-        if (!_classMap.ContainsKey(className))
+        if (!_classMap.TryGetValue(className, out var value))
         {
-            _classMap[className] = new ClassInfo
+            value = new ClassInfo
             {
                 ClassType = classType,
                 ClassName = className,
-                Attributes = new List<string>(),
-                Methods = new List<string>()
+                Attributes = [],
+                Methods = []
             };
+            _classMap[className] = value;
 
-            // Add template parameters if present
+
             if (context.template_parameter_list() != null)
             {
                 _classMap[className].TemplateParameters = Visit(context.template_parameter_list());
             }
 
-            // Add stereotype if present
+
             if (context.stereotype() != null)
             {
                 _classMap[className].Stereotype = Visit(context.stereotype());
             }
         }
 
-        // Handle inheritance declarations
+
         if (context.inheritance_declaration() != null)
         {
-            VisitInheritance_declaration(context.inheritance_declaration(), _classMap[className]);
+            VisitInheritance_declaration(context.inheritance_declaration(), value);
         }
 
-        // Add members
+
         foreach (var member in context.class_member())
         {
             var memberText = Visit(member).Trim();
-            if (!string.IsNullOrWhiteSpace(memberText))
+            if (string.IsNullOrWhiteSpace(memberText)) continue;
+            if (member.attribute() != null && !_classMap[className].Attributes.Contains(memberText))
             {
-                if (member.attribute() != null && !_classMap[className].Attributes.Contains(memberText))
-                {
-                    _classMap[className].Attributes.Add(memberText);
-                }
-                else if (member.method() != null && !_classMap[className].Methods.Contains(memberText))
-                {
-                    _classMap[className].Methods.Add(memberText);
-                }
+                _classMap[className].Attributes.Add(memberText);
+            }
+            else if (member.method() != null && !_classMap[className].Methods.Contains(memberText))
+            {
+                _classMap[className].Methods.Add(memberText);
             }
         }
 
@@ -202,19 +194,17 @@ public class PumlSum : PumlReconstructor
             _enumMap[enumName] = new EnumInfo
             {
                 EnumName = enumName,
-                Items = new List<string>()
+                Items = []
             };
         }
 
-        if (context.item_list() != null)
+        if (context.item_list() == null) return string.Empty;
+        foreach (var item in context.item_list().ident())
         {
-            foreach (var item in context.item_list().ident())
+            var itemText = item.GetText();
+            if (!_enumMap[enumName].Items.Contains(itemText))
             {
-                var itemText = item.GetText();
-                if (!_enumMap[enumName].Items.Contains(itemText))
-                {
-                    _enumMap[enumName].Items.Add(itemText);
-                }
+                _enumMap[enumName].Items.Add(itemText);
             }
         }
 
@@ -257,15 +247,13 @@ public class PumlSum : PumlReconstructor
             classInfo.Extends = context.extends_declaration().ident().GetText();
         }
 
-        if (context.implements_declaration() != null)
+        if (context.implements_declaration() == null) return;
+        foreach (var ident in context.implements_declaration().ident())
         {
-            foreach (var ident in context.implements_declaration().ident())
+            var interfaceName = ident.GetText();
+            if (!classInfo.Implements.Contains(interfaceName))
             {
-                var interfaceName = ident.GetText();
-                if (!classInfo.Implements.Contains(interfaceName))
-                {
-                    classInfo.Implements.Add(interfaceName);
-                }
+                classInfo.Implements.Add(interfaceName);
             }
         }
     }
@@ -274,8 +262,8 @@ public class PumlSum : PumlReconstructor
     {
         public string ClassType { get; init; } = string.Empty;
         public string ClassName { get; init; } = string.Empty;
-        public List<string> Attributes { get; set; } = [];
-        public List<string> Methods { get; set; } = [];
+        public List<string> Attributes { get; init; } = [];
+        public List<string> Methods { get; init; } = [];
         public string? TemplateParameters { get; set; }
         public string? Stereotype { get; set; }
         public string? Extends { get; set; }
@@ -285,6 +273,6 @@ public class PumlSum : PumlReconstructor
     private class EnumInfo
     {
         public string EnumName { get; init; } = string.Empty;
-        public List<string> Items { get; set; } = [];
+        public List<string> Items { get; init; } = [];
     }
 }
