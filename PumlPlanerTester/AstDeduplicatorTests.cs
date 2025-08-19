@@ -22,13 +22,13 @@ public class PlantUmlDeduplicatorTests
                              """;
 
         var expected = StringHelper.NormalizeBreakLines("""
-                                 @startuml
-                                 class Foo {
-                                   + bar()
-                                 }
-                                 @enduml
+                                                        @startuml
+                                                        class Foo {
+                                                          + bar()
+                                                        }
+                                                        @enduml
 
-                                 """);
+                                                        """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();
@@ -59,14 +59,14 @@ public class PlantUmlDeduplicatorTests
                              """;
 
         var expected = StringHelper.NormalizeBreakLines("""
-                                 @startuml
-                                 class Foo {
-                                   + bar()
-                                   + baz()
-                                 }
-                                 @enduml
+                                                        @startuml
+                                                        class Foo {
+                                                          + bar()
+                                                          + baz()
+                                                        }
+                                                        @enduml
 
-                                 """);
+                                                        """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();
@@ -100,16 +100,16 @@ public class PlantUmlDeduplicatorTests
                              """;
 
         var expected = StringHelper.NormalizeBreakLines("""
-                                 @startuml
-                                 class Foo {
-                                   + bar(int a)
-                                   + bar(string b)
-                                   + bar(int a, string b)
-                                   + bar()
-                                 }
-                                 @enduml
+                                                        @startuml
+                                                        class Foo {
+                                                          + bar(int a)
+                                                          + bar(string b)
+                                                          + bar(int a, string b)
+                                                          + bar()
+                                                        }
+                                                        @enduml
 
-                                 """);
+                                                        """);
 
         var ast = new SchemeAst(input);
         var deduplicator = new PumlDeduplicator();

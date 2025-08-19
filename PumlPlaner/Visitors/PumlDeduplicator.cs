@@ -6,8 +6,8 @@ namespace PumlPlaner.Visitors;
 public class PumlDeduplicator : PumlReconstructor
 {
     private readonly Dictionary<string, ClassInfo> _classMap = new();
-    private readonly Dictionary<string, EnumInfo> _enumMap = new();
     private readonly List<string> _connections = [];
+    private readonly Dictionary<string, EnumInfo> _enumMap = new();
     private readonly List<string> _hideDeclarations = [];
 
     public override string VisitUml(PumlgParser.UmlContext context)
@@ -29,10 +29,7 @@ public class PumlDeduplicator : PumlReconstructor
             if (enumInfo.Items.Count > 0)
             {
                 sb.AppendLine(" {");
-                foreach (var item in enumInfo.Items)
-                {
-                    sb.AppendLine($"  {item}");
-                }
+                foreach (var item in enumInfo.Items) sb.AppendLine($"  {item}");
 
                 sb.AppendLine("}");
             }
@@ -50,10 +47,7 @@ public class PumlDeduplicator : PumlReconstructor
 
             if (!string.IsNullOrEmpty(classInfo.Extends) || classInfo.Implements.Count > 0)
             {
-                if (!string.IsNullOrEmpty(classInfo.Extends))
-                {
-                    sb.Append($" extends {classInfo.Extends}");
-                }
+                if (!string.IsNullOrEmpty(classInfo.Extends)) sb.Append($" extends {classInfo.Extends}");
 
                 if (classInfo.Implements.Count > 0)
                 {
@@ -79,16 +73,10 @@ public class PumlDeduplicator : PumlReconstructor
         }
 
 
-        foreach (var connection in _connections)
-        {
-            sb.AppendLine(connection);
-        }
+        foreach (var connection in _connections) sb.AppendLine(connection);
 
 
-        foreach (var hideDecl in _hideDeclarations)
-        {
-            sb.AppendLine(hideDecl);
-        }
+        foreach (var hideDecl in _hideDeclarations) sb.AppendLine(hideDecl);
 
         sb.AppendLine("@enduml");
 
@@ -126,9 +114,7 @@ public class PumlDeduplicator : PumlReconstructor
 
 
         if (context.inheritance_declaration() != null)
-        {
             VisitInheritance_declaration(context.inheritance_declaration(), classInfo);
-        }
 
         foreach (var member in context.class_member())
         {
@@ -151,19 +137,13 @@ public class PumlDeduplicator : PumlReconstructor
 
     private void VisitInheritance_declaration(PumlgParser.Inheritance_declarationContext context, ClassInfo classInfo)
     {
-        if (context.extends_declaration() != null)
-        {
-            classInfo.Extends = context.extends_declaration().ident().GetText();
-        }
+        if (context.extends_declaration() != null) classInfo.Extends = context.extends_declaration().ident().GetText();
 
         if (context.implements_declaration() == null) return;
         foreach (var ident in context.implements_declaration().ident())
         {
             var interfaceName = ident.GetText();
-            if (!classInfo.Implements.Contains(interfaceName))
-            {
-                classInfo.Implements.Add(interfaceName);
-            }
+            if (!classInfo.Implements.Contains(interfaceName)) classInfo.Implements.Add(interfaceName);
         }
     }
 
@@ -184,10 +164,7 @@ public class PumlDeduplicator : PumlReconstructor
         foreach (var item in context.item_list().ident())
         {
             var itemText = item.GetText();
-            if (!enumInfo.Items.Contains(itemText))
-            {
-                enumInfo.Items.Add(itemText);
-            }
+            if (!enumInfo.Items.Contains(itemText)) enumInfo.Items.Add(itemText);
         }
 
         return string.Empty;
@@ -196,10 +173,7 @@ public class PumlDeduplicator : PumlReconstructor
     public override string VisitConnection(PumlgParser.ConnectionContext context)
     {
         var connectionText = base.VisitConnection(context).TrimEnd();
-        if (!_connections.Contains(connectionText))
-        {
-            _connections.Add(connectionText);
-        }
+        if (!_connections.Contains(connectionText)) _connections.Add(connectionText);
 
         return string.Empty;
     }
@@ -207,10 +181,7 @@ public class PumlDeduplicator : PumlReconstructor
     public override string VisitHide_declaration(PumlgParser.Hide_declarationContext context)
     {
         var hideText = base.VisitHide_declaration(context).TrimEnd();
-        if (!_hideDeclarations.Contains(hideText))
-        {
-            _hideDeclarations.Add(hideText);
-        }
+        if (!_hideDeclarations.Contains(hideText)) _hideDeclarations.Add(hideText);
 
         return string.Empty;
     }
@@ -248,7 +219,9 @@ public class PumlDeduplicator : PumlReconstructor
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
         sb.Append(')');
 
-        if (context.type_declaration() == null || context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex) return StringHelper.NormalizeBreakLines(sb.ToString());
+        if (context.type_declaration() == null ||
+            context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex)
+            return StringHelper.NormalizeBreakLines(sb.ToString());
         sb.Append(" : ");
         sb.Append(Visit(context.type_declaration()));
 

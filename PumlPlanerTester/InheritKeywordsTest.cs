@@ -14,7 +14,7 @@ public class InheritKeywordsTest
                              class Animal {
                                + makeSound()
                              }
-                             
+
                              class Dog extends Animal {
                                + bark()
                              }
@@ -55,7 +55,7 @@ public class InheritKeywordsTest
                              interface Drawable {
                                + draw()
                              }
-                             
+
                              class Circle implements Drawable {
                                - radius double
                                + draw()
@@ -98,11 +98,11 @@ public class InheritKeywordsTest
                              interface Flyable {
                                + fly()
                              }
-                             
+
                              interface Swimmable {
                                + swim()
                              }
-                             
+
                              class Duck extends Animal implements Flyable, Swimmable {
                                + fly()
                                + swim()
@@ -148,7 +148,7 @@ public class InheritKeywordsTest
                              abstract class Vehicle {
                                + {abstract} move()
                              }
-                             
+
                              class Car extends Vehicle {
                                + move()
                              }

@@ -36,18 +36,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         var className = context.ident().GetText();
 
 
-        if (classType == "abstractclass")
-        {
-            classType = "abstract class";
-        }
+        if (classType == "abstractclass") classType = "abstract class";
 
         sb.Append($"{classType} {className}");
 
 
-        if (context.template_parameter_list() != null)
-        {
-            sb.Append(Visit(context.template_parameter_list()));
-        }
+        if (context.template_parameter_list() != null) sb.Append(Visit(context.template_parameter_list()));
 
 
         if (context.stereotype() != null)
@@ -74,10 +68,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             {
                 sb.Append("  ");
                 sb.Append(Visit(members[i]).TrimEnd());
-                if (i < members.Count - 1)
-                {
-                    sb.AppendLine();
-                }
+                if (i < members.Count - 1) sb.AppendLine();
             }
 
             sb.AppendLine("\n}");
@@ -115,16 +106,10 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        if (context.extends_declaration() != null)
-        {
-            sb.Append(Visit(context.extends_declaration()));
-        }
+        if (context.extends_declaration() != null) sb.Append(Visit(context.extends_declaration()));
 
         if (context.implements_declaration() == null) return sb.ToString();
-        if (context.extends_declaration() != null)
-        {
-            sb.Append(' ');
-        }
+        if (context.extends_declaration() != null) sb.Append(' ');
         sb.Append(Visit(context.implements_declaration()));
 
         return sb.ToString();
@@ -144,10 +129,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         for (var i = 0; i < identifiers.Count; i++)
         {
             sb.Append(identifiers[i].GetText());
-            if (i < identifiers.Count - 1)
-            {
-                sb.Append(", ");
-            }
+            if (i < identifiers.Count - 1) sb.Append(", ");
         }
 
         return sb.ToString();
@@ -157,10 +139,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     {
         var sb = new StringBuilder();
 
-        foreach (var item in context.ident())
-        {
-            sb.AppendLine($"  {item.GetText()}");
-        }
+        foreach (var item in context.ident()) sb.AppendLine($"  {item.GetText()}");
 
         return sb.ToString();
     }
@@ -182,10 +161,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(Visit(context.right));
 
 
-        if (context.stereotype() != null)
-        {
-            sb.Append($" : {Visit(context.stereotype())}");
-        }
+        if (context.stereotype() != null) sb.Append($" : {Visit(context.stereotype())}");
 
         sb.AppendLine();
 
@@ -200,10 +176,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         if (context.attrib == null) return sb.ToString();
         sb.Append($" \"{context.attrib.GetText()}\"");
-        if (context.mult != null)
-        {
-            sb.Append(context.mult.GetText());
-        }
+        if (context.mult != null) sb.Append(context.mult.GetText());
 
         return sb.ToString();
     }
@@ -215,10 +188,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.attrib != null)
         {
             sb.Append($"\"{context.attrib.GetText()}\"");
-            if (context.mult != null)
-            {
-                sb.Append(context.mult.GetText());
-            }
+            if (context.mult != null) sb.Append(context.mult.GetText());
             sb.Append(' ');
         }
 
@@ -267,7 +237,6 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
         if (context.type_declaration() != null)
         {
-
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
@@ -300,15 +269,11 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append(" " + context.modifiers().GetText());
 
 
-        if (context.ident() == null)
-        {
-            return sb.ToString();
-        }
+        if (context.ident() == null) return sb.ToString();
 
 
         if (context.type_declaration() != null)
         {
-
             if (context.type_declaration().Start.TokenIndex < context.ident().Start.TokenIndex)
             {
                 sb.Append(" " + Visit(context.type_declaration()));
@@ -329,7 +294,8 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         if (context.function_argument_list() != null) sb.Append(Visit(context.function_argument_list()));
         sb.Append(')');
 
-        if (context.type_declaration() == null || context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex) return sb.ToString();
+        if (context.type_declaration() == null ||
+            context.type_declaration().Start.TokenIndex <= context.ident().Start.TokenIndex) return sb.ToString();
         sb.Append(" : ");
         sb.Append(Visit(context.type_declaration()));
 
@@ -362,10 +328,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         sb.Append(context.ident().GetText());
         sb.Append('<');
 
-        if (context.template_argument_list() != null)
-        {
-            sb.Append(Visit(context.template_argument_list()));
-        }
+        if (context.template_argument_list() != null) sb.Append(Visit(context.template_argument_list()));
 
         sb.Append('>');
 
@@ -390,10 +353,10 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public override string VisitGeneric_list_type(PumlgParser.Generic_list_typeContext context)
     {
         var sb = new StringBuilder();
-        
+
         sb.Append(context.template_parameter().GetText());
         sb.Append("[]");
-        
+
         return sb.ToString();
     }
 
@@ -417,12 +380,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public override string VisitTemplate_parameter_list(PumlgParser.Template_parameter_listContext context)
     {
         var sb = new StringBuilder();
-        
+
         sb.Append('<');
         var parameters = context.template_parameter().Select(Visit).ToList();
         sb.Append(string.Join(", ", parameters));
         sb.Append('>');
-        
+
         return sb.ToString();
     }
 
@@ -435,10 +398,9 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     {
         if (context.attribute() != null)
             return Visit(context.attribute());
-        else if (context.method() != null)
+        if (context.method() != null)
             return Visit(context.method());
-        else
-            return string.Empty;
+        return string.Empty;
     }
 
     public override string VisitModifiers(PumlgParser.ModifiersContext context)

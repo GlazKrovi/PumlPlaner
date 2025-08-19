@@ -28,18 +28,18 @@ public class AstSumTests
                                    """;
 
         var expectedResult = StringHelper.NormalizeBreakLines("""
-                                      @startuml
-                                      class Charachter {
-                                        - string name
-                                        + attack()
-                                      }
-                                      class Weapon {
-                                        - float power
-                                        + hit()
-                                      }
-                                      @enduml
+                                                              @startuml
+                                                              class Charachter {
+                                                                - string name
+                                                                + attack()
+                                                              }
+                                                              class Weapon {
+                                                                - float power
+                                                                + hit()
+                                                              }
+                                                              @enduml
 
-                                      """);
+                                                              """);
 
         // process
         var firstAst = new SchemeAst(firstInput);
