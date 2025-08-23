@@ -1,0 +1,34 @@
+﻿@startuml PumlSchemasManager
+
+!theme reddress-darkgreen
+
+package Data {
+  class Schema {
+    + SourcePath { get ; set } : string
+    + PngHref { get } : string /' generated on first demand ; can throw errors
+  }
+
+   Schema <|-- MergeSchema
+  class MergedSchema  {
+    + From { get; init; } : string
+  }
+
+  class Project {
+    + Name { get ; set } : string
+    + Schema { get ; set } : Schemas
+  }
+}
+
+package Commands {
+    class Generate {
+        + From(sourceFile : string)
+    }
+
+    class Merge {
+        + From(params schemas : Schema[])
+    }
+}
+
+
+
+@enduml
