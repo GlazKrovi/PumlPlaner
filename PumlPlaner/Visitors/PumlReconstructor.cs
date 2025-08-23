@@ -134,7 +134,8 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         
         _errors.Add(errorMessage);
 
-        if (_throwOnError) throw new PumlReconstructionException(errorMessage, exception ?? new Exception("Unknown error"));
+        // Ne pas lancer l'exception immédiatement, seulement la stocker
+        // L'exception sera lancée lors de la visite si _throwOnError est true
     }
 
     /// <summary>
@@ -174,11 +175,22 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         }
     }
 
+    /// <summary>
+    ///     Méthode Visit personnalisée pour gérer les contextes null
+    /// </summary>
+    public override string Visit(IParseTree tree)
+    {
+        if (tree == null)
+        {
+            return string.Empty;
+        }
+        return base.Visit(tree);
+    }
+
     public override string VisitUml(PumlgParser.UmlContext context)
     {
         if (context == null)
         {
-            AddError("Contexte UML invalide");
             return string.Empty;
         }
 
@@ -199,11 +211,26 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 
             sb.AppendLine("@enduml");
 
-            return new NormalizedInput(sb.ToString()).ToString();
+            var result = new NormalizedInput(sb.ToString()).ToString();
+            
+            // Lancer l'exception si _throwOnError est true et qu'il y a des erreurs
+            if (_throwOnError && _errors.Count > 0)
+            {
+                throw new PumlReconstructionException(_errors.First(), new Exception("Reconstruction failed"));
+            }
+            
+            return result;
         }
         catch (Exception ex)
         {
             AddError("Erreur lors de la reconstruction du diagramme UML", ex);
+            
+            // Lancer l'exception si _throwOnError est true
+            if (_throwOnError)
+            {
+                throw new PumlReconstructionException(_errors.First(), ex);
+            }
+            
             return sb.ToString();
         }
     }
