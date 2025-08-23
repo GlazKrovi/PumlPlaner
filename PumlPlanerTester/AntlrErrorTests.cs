@@ -542,4 +542,195 @@ public class AntlrErrorTests
             Assert.That(result, Does.Contain("@enduml"));
         });
     }
+
+    [Test]
+    public void Should_Ignore_Non_Fatal_Errors_By_Default()
+    {
+        // Arrange
+        const string pumlWithMinorErrors = """
+
+                                           @startuml
+                                           class TestClass {
+                                               +String name
+                                               -int age
+                                               #method with minor syntax issue
+                                           }
+                                           @enduml
+                                           """;
+
+        // Act
+        var ast = new SchemeAst(pumlWithMinorErrors);
+        var reconstructor = new PumlReconstructor(false, true); // ignoreNonFatalErrors = true
+        var result = reconstructor.Visit(ast.Tree);
+
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result, Does.Contain("class TestClass"));
+            Assert.That(result, Does.Contain("+String name"));
+            Assert.That(result, Does.Contain("-int age"));
+            // Les erreurs non-fatales ne devraient pas empêcher la reconstruction
+            Assert.That(result, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public void Should_Format_Error_Messages_Correctly()
+    {
+        // Arrange
+        const string invalidPuml = """
+
+                                   @startuml
+                                   class BrokenClass {
+                                       +String name
+                                       -int age
+                                   }
+                                   @enduml
+                                   """;
+
+        // Act
+        var ast = new SchemeAst(invalidPuml);
+        var reconstructor = new PumlReconstructor(false, false); // Collecter toutes les erreurs
+        var result = reconstructor.Visit(ast.Tree);
+
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result, Does.Contain("class BrokenClass"));
+            Assert.That(result, Does.Contain("+String name"));
+            Assert.That(result, Does.Contain("-int age"));
+            // Le reconstructor devrait fonctionner même avec des erreurs de syntaxe mineures
+            Assert.That(result, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public void Should_Handle_Visitor_Errors_Gracefully()
+    {
+        // Arrange
+        const string validPuml = """
+
+                                 @startuml
+                                 class TestClass {
+                                     +String name
+                                     -int age
+                                 }
+                                 @enduml
+                                 """;
+
+        // Act
+        var ast = new SchemeAst(validPuml);
+        var reconstructor = new PumlReconstructor(false, false); // Collecter toutes les erreurs
+        var result = reconstructor.Visit(ast.Tree);
+
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result, Does.Contain("class TestClass"));
+            Assert.That(result, Does.Contain("+String name"));
+            Assert.That(result, Does.Contain("-int age"));
+            Assert.That(reconstructor.HasErrors, Is.False);
+            Assert.That(reconstructor.Errors, Is.Empty);
+        });
+    }
+
+    [Test]
+    public void Should_Format_Error_Messages_With_Proper_Prefix()
+    {
+        // Arrange
+        const string validPuml = """
+
+                                 @startuml
+                                 class TestClass {
+                                     +String name
+                                 }
+                                 @enduml
+                                 """;
+
+        // Act
+        var ast = new SchemeAst(validPuml);
+        var reconstructor = new PumlReconstructor(false, false);
+        var result = reconstructor.Visit(ast.Tree);
+
+        // Simuler une erreur pour tester le formatage
+        reconstructor.AddError("Test error");
+
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(reconstructor.HasErrors);
+            Assert.That(reconstructor.Errors, Is.Not.Empty);
+            
+            // Vérifier que les messages d'erreur suivent le format demandé
+            foreach (var error in reconstructor.Errors)
+            {
+                Assert.That(error, Does.StartWith("PlantUML Syntax error:"));
+            }
+        });
+    }
+
+    [Test]
+    public void Should_Distinguish_Fatal_And_Non_Fatal_Errors()
+    {
+        // Arrange
+        const string pumlWithMixedErrors = """
+
+                                           @startuml
+                                           class ValidClass {
+                                               +String name
+                                           }
+                                           
+                                           class BrokenClass {
+                                               +invalid syntax
+                                           }
+                                           @enduml
+                                           """;
+
+        // Act
+        var ast = new SchemeAst(pumlWithMixedErrors);
+        var reconstructor = new PumlReconstructor(false, false); // Collecter toutes les erreurs
+        var result = reconstructor.Visit(ast.Tree);
+
+        Assert.Multiple(() =>
+        {
+            // Assert
+            Assert.That(result, Does.Contain("class ValidClass"));
+            Assert.That(result, Does.Contain("+String name"));
+            Assert.That(reconstructor.HasErrors);
+            
+            // Vérifier qu'on peut distinguer les erreurs fatales
+            var fatalErrors = reconstructor.FatalErrors;
+            Assert.That(fatalErrors, Is.Not.Empty);
+        });
+    }
+
+    [Test]
+    public void Should_Clear_Errors_When_Requested()
+    {
+        // Arrange
+        const string invalidPuml = """
+
+                                   @startuml
+                                   class BrokenClass {
+                                       +invalid syntax
+                                   }
+                                   @enduml
+                                   """;
+
+        // Act
+        var ast = new SchemeAst(invalidPuml);
+        var reconstructor = new PumlReconstructor(false, false);
+        reconstructor.Visit(ast.Tree);
+
+        Assert.That(reconstructor.HasErrors);
+
+        // Clear errors
+        reconstructor.ClearErrors();
+
+        Assert.Multiple(() =>
+        {
+            Assert.That(reconstructor.HasErrors, Is.False);
+            Assert.That(reconstructor.Errors, Is.Empty);
+        });
+    }
 }

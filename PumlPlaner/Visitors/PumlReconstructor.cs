@@ -2,6 +2,7 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using PumlPlaner.Helpers;
+using PumlPlaner.AST;
 
 namespace PumlPlaner.Visitors;
 
@@ -23,10 +24,12 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
 {
     private readonly List<string> _errors = new();
     private readonly bool _throwOnError;
+    private readonly bool _ignoreNonFatalErrors;
 
-    public PumlReconstructor(bool throwOnError = false)
+    public PumlReconstructor(bool throwOnError = false, bool ignoreNonFatalErrors = true)
     {
         _throwOnError = throwOnError;
+        _ignoreNonFatalErrors = ignoreNonFatalErrors;
     }
 
     /// <summary>
@@ -40,14 +43,98 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public bool HasErrors => _errors.Count > 0;
 
     /// <summary>
+    ///     Nettoie la liste des erreurs
+    /// </summary>
+    public void ClearErrors()
+    {
+        _errors.Clear();
+    }
+
+    /// <summary>
+    ///     Récupère les erreurs fatales uniquement
+    /// </summary>
+    public IReadOnlyList<string> FatalErrors => _errors.Where(e => e.Contains("Erreur fatale")).ToList().AsReadOnly();
+
+    /// <summary>
+    ///     Détermine si une erreur ANTLR est fatale ou peut être ignorée
+    /// </summary>
+    private bool IsFatalError(RecognitionException ex)
+    {
+        // Erreurs fatales : erreurs de syntaxe critiques qui empêchent la reconstruction
+        // - Erreurs de token manquant dans des contextes critiques
+        // - Erreurs de règle de grammaire majeures
+        // - Erreurs dans les structures principales (@startuml, @enduml, etc.)
+        
+        if (ex is InputMismatchException || ex is NoViableAltException)
+        {
+            // Ces erreurs sont généralement fatales car elles indiquent une syntaxe invalide
+            return true;
+        }
+        
+        if (ex is FailedPredicateException)
+        {
+            // Les erreurs de prédicat peuvent être fatales selon le contexte
+            return true;
+        }
+        
+        // Les erreurs de reconnaissance simples peuvent souvent être ignorées
+        return false;
+    }
+
+    /// <summary>
+    ///     Formate un message d'erreur ANTLR de manière lisible
+    /// </summary>
+    private string FormatAntlrError(RecognitionException ex, string context)
+    {
+        var errorType = ex switch
+        {
+            InputMismatchException => "Token inattendu",
+            NoViableAltException => "Alternative invalide",
+            FailedPredicateException => "Prédicat échoué",
+            _ => "Erreur de syntaxe"
+        };
+
+        var location = ex.OffendingToken != null 
+            ? $"ligne {ex.OffendingToken.Line}, colonne {ex.OffendingToken.Column}"
+            : "position inconnue";
+
+        var expected = "";
+        if (ex is InputMismatchException ime)
+        {
+            // Pour InputMismatchException, on peut utiliser le message d'erreur qui contient souvent les tokens attendus
+            var message = ime.Message;
+            if (message.Contains("expecting"))
+            {
+                expected = $" (attendu: {message.Split("expecting")[1].Trim()})";
+            }
+        }
+
+        var offending = ex.OffendingToken != null 
+            ? $" (reçu: '{ex.OffendingToken.Text}')"
+            : "";
+
+        return $"PlantUML Syntax error: {errorType} dans {context} à {location}{expected}{offending}";
+    }
+
+    /// <summary>
     ///     Ajoute une erreur à la liste et gère selon la configuration
     /// </summary>
-    private void AddError(string error, Exception? exception = null)
+    public void AddError(string error, Exception? exception = null)
     {
-        var errorMessage = exception != null ? $"{error}: {exception.Message}" : error;
+        string errorMessage;
+        
+        if (exception is RecognitionException antlrEx)
+        {
+            errorMessage = FormatAntlrError(antlrEx, "le diagramme");
+        }
+        else
+        {
+            errorMessage = exception != null ? $"PlantUML Syntax error: {error}: {exception.Message}" : $"PlantUML Syntax error: {error}";
+        }
+        
         _errors.Add(errorMessage);
 
-        if (_throwOnError) throw new PumlReconstructionException(errorMessage, exception);
+        if (_throwOnError) throw new PumlReconstructionException(errorMessage, exception ?? new Exception("Unknown error"));
     }
 
     /// <summary>
@@ -63,8 +150,18 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         }
         catch (RecognitionException ex)
         {
-            // Erreur de syntaxe ANTLR - on l'ajoute à la liste des erreurs
-            AddError($"Erreur de syntaxe dans {context}", ex);
+            // Vérifier si l'erreur est fatale
+            if (IsFatalError(ex))
+            {
+                AddError($"Erreur fatale dans {context}", ex);
+                return string.Empty;
+            }
+            
+            // Pour les erreurs non-fatales, on peut choisir de les ignorer ou les collecter
+            if (!_ignoreNonFatalErrors)
+            {
+                AddError($"Erreur non-fatale dans {context}", ex);
+            }
             return string.Empty;
         }
         catch (Exception ex)
@@ -91,7 +188,14 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         {
             sb.AppendLine("@startuml");
 
-            foreach (var child in context.children) sb.Append(SafeVisit(child, "élément UML"));
+            foreach (var child in context.children) 
+            {
+                var childResult = SafeVisit(child, "élément UML");
+                if (!string.IsNullOrEmpty(childResult))
+                {
+                    sb.Append(childResult);
+                }
+            }
 
             sb.AppendLine("@enduml");
 
@@ -149,18 +253,30 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             sb.Append($"{classType} {className}");
 
             if (context.template_parameter_list() != null)
-                sb.Append(SafeVisit(context.template_parameter_list(), "paramètres de template"));
+            {
+                var templateResult = SafeVisit(context.template_parameter_list(), "paramètres de template");
+                if (!string.IsNullOrEmpty(templateResult))
+                    sb.Append(templateResult);
+            }
 
             if (context.stereotype() != null)
             {
-                sb.Append(' ');
-                sb.Append(SafeVisit(context.stereotype(), "stéréotype"));
+                var stereotypeResult = SafeVisit(context.stereotype(), "stéréotype");
+                if (!string.IsNullOrEmpty(stereotypeResult))
+                {
+                    sb.Append(' ');
+                    sb.Append(stereotypeResult);
+                }
             }
 
             if (context.inheritance_declaration() != null)
             {
-                sb.Append(' ');
-                sb.Append(SafeVisit(context.inheritance_declaration(), "déclaration d'héritage"));
+                var inheritanceResult = SafeVisit(context.inheritance_declaration(), "déclaration d'héritage");
+                if (!string.IsNullOrEmpty(inheritanceResult))
+                {
+                    sb.Append(' ');
+                    sb.Append(inheritanceResult);
+                }
             }
 
             if (context.ChildCount > 2)
@@ -168,15 +284,20 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
                 sb.AppendLine(" {");
 
                 var members = context.class_member().ToList();
+                var validMembers = new List<string>();
 
                 for (var i = 0; i < members.Count; i++)
                 {
-                    sb.Append("  ");
-                    sb.Append(SafeVisit(members[i], "membre de classe").TrimEnd());
-                    if (i < members.Count - 1) sb.AppendLine();
+                    var memberResult = SafeVisit(members[i], "membre de classe");
+                    if (!string.IsNullOrEmpty(memberResult))
+                    {
+                        validMembers.Add("  " + memberResult.TrimEnd());
+                    }
                 }
 
-                sb.AppendLine("\n}");
+                sb.AppendLine(string.Join("\n", validMembers));
+
+                sb.AppendLine("}");
             }
             else
             {
