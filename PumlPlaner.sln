@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PumlPlanerTester", "PumlPla
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PumlPlaner", "PumlPlaner\PumlPlaner.csproj", "{3C57B5EF-B616-439C-92F5-918F4E9C8367}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PumlSchemasManager", "PumlSchemasManager\PumlSchemasManager.csproj", "{D09EC4FD-1AA3-473E-A5AA-BD799FDDC180}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C57B5EF-B616-439C-92F5-918F4E9C8367}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D09EC4FD-1AA3-473E-A5AA-BD799FDDC180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D09EC4FD-1AA3-473E-A5AA-BD799FDDC180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D09EC4FD-1AA3-473E-A5AA-BD799FDDC180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D09EC4FD-1AA3-473E-A5AA-BD799FDDC180}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
