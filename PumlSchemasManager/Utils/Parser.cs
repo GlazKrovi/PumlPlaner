@@ -1,7 +1,6 @@
 ﻿using PlantUml.Net;
-using System.IO;
 
-namespace PumlSchemasManager;
+namespace PumlSchemasManager.Utils;
 
 public class Parser
 {

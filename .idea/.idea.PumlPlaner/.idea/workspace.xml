@@ -13,10 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Class1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Utils/Parser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/PumlSchemasManager.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/PumlSchemasManager.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Commands/Parse.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Commands/Parse.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Utils/Parser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Utils/Parser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManagerTester/UnitTest1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManagerTester/UnitTest1.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,16 +35,13 @@
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Helpers/StringHelper.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlaner/Visitors/PumlReconstructor.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlaner/Visitors/PumlReconstructor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlSum.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlanerTester/AntlrErrorTests.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlanerTester/AntlrErrorTests.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstBuildTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstDeduplicatorTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstSumTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/NormalizerTests.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/PumlSchemasManagerTester/UnitTest1.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -101,6 +97,7 @@
       <workItem from="1755632760591" duration="1283000" />
       <workItem from="1756042799370" duration="2184000" />
       <workItem from="1756045164801" duration="107000" />
+      <workItem from="1756045341933" duration="756000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -406,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756043834887</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="create parse command">
+      <option name="closed" value="true" />
+      <created>1756045456187</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1756045456187</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -427,7 +432,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="deduplication is correct, even for complex class diagrams, but the format isn't perfect" />
     <MESSAGE value="better format" />
     <MESSAGE value="correctly implement deduplicator" />
     <MESSAGE value="remove unexpected line break in test &quot;right&quot; result" />
@@ -452,7 +456,8 @@
     <MESSAGE value="format code" />
     <MESSAGE value="init PumlSchemasManager part" />
     <MESSAGE value="plan discoverer" />
-    <option name="LAST_COMMIT_MESSAGE" value="plan discoverer" />
+    <MESSAGE value="create parse command" />
+    <option name="LAST_COMMIT_MESSAGE" value="create parse command" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

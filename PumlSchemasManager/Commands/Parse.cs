@@ -1,5 +1,6 @@
 ﻿using PlantUml.Net;
 using System.IO;
+using PumlSchemasManager.Utils;
 
 namespace PumlSchemasManager;
 
