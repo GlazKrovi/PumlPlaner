@@ -3,12 +3,6 @@
 !theme reddress-darkgreen
 
 package Utils {
-    interface IParser {
-    ' return png path
-    + Parse(source : string) : string
-  }
-
-   IParser <|-- Parser
   class Parser {
     + Parse(source : string) : string  
   }
@@ -48,14 +42,21 @@ package Data {
 }
 
 package Commands {
+    interface ICommand {
+        + From(params... : object[])
+    }
+
+    ICommand <|-- Generate
     class Generate {
         + From(sourceFile : string)
     }
 
+    ICommand <|-- Merge
     class Merge {
         + From(params schemas : Schema[])
     }
 
+    ICommand <|-- Discover
     class Discover {
      ' and save into projects list
         + From(folderPath : string)
