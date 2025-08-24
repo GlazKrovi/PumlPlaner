@@ -38,11 +38,7 @@ package "Data" {
 }
 
 package "Commands" {
-    interface ICommand {
-        + From(params... : object[])
-    }
-
-    class Generate {
+    class Parse {
         + From(sourceFile : string)
     }
 
@@ -53,10 +49,6 @@ package "Commands" {
     class Discover {
         + From(folderPath : string)
     }
-
-    ICommand <|-- Generate
-    ICommand <|-- Merge
-    ICommand <|-- Discover
 }
 
 @enduml

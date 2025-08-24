@@ -13,6 +13,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Class1.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Utils/Parser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/PumlSchemasManager.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/PumlSchemasManager.csproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,6 +66,7 @@
     &quot;99b563f9-5647-4b27-bf17-57d2e635cebd.executor&quot;: &quot;Debug&quot;,
     &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -95,7 +99,8 @@
       <workItem from="1755357641752" duration="474000" />
       <workItem from="1755531043175" duration="1698000" />
       <workItem from="1755632760591" duration="1283000" />
-      <workItem from="1756042799370" duration="1398000" />
+      <workItem from="1756042799370" duration="2184000" />
+      <workItem from="1756045164801" duration="107000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
