@@ -2,67 +2,61 @@
 
 !theme reddress-darkgreen
 
-package Utils {
-  class Parser {
-    + Parse(source : string) : string  
-  }
+package "Utils" {
+    class Parser {
+        + Parse(source : string) : string
+    }
 }
 
-package Serializers {
+package "Serializers" {
     class Saver {
-        + {static} Save(params projects : Projects[])
-      }
+        + {static} Save(params projects : Project[])
+    }
 
     class Discoverer {
         + Recursive(folderPath : string) : Project
     }
 }
 
+package "Data" {
+    class Schema {
+        - {static} Parser { get } : Parser
+        + SourcePath { get; set } : string
+        + PngHref { get } : string
+    }
 
-package Data {
-  class Schema {
-    - {static} Parser { get }  : Parser
-    + SourcePath { get ; set } : string
+    class MergedSchema {
+        + From { get; init } : string
+    }
 
-    ' generated on first demand ; can throw errors
-    + PngHref { get } : string
-  }
+    class Project {
+        + Name { get; set } : string
+        + Schema { get; set } : Schema[]
+    }
 
-   Schema <|-- MergeSchema
-  class MergedSchema  {
-    + From { get; init; } : string
-  }
-
-  class Project {
-    + Name { get ; set } : string
-    + Schema { get ; set } : Schemas
-  }
-
-
+    Schema <|-- MergedSchema
 }
 
-package Commands {
+package "Commands" {
     interface ICommand {
         + From(params... : object[])
     }
 
-    ICommand <|-- Generate
     class Generate {
         + From(sourceFile : string)
     }
 
-    ICommand <|-- Merge
     class Merge {
         + From(params schemas : Schema[])
     }
 
-    ICommand <|-- Discover
     class Discover {
-     ' and save into projects list
         + From(folderPath : string)
     }
+
+    ICommand <|-- Generate
+    ICommand <|-- Merge
+    ICommand <|-- Discover
 }
-
-
 
 @enduml

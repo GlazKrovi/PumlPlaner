@@ -13,8 +13,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/AndroidProjectSystem.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/lib.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -97,7 +95,7 @@
       <workItem from="1755357641752" duration="474000" />
       <workItem from="1755531043175" duration="1698000" />
       <workItem from="1755632760591" duration="1283000" />
-      <workItem from="1756042799370" duration="876000" />
+      <workItem from="1756042799370" duration="1398000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -395,7 +393,15 @@
       <option name="project" value="LOCAL" />
       <updated>1755964853090</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="plan discoverer">
+      <option name="closed" value="true" />
+      <created>1756043834887</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1756043834887</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -416,7 +422,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="sort files" />
     <MESSAGE value="deduplication is correct, even for complex class diagrams, but the format isn't perfect" />
     <MESSAGE value="better format" />
     <MESSAGE value="correctly implement deduplicator" />
@@ -441,7 +446,8 @@
     <MESSAGE value="cleanup code" />
     <MESSAGE value="format code" />
     <MESSAGE value="init PumlSchemasManager part" />
-    <option name="LAST_COMMIT_MESSAGE" value="init PumlSchemasManager part" />
+    <MESSAGE value="plan discoverer" />
+    <option name="LAST_COMMIT_MESSAGE" value="plan discoverer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
