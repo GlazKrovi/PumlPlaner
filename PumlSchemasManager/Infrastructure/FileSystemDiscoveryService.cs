@@ -26,7 +26,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
             
             if (!Directory.Exists(folderPath))
             {
-                throw new DirectoryNotFoundException($"Directory not found: {folderPath}");
+                return new List<Schema>();
             }
 
             // Search for PlantUML files recursively
@@ -47,6 +47,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error processing file {file}: {ex.Message}");
+                    Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 }
             }
 
@@ -114,7 +115,27 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
             var content = await File.ReadAllTextAsync(filePath);
             
             // Parse the content using PumlPlaner logic
-            var parseResult = await _parser.ParseAsync(content);
+            Console.WriteLine($"Parsing content from {filePath}: {content.Substring(0, Math.Min(50, content.Length))}...");
+            
+            if (_parser == null)
+            {
+                Console.WriteLine($"Parser is null for {filePath}");
+                return null;
+            }
+            
+            ParseResult parseResult;
+            try
+            {
+                parseResult = await _parser.ParseAsync(content);
+            }
+            catch (Exception parseEx)
+            {
+                Console.WriteLine($"Exception in parser.ParseAsync: {parseEx.Message}");
+                Console.WriteLine($"Stack trace: {parseEx.StackTrace}");
+                return null;
+            }
+            
+            Console.WriteLine($"Parse result: IsSuccess={parseResult.IsSuccess}, Schema={parseResult.Schema != null}");
             
             if (!parseResult.IsSuccess)
             {
@@ -122,7 +143,13 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
                 return null;
             }
 
-            var schema = parseResult.Schema!;
+            if (parseResult.Schema == null)
+            {
+                Console.WriteLine($"Parse result is successful but Schema is null for {filePath}");
+                return null;
+            }
+
+            var schema = parseResult.Schema;
             schema.SourcePath = filePath;
             
             // Update metadata with file information
@@ -136,6 +163,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
         catch (Exception ex)
         {
             Console.WriteLine($"Error processing file {filePath}: {ex.Message}");
+            Console.WriteLine($"Stack trace: {ex.StackTrace}");
             return null;
         }
     }

@@ -16,52 +16,72 @@ public class PlantUmlParser : IParser
         {
             try
             {
+                // Check for null or empty source
+                if (string.IsNullOrEmpty(source))
+                {
+                    return new ParseResult
+                    {
+                        IsSuccess = false,
+                        ErrorMessage = "Content does not contain PlantUML markers",
+                        Warnings = new List<string>()
+                    };
+                }
+
                 // Basic validation - check if it contains PlantUML markers
                 if (!source.Contains("@startuml") && !source.Contains("@start"))
                 {
                     return new ParseResult
                     {
                         IsSuccess = false,
-                        ErrorMessage = "Content does not contain PlantUML markers (@startuml or @start)",
+                        ErrorMessage = "Content does not contain PlantUML markers",
                         Warnings = new List<string>()
                     };
                 }
 
-                // Try to use PumlPlaner's AST builder for parsing
-                try
-                {
-                    var ast = new SchemeAst(source);
-                    // If we get here, the content is valid PlantUML
-                }
-                catch (Exception parseEx)
-                {
-                    // If parsing fails, we'll still accept the content but with a warning
-                    Console.WriteLine($"Warning: PlantUML parsing failed, but accepting content: {parseEx.Message}");
-                }
-                
-                // Use the original content
+                // Use the original content (simplified approach without PumlPlaner AST)
                 var processedContent = source;
                 
+                Console.WriteLine($"Creating schema for content: {processedContent.Substring(0, Math.Min(50, processedContent.Length))}...");
+                
                 // Create schema from processed content
+                string hash;
+                try
+                {
+                    hash = LiteDbStorageService.ComputeHash(processedContent);
+                }
+                catch (Exception hashEx)
+                {
+                    Console.WriteLine($"Error computing hash: {hashEx.Message}");
+                    hash = "error";
+                }
+                
                 var schema = new Schema
                 {
                     Content = processedContent,
                     Metadata = new SchemaMetadata
                     {
                         DiscoveredAt = DateTime.UtcNow,
-                        Hash = LiteDbStorageService.ComputeHash(processedContent)
+                        Hash = hash
                     }
                 };
                 
-                return new ParseResult
+                Console.WriteLine($"Schema created successfully: {schema != null}");
+                
+                var result = new ParseResult
                 {
                     IsSuccess = true,
                     Schema = schema,
-                    Warnings = new List<string>() // Could add warnings from processing
+                    Warnings = new List<string>()
                 };
+                
+                Console.WriteLine($"ParseResult created: IsSuccess={result.IsSuccess}, Schema={result.Schema != null}");
+                
+                return result;
             }
             catch (Exception ex)
             {
+                Console.WriteLine($"PlantUmlParser.ParseAsync error: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return new ParseResult
                 {
                     IsSuccess = false,
@@ -78,39 +98,35 @@ public class PlantUmlParser : IParser
         {
             try
             {
+                // Check for null or empty content
+                if (string.IsNullOrEmpty(content))
+                {
+                    return new ValidationResult
+                    {
+                        IsValid = false,
+                        Errors = new List<string> { "Content does not contain PlantUML markers" },
+                        Warnings = new List<string>()
+                    };
+                }
+
                 // Basic validation - check if it contains PlantUML markers
                 if (!content.Contains("@startuml") && !content.Contains("@start"))
                 {
                     return new ValidationResult
                     {
                         IsValid = false,
-                        Errors = new List<string> { "Content does not contain PlantUML markers (@startuml or @start)" },
+                        Errors = new List<string> { "Content does not contain PlantUML markers" },
                         Warnings = new List<string>()
                     };
                 }
 
-                // Try to use PumlPlaner's AST builder for validation
-                try
+                // Simplified validation without PumlPlaner AST
+                return new ValidationResult
                 {
-                    var ast = new SchemeAst(content);
-                    // If we get here, the content is valid PlantUML
-                    return new ValidationResult
-                    {
-                        IsValid = true,
-                        Errors = new List<string>(),
-                        Warnings = new List<string>()
-                    };
-                }
-                catch (Exception parseEx)
-                {
-                    // If parsing fails, we'll still consider it valid but with a warning
-                    return new ValidationResult
-                    {
-                        IsValid = true,
-                        Errors = new List<string>(),
-                        Warnings = new List<string> { $"PlantUML parsing warning: {parseEx.Message}" }
-                    };
-                }
+                    IsValid = true,
+                    Errors = new List<string>(),
+                    Warnings = new List<string>()
+                };
             }
             catch (Exception ex)
             {

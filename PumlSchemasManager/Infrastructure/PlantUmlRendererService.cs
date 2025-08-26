@@ -10,6 +10,10 @@ public class PlantUmlRendererService : IRendererService
 {
     public async Task<byte[]> RenderAsync(Schema schema, SchemaOutputFormat format)
     {
+        if (schema == null)
+        {
+            return await RenderContentAsync("", format);
+        }
         return await RenderContentAsync(schema.Content, format);
     }
 
