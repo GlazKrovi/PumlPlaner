@@ -1,54 +1,150 @@
-﻿@startuml PumlSchemasManager
+﻿@startuml PumlSchemasManager_Improved
 
 !theme reddress-darkgreen
 
-package "Utils" {
-    class Parser {
-        + Parse(source : string) : string
+package "Core" {
+    interface IParser {
+        + Parse(source : string) : ParseResult
+    }
+    
+    interface IStorageService {
+        + SaveProject(project : Project) : void
+        + LoadProject(id : string) : Project
+        + SaveGeneratedFile(content : byte[], metadata : FileMetadata) : string
+        + SaveDiscoveredFile(content : string, path : string) : string
+    }
+    
+    interface IFileDiscoveryService {
+        + DiscoverSchemas(folderPath : string) : Schema[]
+        + ValidateSchema(schema : Schema) : ValidationResult
+    }
+    
+    interface IRendererService {
+        + Render(schema : Schema, format : OutputFormat) : byte[]
     }
 }
 
-package "Serializers" {
-    class Saver {
-        + {static} Save(params projects : Project[])
+package "Infrastructure" {
+    class LiteDbStorageService {
+        - database : ILiteDatabase
+        + SaveProject(project : Project) : void
+        + LoadProject(id : string) : Project
+        + SaveGeneratedFile(content : byte[], metadata : FileMetadata) : string
+        + SaveDiscoveredFile(content : string, path : string) : string
     }
-
-    class Discoverer {
-        + Recursive(folderPath : string) : Project
+    
+    class PlantUmlParser {
+        - renderer : IRenderer
+        + Parse(source : string) : ParseResult
+    }
+    
+    class FileSystemDiscoveryService {
+        + DiscoverSchemas(folderPath : string) : Schema[]
+        + ValidateSchema(schema : Schema) : ValidationResult
+    }
+    
+    class PlantUmlRendererService {
+        - factory : RendererFactory
+        + Render(schema : Schema, format : OutputFormat) : byte[]
     }
 }
 
-package "Data" {
+package "Domain" {
     class Schema {
-        - {static} Parser { get } : Parser
+        + Id { get; set } : string
         + SourcePath { get; set } : string
-        + PngHref { get } : string
+        + Content { get; set } : string
+        + GeneratedFiles { get; set } : GeneratedFile[]
+        + Metadata { get; set } : SchemaMetadata
     }
-
-    class MergedSchema {
-        + From { get; init } : string
-    }
-
+    
     class Project {
+        + Id { get; set } : string
         + Name { get; set } : string
-        + Schema { get; set } : Schema[]
+        + Schemas { get; set } : Schema[]
+        + CreatedAt { get; set } : DateTime
+        + UpdatedAt { get; set } : DateTime
     }
+    
+    class GeneratedFile {
+        + Id { get; set } : string
+        + SchemaId { get; set } : string
+        + Format { get; set } : OutputFormat
+        + FilePath { get; set } : string
+        + GeneratedAt { get; set } : DateTime
+    }
+    
+    class SchemaMetadata {
+        + DiscoveredAt { get; set } : DateTime
+        + OriginalPath { get; set } : string
+        + Hash { get; set } : string
+    }
+}
 
-    Schema <|-- MergedSchema
+package "Application" {
+    class SchemaManager {
+        - storageService : IStorageService
+        - discoveryService : IFileDiscoveryService
+        - rendererService : IRendererService
+        - parser : IParser
+        
+        + CreateProject(name : string) : Project
+        + AddSchemasToProject(projectId : string, schemas : Schema[]) : void
+        + GenerateOutputs(projectId : string, formats : OutputFormat[]) : void
+        + DiscoverAndAddSchemas(projectId : string, folderPath : string) : void
+    }
+    
+    class ProjectService {
+        - storageService : IStorageService
+        
+        + GetProject(id : string) : Project
+        + UpdateProject(project : Project) : void
+        + DeleteProject(id : string) : void
+        + ListProjects() : Project[]
+    }
 }
 
 package "Commands" {
-    class Parse {
-        + From(sourceFile : string)
+    class ParseCommand {
+        + Execute(sourceFile : string) : ParseResult
     }
-
-    class Merge {
-        + From(params schemas : Schema[])
+    
+    class MergeCommand {
+        + Execute(schemas : Schema[]) : Schema
     }
-
-    class Discover {
-        + From(folderPath : string)
+    
+    class DiscoverCommand {
+        + Execute(folderPath : string) : Schema[]
+    }
+    
+    class GenerateCommand {
+        + Execute(projectId : string, formats : OutputFormat[]) : void
     }
 }
+
+' Interfaces implementations
+IParser <|.. PlantUmlParser
+IStorageService <|.. LiteDbStorageService
+IFileDiscoveryService <|.. FileSystemDiscoveryService
+IRendererService <|.. PlantUmlRendererService
+
+' Dependencies
+SchemaManager --> IStorageService
+SchemaManager --> IFileDiscoveryService
+SchemaManager --> IRendererService
+SchemaManager --> IParser
+
+ProjectService --> IStorageService
+
+ParseCommand --> IParser
+MergeCommand --> IStorageService
+DiscoverCommand --> IFileDiscoveryService
+GenerateCommand --> IRendererService
+GenerateCommand --> IStorageService
+
+' Domain relationships
+Project ||--o{ Schema
+Schema ||--o{ GeneratedFile
+Schema ||--|| SchemaMetadata
 
 @enduml
