@@ -37,12 +37,13 @@ public class LiteDbStorageService : IStorageService, IDisposable
         
         // Configure BsonMapper for ObjectId references
         var mapper = _database.Mapper;
-        mapper.Entity<Project>()
-            .DbRef(x => x.SchemaIds, "schemas");
-        mapper.Entity<Schema>()
-            .DbRef(x => x.ProjectId, "projects");
-        mapper.Entity<GeneratedFile>()
-            .DbRef(x => x.SchemaId, "schemas");
+        // Disable DbRef for now to avoid mapping issues
+        // mapper.Entity<Project>()
+        //     .DbRef(x => x.SchemaIds, "schemas");
+        // mapper.Entity<Schema>()
+        //     .DbRef(x => x.ProjectId, "projects");
+        // mapper.Entity<GeneratedFile>()
+        //     .DbRef(x => x.SchemaId, "schemas");
     }
 
     public async Task<Project> SaveProjectAsync(Project project)
@@ -137,6 +138,11 @@ public class LiteDbStorageService : IStorageService, IDisposable
     public async Task<Schema?> LoadSchemaAsync(ObjectId id)
     {
         return await Task.Run(() => _schemas.FindById(id));
+    }
+
+    public async Task UpdateSchemaAsync(Schema schema)
+    {
+        await Task.Run(() => _schemas.Update(schema));
     }
 
     public async Task<string> SaveGeneratedFileAsync(byte[] content, FileMetadata metadata)

@@ -1,0 +1,16 @@
+@startuml
+title Simple Test Diagram
+
+class TestClass {
+  +String name
+  +int value
+  +void doSomething()
+}
+
+class AnotherClass {
+  +String description
+}
+
+TestClass --> AnotherClass : uses
+
+@enduml

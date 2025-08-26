@@ -75,6 +75,12 @@ public interface IStorageService
     Task<Schema?> LoadSchemaAsync(ObjectId id);
     
     /// <summary>
+    /// Updates an existing schema
+    /// </summary>
+    /// <param name="schema">Schema to update</param>
+    Task UpdateSchemaAsync(Schema schema);
+    
+    /// <summary>
     /// Saves a generated file to LiteDB FileStorage
     /// </summary>
     /// <param name="content">File content</param>

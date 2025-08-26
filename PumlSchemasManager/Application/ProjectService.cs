@@ -113,7 +113,7 @@ public class ProjectStatistics
     /// <summary>
     /// Project ID
     /// </summary>
-    public ObjectId ProjectId { get; set; }
+    public ObjectId ProjectId { get; set; } = ObjectId.Empty;
     
     /// <summary>
     /// Project name

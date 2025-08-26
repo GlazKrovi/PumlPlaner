@@ -119,7 +119,7 @@ public class SchemaManager
                     
                     // Update schema with generated file
                     schema.GeneratedFiles.Add(generatedFile);
-                    await _storageService.SaveSchemaAsync(schema);
+                    await _storageService.UpdateSchemaAsync(schema);
                 }
                 catch (Exception ex)
                 {

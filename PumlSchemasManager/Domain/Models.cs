@@ -9,7 +9,7 @@ namespace PumlSchemasManager.Domain;
 public class Schema
 {
     [BsonId]
-    public ObjectId Id { get; set; }
+    public ObjectId Id { get; set; } = ObjectId.Empty;
     
     /// <summary>
     /// Original file path where the schema was discovered
@@ -34,8 +34,7 @@ public class Schema
     /// <summary>
     /// Project this schema belongs to
     /// </summary>
-    [BsonRef("projects")]
-    public ObjectId ProjectId { get; set; }
+    public ObjectId ProjectId { get; set; } = ObjectId.Empty;
 }
 
 /// <summary>
@@ -44,7 +43,7 @@ public class Schema
 public class Project
 {
     [BsonId]
-    public ObjectId Id { get; set; }
+    public ObjectId Id { get; set; } = ObjectId.Empty;
     
     /// <summary>
     /// Name of the project
@@ -55,7 +54,6 @@ public class Project
     /// <summary>
     /// Schemas contained in this project
     /// </summary>
-    [BsonRef("schemas")]
     public List<ObjectId> SchemaIds { get; set; } = new();
     
     /// <summary>
@@ -75,13 +73,12 @@ public class Project
 public class GeneratedFile
 {
     [BsonId]
-    public ObjectId Id { get; set; }
+    public ObjectId Id { get; set; } = ObjectId.Empty;
     
     /// <summary>
     /// Reference to the schema that generated this file
     /// </summary>
-    [BsonRef("schemas")]
-    public ObjectId SchemaId { get; set; }
+    public ObjectId SchemaId { get; set; } = ObjectId.Empty;
     
     /// <summary>
     /// Output format (PNG, SVG, etc.)
