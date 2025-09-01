@@ -76,8 +76,8 @@ public class Program
         var services = new ServiceCollection();
         
         // Register core services
-        services.AddSingleton<IParser, Parser>();
-        services.AddSingleton<IFileDiscoveryService, FileDiscoveryService>();
+        services.AddSingleton<IParser, PlantUmlParser>();
+        services.AddSingleton<IFileDiscoveryService, FileSystemDiscoveryService>();
         services.AddSingleton<SchemaManager>();
         
         // Register commands
