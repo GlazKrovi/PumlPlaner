@@ -14,7 +14,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/AddSchemasCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/AddSchemasCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/CreateProjectCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/CreateProjectCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverAndAddCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverAndAddCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/GenerateCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/GenerateCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/MergeCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/MergeCommandSettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/ParseCommand.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/ParseCommandSettings.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -134,7 +147,7 @@
       <workItem from="1756045164801" duration="107000" />
       <workItem from="1756045341933" duration="756000" />
       <workItem from="1756239886403" duration="935000" />
-      <workItem from="1756738489405" duration="4094000" />
+      <workItem from="1756738489405" duration="4459000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -472,7 +485,31 @@
       <option name="project" value="LOCAL" />
       <updated>1756741152114</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="the CLI is fully functional">
+      <option name="closed" value="true" />
+      <created>1756742892109</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1756742892109</updated>
+    </task>
+    <task id="LOCAL-00044" summary="clean up code via rider">
+      <option name="closed" value="true" />
+      <created>1756743040013</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743040013</updated>
+    </task>
+    <task id="LOCAL-00045" summary="reformat code">
+      <option name="closed" value="true" />
+      <created>1756743085530</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743085530</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -493,9 +530,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="remove unexpected line break in test &quot;right&quot; result" />
-    <MESSAGE value="rename &quot;merge&quot; into &quot;sum&quot;, while it's a very simple sum operation, not a complex merge" />
-    <MESSAGE value="rename" />
     <MESSAGE value="fix namespaces" />
     <MESSAGE value="cleanup code, according to rider ide" />
     <MESSAGE value="manage complex schemas" />
@@ -518,7 +552,10 @@
     <MESSAGE value="create parse command" />
     <MESSAGE value="add docs for distribution" />
     <MESSAGE value="fix syntax error" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix syntax error" />
+    <MESSAGE value="the CLI is fully functional" />
+    <MESSAGE value="clean up code via rider" />
+    <MESSAGE value="reformat code" />
+    <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
