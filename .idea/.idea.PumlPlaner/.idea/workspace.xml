@@ -15,7 +15,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PumlPlanerCli/PumlPlanerCli.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerCli/PumlPlanerCli.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +35,12 @@
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlDeduplicator.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlReconstructor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlaner/Visitors/PumlSum.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/ferna/Documents/mauivers/PumlPlaner/PumlPlanerCli/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstBuildTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstDeduplicatorTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/AstSumTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/ComplexDiagramTests.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/PumlPlanerTester/NormalizerTests.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/PumlSchemasManagerTester/UnitTest1.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectColorInfo">{
@@ -124,7 +123,7 @@
       <workItem from="1756045164801" duration="107000" />
       <workItem from="1756045341933" duration="756000" />
       <workItem from="1756239886403" duration="935000" />
-      <workItem from="1756738489405" duration="1718000" />
+      <workItem from="1756738489405" duration="2172000" />
     </task>
     <task id="LOCAL-00001" summary="init project">
       <option name="closed" value="true" />
@@ -438,7 +437,15 @@
       <option name="project" value="LOCAL" />
       <updated>1756045456187</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="add docs for distribution">
+      <option name="closed" value="true" />
+      <created>1756740433284</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1756740433284</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -459,7 +466,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="better format" />
     <MESSAGE value="correctly implement deduplicator" />
     <MESSAGE value="remove unexpected line break in test &quot;right&quot; result" />
     <MESSAGE value="rename &quot;merge&quot; into &quot;sum&quot;, while it's a very simple sum operation, not a complex merge" />
@@ -484,7 +490,8 @@
     <MESSAGE value="init PumlSchemasManager part" />
     <MESSAGE value="plan discoverer" />
     <MESSAGE value="create parse command" />
-    <option name="LAST_COMMIT_MESSAGE" value="create parse command" />
+    <MESSAGE value="add docs for distribution" />
+    <option name="LAST_COMMIT_MESSAGE" value="add docs for distribution" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

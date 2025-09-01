@@ -29,31 +29,31 @@ public class Program
             config.SetApplicationName("pumlplaner");
             config.SetApplicationVersion("1.0.0");
             
-            config.AddCommand<ParseCommand>("parse", "Parse a PlantUML file")
+            config.AddCommand<ParseCommand>("parse")
                 .WithDescription("Parse and analyze a single PlantUML file")
                 .WithExample(new[] { "parse", "path/to/file.puml" });
                 
-            config.AddCommand<DiscoverCommand>("discover", "Discover PlantUML files in a folder")
+            config.AddCommand<DiscoverCommand>("discover")
                 .WithDescription("Find all PlantUML files in a specified directory")
                 .WithExample(new[] { "discover", "path/to/folder" });
                 
-            config.AddCommand<CreateProjectCommand>("create-project", "Create a new project")
+            config.AddCommand<CreateProjectCommand>("create-project")
                 .WithDescription("Create a new PumlPlaner project")
                 .WithExample(new[] { "create-project", "MyProject" });
                 
-            config.AddCommand<AddSchemasCommand>("add-schemas", "Add schemas to a project")
+            config.AddCommand<AddSchemasCommand>("add-schemas")
                 .WithDescription("Add existing schemas to a project")
                 .WithExample(new[] { "add-schemas", "projectId", "schema1.puml", "schema2.puml" });
                 
-            config.AddCommand<DiscoverAndAddCommand>("discover-add", "Discover and add schemas to a project")
+            config.AddCommand<DiscoverAndAddCommand>("discover-add")
                 .WithDescription("Discover PlantUML files and add them to a project")
                 .WithExample(new[] { "discover-add", "projectId", "path/to/folder" });
                 
-            config.AddCommand<MergeCommand>("merge", "Merge multiple schemas")
+            config.AddCommand<MergeCommand>("merge")
                 .WithDescription("Merge multiple PlantUML schemas into one")
                 .WithExample(new[] { "merge", "schema1.puml", "schema2.puml" });
                 
-            config.AddCommand<GenerateCommand>("generate", "Generate output files")
+            config.AddCommand<GenerateCommand>("generate")
                 .WithDescription("Generate output files from a project")
                 .WithExample(new[] { "generate", "projectId", "png", "svg" });
         });
