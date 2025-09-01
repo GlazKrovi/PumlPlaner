@@ -1,0 +1,21 @@
+@startuml
+title Test Diagram for PumlPlaner CLI
+
+actor User
+participant "PumlPlaner CLI" as CLI
+participant "Parser" as Parser
+database "Storage" as DB
+
+User -> CLI: Execute command
+CLI -> Parser: Parse diagram
+Parser -> DB: Store result
+DB -> CLI: Return success
+CLI -> User: Display result
+
+note right of Parser
+  Testing different modes:
+  - Remote (PlantUML.Net)
+  - Local (PlantUML.jar)
+  - Embedded (Built-in)
+end note
+@enduml
