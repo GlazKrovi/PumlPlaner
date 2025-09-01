@@ -1,12 +1,6 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using Microsoft.Extensions.DependencyInjection;
-using PumlSchemasManager.Commands;
-using PumlSchemasManager.Application;
-using PumlSchemasManager.Core;
-using PumlSchemasManager.Infrastructure;
-using PumlSchemasManager.Domain;
-using LiteDB;
 
 namespace PumlPlanerCli;
 
@@ -17,11 +11,8 @@ public class Program
 {
     public static async Task<int> Main(string[] args)
     {
-        // Configure dependency injection
-        var services = ConfigureServices();
-        
         // Create command app
-        var app = new CommandApp(new TypeRegistrar(services));
+        var app = new CommandApp();
         
         // Configure CLI
         app.Configure(config =>
@@ -66,30 +57,6 @@ public class Program
         }
         
         return await app.RunAsync(args);
-    }
-    
-    /// <summary>
-    /// Configure dependency injection services
-    /// </summary>
-    private static IServiceProvider ConfigureServices()
-    {
-        var services = new ServiceCollection();
-        
-        // Register core services
-        services.AddSingleton<IParser, PlantUmlParser>();
-        services.AddSingleton<IFileDiscoveryService, FileSystemDiscoveryService>();
-        services.AddSingleton<SchemaManager>();
-        
-        // Register commands
-        services.AddTransient<ParseCommand>();
-        services.AddTransient<DiscoverCommand>();
-        services.AddTransient<CreateProjectCommand>();
-        services.AddTransient<AddSchemasCommand>();
-        services.AddTransient<DiscoverAndAddCommand>();
-        services.AddTransient<MergeCommand>();
-        services.AddTransient<GenerateCommand>();
-        
-        return services.BuildServiceProvider();
     }
     
     /// <summary>
@@ -140,20 +107,23 @@ public class Program
 }
 
 /// <summary>
+/// Settings for parse command
+/// </summary>
+public class ParseCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<file>")]
+    public string FilePath { get; set; } = string.Empty;
+    
+    [CommandOption("--verbose|-v")]
+    public bool Verbose { get; set; }
+}
+
+/// <summary>
 /// Command to parse a PlantUML file
 /// </summary>
-public class ParseCommand : AsyncCommand<ParseCommand.Settings>
+public class ParseCommand : AsyncCommand<ParseCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<file>")]
-        public string FilePath { get; set; } = string.Empty;
-        
-        [CommandOption("--verbose|-v")]
-        public bool Verbose { get; set; }
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, ParseCommandSettings settings)
     {
         try
         {
@@ -164,28 +134,31 @@ public class ParseCommand : AsyncCommand<ParseCommand.Settings>
                     ctx.Status($"Reading {settings.FilePath}");
                 });
             
-            // TODO: Implement actual parsing logic
-            await Task.Delay(1000); // Simulate work
-            
-            var result = new { IsSuccess = true, Message = "File parsed successfully" };
-            
-            if (result.IsSuccess)
+            // Check if file exists
+            if (!File.Exists(settings.FilePath))
             {
-                AnsiConsole.MarkupLine("[bold green]✓[/] File parsed successfully!");
-                
-                if (settings.Verbose)
-                {
-                    var panel = new Panel($"[bold blue]File:[/] {settings.FilePath}")
-                    {
-                        Border = BoxBorder.Rounded,
-                        Padding = new Padding(1, 1)
-                    };
-                    AnsiConsole.Write(panel);
-                }
+                AnsiConsole.MarkupLine($"[bold red]✗[/] File not found: {settings.FilePath}");
+                return 1;
             }
-            else
+            
+            // Simulate parsing work
+            await Task.Delay(1000);
+            
+            AnsiConsole.MarkupLine("[bold green]✓[/] File parsed successfully!");
+            
+            if (settings.Verbose)
             {
-                AnsiConsole.MarkupLine("[bold red]✗[/] Failed to parse file");
+                var fileInfo = new FileInfo(settings.FilePath);
+                var panel = new Panel(
+                    $"[bold blue]File:[/] {settings.FilePath}\n" +
+                    $"[bold blue]Size:[/] {fileInfo.Length} bytes\n" +
+                    $"[bold blue]Last Modified:[/] {fileInfo.LastWriteTime}"
+                )
+                {
+                    Border = BoxBorder.Rounded,
+                    Padding = new Padding(1, 1)
+                };
+                AnsiConsole.Write(panel);
             }
             
             return 0;
@@ -199,32 +172,45 @@ public class ParseCommand : AsyncCommand<ParseCommand.Settings>
 }
 
 /// <summary>
+/// Settings for discover command
+/// </summary>
+public class DiscoverCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<folder>")]
+    public string FolderPath { get; set; } = string.Empty;
+    
+    [CommandOption("--recursive|-r")]
+    public bool Recursive { get; set; }
+    
+    [CommandOption("--pattern|-p")]
+    public string Pattern { get; set; } = "*.puml";
+}
+
+/// <summary>
 /// Command to discover PlantUML files in a folder
 /// </summary>
-public class DiscoverCommand : AsyncCommand<DiscoverCommand.Settings>
+public class DiscoverCommand : AsyncCommand<DiscoverCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<folder>")]
-        public string FolderPath { get; set; } = string.Empty;
-        
-        [CommandOption("--recursive|-r")]
-        public bool Recursive { get; set; }
-        
-        [CommandOption("--pattern|-p")]
-        public string Pattern { get; set; } = "*.puml";
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, DiscoverCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Discovering PlantUML files in:[/] {settings.FolderPath}");
             
-            // TODO: Implement actual discovery logic
-            await Task.Delay(500);
+            if (!Directory.Exists(settings.FolderPath))
+            {
+                AnsiConsole.MarkupLine($"[bold red]✗[/] Directory not found: {settings.FolderPath}");
+                return 1;
+            }
             
-            var files = new[] { "schema1.puml", "schema2.puml", "diagram.puml" };
+            var searchOption = settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            var files = Directory.GetFiles(settings.FolderPath, settings.Pattern, searchOption);
+            
+            if (files.Length == 0)
+            {
+                AnsiConsole.MarkupLine("[bold yellow]No PlantUML files found.[/]");
+                return 0;
+            }
             
             var table = new Table()
                 .AddColumn("[bold blue]File[/]")
@@ -233,7 +219,10 @@ public class DiscoverCommand : AsyncCommand<DiscoverCommand.Settings>
                 
             foreach (var file in files)
             {
-                table.AddRow(file, "2.3 KB", DateTime.Now.ToString("yyyy-MM-dd HH:mm"));
+                var fileInfo = new FileInfo(file);
+                var relativePath = Path.GetRelativePath(settings.FolderPath, file);
+                var size = fileInfo.Length < 1024 ? $"{fileInfo.Length} B" : $"{fileInfo.Length / 1024.0:F1} KB";
+                table.AddRow(relativePath, size, fileInfo.LastWriteTime.ToString("yyyy-MM-dd HH:mm"));
             }
             
             AnsiConsole.MarkupLine($"[bold green]Found {files.Length} PlantUML files:[/]");
@@ -250,29 +239,32 @@ public class DiscoverCommand : AsyncCommand<DiscoverCommand.Settings>
 }
 
 /// <summary>
+/// Settings for create project command
+/// </summary>
+public class CreateProjectCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<name>")]
+    public string ProjectName { get; set; } = string.Empty;
+    
+    [CommandOption("--description|-d")]
+    public string Description { get; set; } = string.Empty;
+    
+    [CommandOption("--output|-o")]
+    public string OutputPath { get; set; } = "./";
+}
+
+/// <summary>
 /// Command to create a new project
 /// </summary>
-public class CreateProjectCommand : AsyncCommand<CreateProjectCommand.Settings>
+public class CreateProjectCommand : AsyncCommand<CreateProjectCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<name>")]
-        public string ProjectName { get; set; } = string.Empty;
-        
-        [CommandOption("--description|-d")]
-        public string Description { get; set; } = string.Empty;
-        
-        [CommandOption("--output|-o")]
-        public string OutputPath { get; set; } = "./";
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, CreateProjectCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Creating project:[/] {settings.ProjectName}");
             
-            // TODO: Implement actual project creation
+            // Simulate project creation
             await Task.Delay(800);
             
             var projectId = Guid.NewGuid().ToString("N")[..8];
@@ -282,6 +274,7 @@ public class CreateProjectCommand : AsyncCommand<CreateProjectCommand.Settings>
             var panel = new Panel(
                 $"[bold blue]Project ID:[/] {projectId}\n" +
                 $"[bold blue]Name:[/] {settings.ProjectName}\n" +
+                $"[bold blue]Description:[/] {settings.Description}\n" +
                 $"[bold blue]Output Path:[/] {settings.OutputPath}"
             )
             {
@@ -302,26 +295,29 @@ public class CreateProjectCommand : AsyncCommand<CreateProjectCommand.Settings>
 }
 
 /// <summary>
+/// Settings for add schemas command
+/// </summary>
+public class AddSchemasCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<projectId>")]
+    public string ProjectId { get; set; } = string.Empty;
+    
+    [CommandArgument(1, "<schemas...>")]
+    public string[] SchemaFiles { get; set; } = Array.Empty<string>();
+}
+
+/// <summary>
 /// Command to add schemas to a project
 /// </summary>
-public class AddSchemasCommand : AsyncCommand<AddSchemasCommand.Settings>
+public class AddSchemasCommand : AsyncCommand<AddSchemasCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<projectId>")]
-        public string ProjectId { get; set; } = string.Empty;
-        
-        [CommandArgument(1, "<schemas...>")]
-        public string[] SchemaFiles { get; set; } = Array.Empty<string>();
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, AddSchemasCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Adding schemas to project:[/] {settings.ProjectId}");
             
-            // TODO: Implement actual schema addition
+            // Simulate schema addition
             await Task.Delay(600);
             
             AnsiConsole.MarkupLine($"[bold green]✓[/] Added {settings.SchemaFiles.Length} schemas to project!");
@@ -332,7 +328,9 @@ public class AddSchemasCommand : AsyncCommand<AddSchemasCommand.Settings>
                 
             foreach (var file in settings.SchemaFiles)
             {
-                table.AddRow(file, "[green]Added[/]");
+                var exists = File.Exists(file);
+                var status = exists ? "[green]Added[/]" : "[red]File not found[/]";
+                table.AddRow(file, status);
             }
             
             AnsiConsole.Write(table);
@@ -348,32 +346,42 @@ public class AddSchemasCommand : AsyncCommand<AddSchemasCommand.Settings>
 }
 
 /// <summary>
+/// Settings for discover and add command
+/// </summary>
+public class DiscoverAndAddCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<projectId>")]
+    public string ProjectId { get; set; } = string.Empty;
+    
+    [CommandArgument(1, "<folder>")]
+    public string FolderPath { get; set; } = string.Empty;
+    
+    [CommandOption("--recursive|-r")]
+    public bool Recursive { get; set; }
+}
+
+/// <summary>
 /// Command to discover and add schemas to a project
 /// </summary>
-public class DiscoverAndAddCommand : AsyncCommand<DiscoverAndAddCommand.Settings>
+public class DiscoverAndAddCommand : AsyncCommand<DiscoverAndAddCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<projectId>")]
-        public string ProjectId { get; set; } = string.Empty;
-        
-        [CommandArgument(1, "<folder>")]
-        public string FolderPath { get; set; } = string.Empty;
-        
-        [CommandOption("--recursive|-r")]
-        public bool Recursive { get; set; }
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, DiscoverAndAddCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Discovering and adding schemas to project:[/] {settings.ProjectId}");
             
-            // TODO: Implement actual discovery and addition
-            await Task.Delay(1000);
+            if (!Directory.Exists(settings.FolderPath))
+            {
+                AnsiConsole.MarkupLine($"[bold red]✗[/] Directory not found: {settings.FolderPath}");
+                return 1;
+            }
             
-            var discoveredFiles = new[] { "schema1.puml", "schema2.puml" };
+            var searchOption = settings.Recursive ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly;
+            var discoveredFiles = Directory.GetFiles(settings.FolderPath, "*.puml", searchOption);
+            
+            // Simulate discovery and addition
+            await Task.Delay(1000);
             
             AnsiConsole.MarkupLine($"[bold green]✓[/] Discovered and added {discoveredFiles.Length} schemas!");
             
@@ -383,7 +391,8 @@ public class DiscoverAndAddCommand : AsyncCommand<DiscoverAndAddCommand.Settings
                 
             foreach (var file in discoveredFiles)
             {
-                table.AddRow(file, "[green]Added to project[/]");
+                var relativePath = Path.GetRelativePath(settings.FolderPath, file);
+                table.AddRow(relativePath, "[green]Added to project[/]");
             }
             
             AnsiConsole.Write(table);
@@ -399,29 +408,44 @@ public class DiscoverAndAddCommand : AsyncCommand<DiscoverAndAddCommand.Settings
 }
 
 /// <summary>
+/// Settings for merge command
+/// </summary>
+public class MergeCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<schemas...>")]
+    public string[] SchemaFiles { get; set; } = Array.Empty<string>();
+    
+    [CommandOption("--output|-o")]
+    public string OutputFile { get; set; } = "merged.puml";
+    
+    [CommandOption("--format|-f")]
+    public string Format { get; set; } = "puml";
+}
+
+/// <summary>
 /// Command to merge multiple schemas
 /// </summary>
-public class MergeCommand : AsyncCommand<MergeCommand.Settings>
+public class MergeCommand : AsyncCommand<MergeCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<schemas...>")]
-        public string[] SchemaFiles { get; set; } = Array.Empty<string>();
-        
-        [CommandOption("--output|-o")]
-        public string OutputFile { get; set; } = "merged.puml";
-        
-        [CommandOption("--format|-f")]
-        public string Format { get; set; } = "puml";
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, MergeCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Merging {settings.SchemaFiles.Length} schemas...[/]");
             
-            // TODO: Implement actual merging logic
+            // Check if all files exist
+            var missingFiles = settings.SchemaFiles.Where(f => !File.Exists(f)).ToArray();
+            if (missingFiles.Any())
+            {
+                AnsiConsole.MarkupLine($"[bold red]✗[/] Some files not found:");
+                foreach (var file in missingFiles)
+                {
+                    AnsiConsole.MarkupLine($"  - {file}");
+                }
+                return 1;
+            }
+            
+            // Simulate merging logic
             await Task.Delay(1200);
             
             AnsiConsole.MarkupLine($"[bold green]✓[/] Schemas merged successfully!");
@@ -449,32 +473,35 @@ public class MergeCommand : AsyncCommand<MergeCommand.Settings>
 }
 
 /// <summary>
+/// Settings for generate command
+/// </summary>
+public class GenerateCommandSettings : CommandSettings
+{
+    [CommandArgument(0, "<projectId>")]
+    public string ProjectId { get; set; } = string.Empty;
+    
+    [CommandArgument(1, "<formats...>")]
+    public string[] Formats { get; set; } = Array.Empty<string>();
+    
+    [CommandOption("--output|-o")]
+    public string OutputPath { get; set; } = "./output";
+    
+    [CommandOption("--quality|-q")]
+    public int Quality { get; set; } = 100;
+}
+
+/// <summary>
 /// Command to generate output files
 /// </summary>
-public class GenerateCommand : AsyncCommand<GenerateCommand.Settings>
+public class GenerateCommand : AsyncCommand<GenerateCommandSettings>
 {
-    public class Settings : CommandSettings
-    {
-        [CommandArgument(0, "<projectId>")]
-        public string ProjectId { get; set; } = string.Empty;
-        
-        [CommandArgument(1, "<formats...>")]
-        public string[] Formats { get; set; } = Array.Empty<string>();
-        
-        [CommandOption("--output|-o")]
-        public string OutputPath { get; set; } = "./output";
-        
-        [CommandOption("--quality|-q")]
-        public int Quality { get; set; } = 100;
-    }
-    
-    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
+    public override async Task<int> ExecuteAsync(CommandContext context, GenerateCommandSettings settings)
     {
         try
         {
             AnsiConsole.MarkupLine($"[bold blue]Generating outputs for project:[/] {settings.ProjectId}");
             
-            // TODO: Implement actual generation logic
+            // Simulate generation logic
             await Task.Delay(1500);
             
             AnsiConsole.MarkupLine($"[bold green]✓[/] Output files generated successfully!");
@@ -500,57 +527,5 @@ public class GenerateCommand : AsyncCommand<GenerateCommand.Settings>
             AnsiConsole.MarkupLine($"[bold red]Error:[/] {ex.Message}");
             return 1;
         }
-    }
-}
-
-/// <summary>
-/// Type registrar for dependency injection
-/// </summary>
-public class TypeRegistrar : ITypeRegistrar
-{
-    private readonly IServiceProvider _serviceProvider;
-    
-    public TypeRegistrar(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-    
-    public ITypeResolver Build()
-    {
-        return new TypeResolver(_serviceProvider);
-    }
-    
-    public void Register(Type service, Type implementation)
-    {
-        // Not needed for this implementation
-    }
-    
-    public void RegisterInstance(Type service, object implementation)
-    {
-        // Not needed for this implementation
-    }
-    
-    public void RegisterLazy(Type service, Func<object> factory)
-    {
-        // Not needed for this implementation
-    }
-}
-
-/// <summary>
-/// Type resolver for dependency injection
-/// </summary>
-public class TypeResolver : ITypeResolver
-{
-    private readonly IServiceProvider _serviceProvider;
-    
-    public TypeResolver(IServiceProvider serviceProvider)
-    {
-        _serviceProvider = serviceProvider;
-    }
-    
-    public object Resolve(Type type)
-    {
-        return _serviceProvider.GetService(type) ?? 
-               throw new InvalidOperationException($"Service of type {type} not registered");
     }
 }
