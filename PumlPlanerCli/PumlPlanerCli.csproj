@@ -29,4 +29,8 @@
         <ProjectReference Include="..\PumlSchemasManager\PumlSchemasManager.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Configuration\" />
+    </ItemGroup>
+
 </Project>
