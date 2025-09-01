@@ -17,6 +17,12 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <RepositoryUrl>https://github.com/yourusername/PumlPlaner</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
+        
+        <!-- Publishing Configuration (only applied during publish) -->
+        <PublishSingleFile Condition="'$(RuntimeIdentifier)' != ''">true</PublishSingleFile>
+        <SelfContained Condition="'$(RuntimeIdentifier)' != ''">true</SelfContained>
+        <PublishReadyToRun Condition="'$(RuntimeIdentifier)' != ''">true</PublishReadyToRun>
+        <IncludeNativeLibrariesForSelfExtract Condition="'$(RuntimeIdentifier)' != ''">true</IncludeNativeLibrariesForSelfExtract>
     </PropertyGroup>
 
     <ItemGroup>

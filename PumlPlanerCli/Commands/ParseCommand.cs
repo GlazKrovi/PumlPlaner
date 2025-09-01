@@ -18,9 +18,6 @@ public class ParseCommandSettings : CommandSettings
     
     [CommandOption("--verbose|-v")]
     public bool Verbose { get; set; }
-    
-    [CommandOption("--list-modes")]
-    public bool ListModes { get; set; }
 }
 
 /// <summary>
@@ -32,18 +29,19 @@ public class ParseCommand : AsyncCommand<ParseCommandSettings>
     {
         try
         {
-            if (settings.ListModes)
-            {
-                ShowAvailableModes();
-                return 0;
-            }
-            
             AnsiConsole.Status()
                 .Start("Parsing PlantUML file...", ctx => 
                 {
                     ctx.Spinner(Spinner.Known.Dots);
                     ctx.Status($"Reading {settings.FilePath}");
                 });
+            
+            // Check if file path is provided
+            if (string.IsNullOrEmpty(settings.FilePath))
+            {
+                AnsiConsole.MarkupLine("[bold red]✗[/] File path is required when not using --list-modes");
+                return 1;
+            }
             
             // Check if file exists
             if (!File.Exists(settings.FilePath))

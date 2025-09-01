@@ -93,7 +93,7 @@ public class ConfigCommand : AsyncCommand<ConfigCommandSettings>
         table.AddRow(
             "Default Mode",
             GetModeDisplayName(defaultMode),
-            "Parsing mode used when no mode is specified"
+            "Parsing mode used when no mode is specified. It renders the schemas via plantuml.com"
         );
         
         table.AddRow(

@@ -27,6 +27,10 @@ public static class Program
             config.AddCommand<ConfigCommand>("config")
                 .WithDescription("Configure parser settings and test parsers")
                 .WithExample("config", "--show");
+                
+            config.AddCommand<ListModesCommand>("list-modes")
+                .WithDescription("List available parsing modes")
+                .WithExample("list-modes", "--verbose");
 
             config.AddCommand<DiscoverCommand>("discover")
                 .WithDescription("Find all PlantUML files in a specified directory")
