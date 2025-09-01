@@ -8,6 +8,31 @@ namespace PumlSchemasManagerTester.Integration;
 [TestFixture]
 public class IntegrationTests : IDisposable
 {
+    [SetUp]
+    public void Setup()
+    {
+        _testDbPath = $"integration_test_{Guid.NewGuid()}.db";
+        _testDirectory = Path.Combine(Path.GetTempPath(), $"integration_test_{Guid.NewGuid()}");
+
+        Directory.CreateDirectory(_testDirectory);
+
+        _storageService = new LiteDbStorageService($"Filename={_testDbPath};Mode=Exclusive");
+        _parser = new PlantUmlParser();
+        _renderer = new PlantUmlRendererService();
+        _discoveryService = new FileSystemDiscoveryService(_parser);
+
+        _projectService = new ProjectService(_storageService);
+        _schemaManager = new SchemaManager(_storageService, _discoveryService, _renderer, _parser);
+    }
+
+    [TearDown]
+    public void Cleanup()
+    {
+        _storageService?.Dispose();
+        if (File.Exists(_testDbPath)) File.Delete(_testDbPath);
+        if (Directory.Exists(_testDirectory)) Directory.Delete(_testDirectory, true);
+    }
+
     private ProjectService _projectService;
     private SchemaManager _schemaManager;
     private LiteDbStorageService _storageService;
@@ -17,48 +42,11 @@ public class IntegrationTests : IDisposable
     private string _testDbPath;
     private string _testDirectory;
 
-    [SetUp]
-    public void Setup()
-    {
-        _testDbPath = $"integration_test_{Guid.NewGuid()}.db";
-        _testDirectory = Path.Combine(Path.GetTempPath(), $"integration_test_{Guid.NewGuid()}");
-        
-        Directory.CreateDirectory(_testDirectory);
-        
-        _storageService = new LiteDbStorageService($"Filename={_testDbPath};Mode=Exclusive");
-        _parser = new PlantUmlParser();
-        _renderer = new PlantUmlRendererService();
-        _discoveryService = new FileSystemDiscoveryService(_parser);
-        
-        _projectService = new ProjectService(_storageService);
-        _schemaManager = new SchemaManager(_storageService, _discoveryService, _renderer, _parser);
-    }
-
-    [TearDown]
-    public void Cleanup()
-    {
-        _storageService?.Dispose();
-        if (File.Exists(_testDbPath))
-        {
-            File.Delete(_testDbPath);
-        }
-        if (Directory.Exists(_testDirectory))
-        {
-            Directory.Delete(_testDirectory, true);
-        }
-    }
-
     public void Dispose()
     {
         _storageService?.Dispose();
-        if (File.Exists(_testDbPath))
-        {
-            File.Delete(_testDbPath);
-        }
-        if (Directory.Exists(_testDirectory))
-        {
-            Directory.Delete(_testDirectory, true);
-        }
+        if (File.Exists(_testDbPath)) File.Delete(_testDbPath);
+        if (Directory.Exists(_testDirectory)) Directory.Delete(_testDirectory, true);
     }
 
     [Test]
@@ -208,8 +196,8 @@ public class IntegrationTests : IDisposable
         // Arrange
         var schemas = new List<Schema>
         {
-            new Schema { Content = "@startuml\nclass A\n@enduml" },
-            new Schema { Content = "@startuml\nclass B\n@enduml" }
+            new() { Content = "@startuml\nclass A\n@enduml" },
+            new() { Content = "@startuml\nclass B\n@enduml" }
         };
 
         // Act

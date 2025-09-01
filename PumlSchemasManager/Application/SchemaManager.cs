@@ -5,14 +5,14 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Application;
 
 /// <summary>
-/// Main service for managing PlantUML schemas and projects
+///     Main service for managing PlantUML schemas and projects
 /// </summary>
 public class SchemaManager
 {
-    private readonly IStorageService _storageService;
     private readonly IFileDiscoveryService _discoveryService;
-    private readonly IRendererService _rendererService;
     private readonly IParser _parser;
+    private readonly IRendererService _rendererService;
+    private readonly IStorageService _storageService;
 
     public SchemaManager(
         IStorageService storageService,
@@ -27,7 +27,7 @@ public class SchemaManager
     }
 
     /// <summary>
-    /// Creates a new project
+    ///     Creates a new project
     /// </summary>
     /// <param name="name">Project name</param>
     /// <returns>Created project</returns>
@@ -46,7 +46,7 @@ public class SchemaManager
     }
 
     /// <summary>
-    /// Adds schemas to an existing project
+    ///     Adds schemas to an existing project
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="schemas">Schemas to add</param>
@@ -69,7 +69,7 @@ public class SchemaManager
     }
 
     /// <summary>
-    /// Generates output files for all schemas in a project
+    ///     Generates output files for all schemas in a project
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="formats">Output formats to generate</param>
@@ -88,11 +88,10 @@ public class SchemaManager
             if (schema == null) continue;
 
             foreach (var format in formats)
-            {
                 try
                 {
                     var renderedContent = await _rendererService.RenderAsync(schema, format);
-                    
+
                     var metadata = new FileMetadata
                     {
                         FileName = $"{schema.Id}_{format}.{_rendererService.GetFileExtension(format)}",
@@ -116,7 +115,7 @@ public class SchemaManager
                     };
 
                     generatedFiles.Add(generatedFile);
-                    
+
                     // Update schema with generated file
                     schema.GeneratedFiles.Add(generatedFile);
                     await _storageService.UpdateSchemaAsync(schema);
@@ -125,14 +124,13 @@ public class SchemaManager
                 {
                     Console.WriteLine($"Failed to generate {format} for schema {schema.Id}: {ex.Message}");
                 }
-            }
         }
 
         return generatedFiles;
     }
 
     /// <summary>
-    /// Discovers PlantUML files in a folder and adds them to a project
+    ///     Discovers PlantUML files in a folder and adds them to a project
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="folderPath">Folder path to search</param>
@@ -144,17 +142,14 @@ public class SchemaManager
             throw new ArgumentException($"Project with ID {projectId} not found", nameof(projectId));
 
         var discoveredSchemas = await _discoveryService.DiscoverSchemasAsync(folderPath);
-        
-        if (discoveredSchemas.Any())
-        {
-            return await AddSchemasToProjectAsync(projectId, discoveredSchemas);
-        }
+
+        if (discoveredSchemas.Any()) return await AddSchemasToProjectAsync(projectId, discoveredSchemas);
 
         return project;
     }
 
     /// <summary>
-    /// Parses a single PlantUML file and creates a schema
+    ///     Parses a single PlantUML file and creates a schema
     /// </summary>
     /// <param name="filePath">Path to the PlantUML file</param>
     /// <returns>Parsed schema</returns>
@@ -182,7 +177,7 @@ public class SchemaManager
     }
 
     /// <summary>
-    /// Merges multiple schemas into a single schema
+    ///     Merges multiple schemas into a single schema
     /// </summary>
     /// <param name="schemas">Schemas to merge</param>
     /// <returns>Merged schema</returns>
@@ -196,7 +191,7 @@ public class SchemaManager
 
         // Simple merge strategy: combine all content with separators
         var mergedContent = string.Join("\n\n", schemas.Select(s => s.Content));
-        
+
         var parseResult = await _parser.ParseAsync(mergedContent);
         if (!parseResult.IsSuccess)
             throw new InvalidOperationException($"Failed to merge schemas: {parseResult.ErrorMessage}");
@@ -210,7 +205,7 @@ public class SchemaManager
     }
 
     /// <summary>
-    /// Gets all schemas for a project
+    ///     Gets all schemas for a project
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <returns>List of schemas</returns>
@@ -224,10 +219,7 @@ public class SchemaManager
         foreach (var schemaId in project.SchemaIds)
         {
             var schema = await _storageService.LoadSchemaAsync(schemaId);
-            if (schema != null)
-            {
-                schemas.Add(schema);
-            }
+            if (schema != null) schemas.Add(schema);
         }
 
         return schemas;

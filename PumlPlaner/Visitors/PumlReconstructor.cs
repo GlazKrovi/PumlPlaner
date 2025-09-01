@@ -22,8 +22,8 @@ public class PumlReconstructionException : Exception
 public class PumlReconstructor : PumlgBaseVisitor<string>
 {
     private readonly List<string> _errors = [];
-    private readonly bool _throwOnError;
     private readonly bool _ignoreNonFatalErrors;
+    private readonly bool _throwOnError;
 
     public PumlReconstructor(bool throwOnError = false, bool ignoreNonFatalErrors = true)
     {
@@ -42,17 +42,17 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public bool HasErrors => _errors.Count > 0;
 
     /// <summary>
+    ///     Récupère les erreurs fatales uniquement
+    /// </summary>
+    public IReadOnlyList<string> FatalErrors => _errors.Where(e => e.Contains("Erreur fatale")).ToList().AsReadOnly();
+
+    /// <summary>
     ///     Nettoie la liste des erreurs
     /// </summary>
     public void ClearErrors()
     {
         _errors.Clear();
     }
-
-    /// <summary>
-    ///     Récupère les erreurs fatales uniquement
-    /// </summary>
-    public IReadOnlyList<string> FatalErrors => _errors.Where(e => e.Contains("Erreur fatale")).ToList().AsReadOnly();
 
     /// <summary>
     ///     Détermine si une erreur ANTLR est fatale ou peut être ignorée
@@ -63,19 +63,15 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         // - Erreurs de token manquant dans des contextes critiques
         // - Erreurs de règle de grammaire majeures
         // - Erreurs dans les structures principales (@startuml, @enduml, etc.)
-        
+
         if (ex is InputMismatchException || ex is NoViableAltException)
-        {
             // Ces erreurs sont généralement fatales car elles indiquent une syntaxe invalide
             return true;
-        }
-        
+
         if (ex is FailedPredicateException)
-        {
             // Les erreurs de prédicat peuvent être fatales selon le contexte
             return true;
-        }
-        
+
         // Les erreurs de reconnaissance simples peuvent souvent être ignorées
         return false;
     }
@@ -93,7 +89,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
             _ => "Erreur de syntaxe"
         };
 
-        var location = ex.OffendingToken != null 
+        var location = ex.OffendingToken != null
             ? $"ligne {ex.OffendingToken.Line}, colonne {ex.OffendingToken.Column}"
             : "position inconnue";
 
@@ -102,13 +98,10 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         {
             // Pour InputMismatchException, on peut utiliser le message d'erreur qui contient souvent les tokens attendus
             var message = ime.Message;
-            if (message.Contains("expecting"))
-            {
-                expected = $" (attendu: {message.Split("expecting")[1].Trim()})";
-            }
+            if (message.Contains("expecting")) expected = $" (attendu: {message.Split("expecting")[1].Trim()})";
         }
 
-        var offending = ex.OffendingToken != null 
+        var offending = ex.OffendingToken != null
             ? $" (reçu: '{ex.OffendingToken.Text}')"
             : "";
 
@@ -121,16 +114,14 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     public void AddError(string error, Exception? exception = null)
     {
         string errorMessage;
-        
+
         if (exception is RecognitionException antlrEx)
-        {
             errorMessage = FormatAntlrError(antlrEx, "le diagramme");
-        }
         else
-        {
-            errorMessage = exception != null ? $"PlantUML Syntax error: {error}: {exception.Message}" : $"PlantUML Syntax error: {error}";
-        }
-        
+            errorMessage = exception != null
+                ? $"PlantUML Syntax error: {error}: {exception.Message}"
+                : $"PlantUML Syntax error: {error}";
+
         _errors.Add(errorMessage);
 
         // Ne pas lancer l'exception immédiatement, seulement la stocker
@@ -156,12 +147,9 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
                 AddError($"Erreur fatale dans {context}", ex);
                 return string.Empty;
             }
-            
+
             // Pour les erreurs non-fatales, on peut choisir de les ignorer ou les collecter
-            if (!_ignoreNonFatalErrors)
-            {
-                AddError($"Erreur non-fatale dans {context}", ex);
-            }
+            if (!_ignoreNonFatalErrors) AddError($"Erreur non-fatale dans {context}", ex);
             return string.Empty;
         }
         catch (Exception ex)
@@ -179,19 +167,13 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
     /// </summary>
     public override string Visit(IParseTree tree)
     {
-        if (tree == null)
-        {
-            return string.Empty;
-        }
+        if (tree == null) return string.Empty;
         return base.Visit(tree);
     }
 
     public override string VisitUml(PumlgParser.UmlContext context)
     {
-        if (context == null)
-        {
-            return string.Empty;
-        }
+        if (context == null) return string.Empty;
 
         var sb = new StringBuilder();
 
@@ -199,37 +181,29 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
         {
             sb.AppendLine("@startuml");
 
-            foreach (var child in context.children) 
+            foreach (var child in context.children)
             {
                 var childResult = SafeVisit(child, "élément UML");
-                if (!string.IsNullOrEmpty(childResult))
-                {
-                    sb.Append(childResult);
-                }
+                if (!string.IsNullOrEmpty(childResult)) sb.Append(childResult);
             }
 
             sb.AppendLine("@enduml");
 
             var result = new NormalizedInput(sb.ToString()).ToString();
-            
+
             // Lancer l'exception si _throwOnError est true et qu'il y a des erreurs
             if (_throwOnError && _errors.Count > 0)
-            {
                 throw new PumlReconstructionException(_errors.First(), new Exception("Reconstruction failed"));
-            }
-            
+
             return result;
         }
         catch (Exception ex)
         {
             AddError("Erreur lors de la reconstruction du diagramme UML", ex);
-            
+
             // Lancer l'exception si _throwOnError est true
-            if (_throwOnError)
-            {
-                throw new PumlReconstructionException(_errors.First(), ex);
-            }
-            
+            if (_throwOnError) throw new PumlReconstructionException(_errors.First(), ex);
+
             return sb.ToString();
         }
     }
@@ -315,10 +289,7 @@ public class PumlReconstructor : PumlgBaseVisitor<string>
                 for (var i = 0; i < members.Count; i++)
                 {
                     var memberResult = SafeVisit(members[i], "membre de classe");
-                    if (!string.IsNullOrEmpty(memberResult))
-                    {
-                        validMembers.Add("  " + memberResult.TrimEnd());
-                    }
+                    if (!string.IsNullOrEmpty(memberResult)) validMembers.Add("  " + memberResult.TrimEnd());
                 }
 
                 sb.AppendLine(string.Join("\n", validMembers));

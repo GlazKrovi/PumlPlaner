@@ -5,13 +5,13 @@ namespace PumlSchemasManagerTester.Infrastructure;
 [TestFixture]
 public class PlantUmlParserTests
 {
-    private PlantUmlParser _parser;
-
     [SetUp]
     public void Setup()
     {
         _parser = new PlantUmlParser();
     }
+
+    private PlantUmlParser _parser;
 
     [Test]
     public async Task ParseAsync_WithValidPlantUml_ShouldReturnSuccess()
@@ -277,14 +277,10 @@ User --> Order : places
 
         // Assert
         parseResult.IsSuccess.Should().Be(validateResult.IsValid);
-        
+
         if (parseResult.IsSuccess)
-        {
             validateResult.IsValid.Should().BeTrue();
-        }
         else
-        {
             validateResult.IsValid.Should().BeFalse();
-        }
     }
 }

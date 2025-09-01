@@ -6,13 +6,13 @@ namespace PumlSchemasManagerTester.Infrastructure;
 [TestFixture]
 public class PlantUmlRendererServiceTests
 {
-    private PlantUmlRendererService _renderer;
-
     [SetUp]
     public void Setup()
     {
         _renderer = new PlantUmlRendererService();
     }
+
+    private PlantUmlRendererService _renderer;
 
     [Test]
     public async Task RenderAsync_WithValidSchema_ShouldReturnContent()
@@ -50,12 +50,12 @@ public class PlantUmlRendererServiceTests
     {
         // Arrange
         var content = "@startuml\nclass Test\n@enduml";
-        var formats = new[] 
-        { 
-            SchemaOutputFormat.Png, 
-            SchemaOutputFormat.Svg, 
+        var formats = new[]
+        {
+            SchemaOutputFormat.Png,
+            SchemaOutputFormat.Svg,
             SchemaOutputFormat.Pdf,
-            SchemaOutputFormat.Html 
+            SchemaOutputFormat.Html
         };
 
         // Act & Assert

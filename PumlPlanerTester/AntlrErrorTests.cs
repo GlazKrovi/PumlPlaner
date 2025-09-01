@@ -239,12 +239,12 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidInheritance = """
 
-                                                 @startuml
-                                                 class ChildClass extends ParentClass {
-                                                     +String name
-                                                 }
-                                                 @enduml
-                                                 """;
+                                                  @startuml
+                                                  class ChildClass extends ParentClass {
+                                                      +String name
+                                                  }
+                                                  @enduml
+                                                  """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidInheritance);
@@ -268,13 +268,13 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidTemplate = """
 
-                                              @startuml
-                                              class TestClass<T> {
-                                                  +String name
-                                                  +invalid template syntax
-                                              }
-                                              @enduml
-                                              """;
+                                               @startuml
+                                               class TestClass<T> {
+                                                   +String name
+                                                   +invalid template syntax
+                                               }
+                                               @enduml
+                                               """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidTemplate);
@@ -298,12 +298,12 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidStereotype = """
 
-                                                @startuml
-                                                class TestClass <<stereotype syntax>> {
-                                                    +String name
-                                                }
-                                                @enduml
-                                                """;
+                                                 @startuml
+                                                 class TestClass <<stereotype syntax>> {
+                                                     +String name
+                                                 }
+                                                 @enduml
+                                                 """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidStereotype);
@@ -327,13 +327,13 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidMethodArgs = """
 
-                                                @startuml
-                                                class TestClass {
-                                                    +String name
-                                                    +calculate(invalid argument syntax) : int
-                                                }
-                                                @enduml
-                                                """;
+                                                 @startuml
+                                                 class TestClass {
+                                                     +String name
+                                                     +calculate(invalid argument syntax) : int
+                                                 }
+                                                 @enduml
+                                                 """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidMethodArgs);
@@ -358,14 +358,14 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidAttribute = """
 
-                                              @startuml
-                                              class TestClass {
-                                                  +String name
-                                                  attribute syntax
-                                                  -int age
-                                              }
-                                              @enduml
-                                              """;
+                                                @startuml
+                                                class TestClass {
+                                                    +String name
+                                                    attribute syntax
+                                                    -int age
+                                                }
+                                                @enduml
+                                                """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidAttribute);
@@ -390,13 +390,13 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidVisibility = """
 
-                                                @startuml
-                                                class TestClass {
-                                                    String invalidVisibility
-                                                    +String validVisibility
-                                                }
-                                                @enduml
-                                                """;
+                                                 @startuml
+                                                 class TestClass {
+                                                     String invalidVisibility
+                                                     +String validVisibility
+                                                 }
+                                                 @enduml
+                                                 """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidVisibility);
@@ -420,14 +420,14 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidTypes = """
 
-                                           @startuml
-                                           class TestClass {
-                                               +String name
-                                               type declaration
-                                               -int age
-                                           }
-                                           @enduml
-                                           """;
+                                            @startuml
+                                            class TestClass {
+                                                +String name
+                                                type declaration
+                                                -int age
+                                            }
+                                            @enduml
+                                            """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidTypes);
@@ -452,14 +452,14 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithInvalidHide = """
 
-                                          @startuml
-                                          class TestClass {
-                                              +String name
-                                          }
-                                          
-                                          hide invalid
-                                          @enduml
-                                          """;
+                                           @startuml
+                                           class TestClass {
+                                               +String name
+                                           }
+
+                                           hide invalid
+                                           @enduml
+                                           """;
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidHide);
@@ -483,25 +483,25 @@ public class AntlrErrorTests
         // Arrange
         const string pumlWithComplexErrors = """
 
-                                            @startuml
-                                            class Class1 {
-                                                +String name
-                                                -int age
-                                            }
+                                             @startuml
+                                             class Class1 {
+                                                 +String name
+                                                 -int age
+                                             }
 
-                                            class Class2 {
-                                                #calculate() : int
-                                                +invalid member
-                                            }
+                                             class Class2 {
+                                                 #calculate() : int
+                                                 +invalid member
+                                             }
 
-                                            enum TestEnum {
-                                                item syntax
-                                            }
+                                             enum TestEnum {
+                                                 item syntax
+                                             }
 
-                                            Class1 <<uses>> Class2
-                                            Class2 <<has>> TestEnum
-                                            @enduml
-                                            """;
+                                             Class1 <<uses>> Class2
+                                             Class2 <<has>> TestEnum
+                                             @enduml
+                                             """;
 
         // Act
         var ast = new SchemeAst(pumlWithComplexErrors);
@@ -708,12 +708,9 @@ public class AntlrErrorTests
             // Assert
             Assert.That(reconstructor.HasErrors);
             Assert.That(reconstructor.Errors, Is.Not.Empty);
-            
+
             // Vérifier que les messages d'erreur suivent le format demandé
-            foreach (var error in reconstructor.Errors)
-            {
-                Assert.That(error, Does.StartWith("PlantUML Syntax error:"));
-            }
+            foreach (var error in reconstructor.Errors) Assert.That(error, Does.StartWith("PlantUML Syntax error:"));
         });
     }
 
@@ -727,7 +724,7 @@ public class AntlrErrorTests
                                            class ValidClass {
                                                +String name
                                            }
-                                           
+
                                            class BrokenClass {
                                                +invalid syntax
                                            }

@@ -5,7 +5,7 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Application;
 
 /// <summary>
-/// Service for managing projects
+///     Service for managing projects
 /// </summary>
 public class ProjectService
 {
@@ -17,7 +17,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Gets a project by ID
+    ///     Gets a project by ID
     /// </summary>
     /// <param name="id">Project ID</param>
     /// <returns>Project if found, null otherwise</returns>
@@ -27,7 +27,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Updates an existing project
+    ///     Updates an existing project
     /// </summary>
     /// <param name="project">Project to update</param>
     public async Task UpdateProjectAsync(Project project)
@@ -36,7 +36,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Deletes a project and all its associated data
+    ///     Deletes a project and all its associated data
     /// </summary>
     /// <param name="id">Project ID to delete</param>
     public async Task DeleteProjectAsync(ObjectId id)
@@ -45,7 +45,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Lists all projects
+    ///     Lists all projects
     /// </summary>
     /// <returns>List of all projects</returns>
     public async Task<List<Project>> ListProjectsAsync()
@@ -54,7 +54,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Gets projects by name (partial match)
+    ///     Gets projects by name (partial match)
     /// </summary>
     /// <param name="name">Project name to search for</param>
     /// <returns>List of matching projects</returns>
@@ -67,7 +67,7 @@ public class ProjectService
     }
 
     /// <summary>
-    /// Gets project statistics
+    ///     Gets project statistics
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <returns>Project statistics</returns>
@@ -106,42 +106,42 @@ public class ProjectService
 }
 
 /// <summary>
-/// Statistics for a project
+///     Statistics for a project
 /// </summary>
 public class ProjectStatistics
 {
     /// <summary>
-    /// Project ID
+    ///     Project ID
     /// </summary>
     public ObjectId ProjectId { get; set; } = ObjectId.Empty;
-    
+
     /// <summary>
-    /// Project name
+    ///     Project name
     /// </summary>
     public string ProjectName { get; set; } = string.Empty;
-    
+
     /// <summary>
-    /// Number of schemas in the project
+    ///     Number of schemas in the project
     /// </summary>
     public int SchemaCount { get; set; }
-    
+
     /// <summary>
-    /// Number of generated files
+    ///     Number of generated files
     /// </summary>
     public int GeneratedFileCount { get; set; }
-    
+
     /// <summary>
-    /// Total size of generated files in bytes
+    ///     Total size of generated files in bytes
     /// </summary>
     public long TotalFileSize { get; set; }
-    
+
     /// <summary>
-    /// When the project was created
+    ///     When the project was created
     /// </summary>
     public DateTime CreatedAt { get; set; }
-    
+
     /// <summary>
-    /// When the project was last updated
+    ///     When the project was last updated
     /// </summary>
     public DateTime UpdatedAt { get; set; }
 }

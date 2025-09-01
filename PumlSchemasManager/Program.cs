@@ -6,7 +6,7 @@ using PumlSchemasManager.Infrastructure;
 namespace PumlSchemasManager;
 
 /// <summary>
-/// Main program demonstrating the usage of PumlSchemasManager
+///     Main program demonstrating the usage of PumlSchemasManager
 /// </summary>
 public class Program
 {
@@ -19,7 +19,7 @@ public class Program
             var parser = new PlantUmlParser();
             var discoveryService = new FileSystemDiscoveryService(parser);
             var rendererService = new PlantUmlRendererService();
-            
+
             var schemaManager = new SchemaManager(storageService, discoveryService, rendererService, parser);
             var projectService = new ProjectService(storageService);
 
@@ -91,10 +91,7 @@ public class Program
             // Example 6: List all projects
             Console.WriteLine("6. All projects:");
             var allProjects = await projectService.ListProjectsAsync();
-            foreach (var p in allProjects)
-            {
-                Console.WriteLine($"   - {p.Name} (ID: {p.Id})");
-            }
+            foreach (var p in allProjects) Console.WriteLine($"   - {p.Name} (ID: {p.Id})");
 
             Console.WriteLine("\n=== Demo completed successfully! ===");
         }

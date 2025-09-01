@@ -5,16 +5,13 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Infrastructure;
 
 /// <summary>
-/// PlantUML renderer service (simplified version)
+///     PlantUML renderer service (simplified version)
 /// </summary>
 public class PlantUmlRendererService : IRendererService
 {
     public async Task<byte[]> RenderAsync(Schema schema, SchemaOutputFormat format)
     {
-        if (schema == null)
-        {
-            return await RenderContentAsync("", format);
-        }
+        if (schema == null) return await RenderContentAsync("", format);
         return await RenderContentAsync(schema.Content, format);
     }
 

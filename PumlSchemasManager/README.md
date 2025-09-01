@@ -35,9 +35,9 @@ PumlSchemasManager/
 ## Installation
 
 1. **Prérequis** :
-   - .NET 9.0
-   - Java (pour PlantUML)
-   - GraphViz (optionnel, pour certains formats)
+    - .NET 9.0
+    - Java (pour PlantUML)
+    - GraphViz (optionnel, pour certains formats)
 
 2. **Dépendances** :
    ```bash

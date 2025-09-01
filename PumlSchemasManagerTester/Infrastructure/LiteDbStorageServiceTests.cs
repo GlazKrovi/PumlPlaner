@@ -8,9 +8,6 @@ namespace PumlSchemasManagerTester.Infrastructure;
 [TestFixture]
 public class LiteDbStorageServiceTests : IDisposable
 {
-    private LiteDbStorageService _storageService;
-    private string _testDbPath;
-
     [SetUp]
     public void Setup()
     {
@@ -22,19 +19,16 @@ public class LiteDbStorageServiceTests : IDisposable
     public void Cleanup()
     {
         _storageService?.Dispose();
-        if (File.Exists(_testDbPath))
-        {
-            File.Delete(_testDbPath);
-        }
+        if (File.Exists(_testDbPath)) File.Delete(_testDbPath);
     }
+
+    private LiteDbStorageService _storageService;
+    private string _testDbPath;
 
     public void Dispose()
     {
         _storageService?.Dispose();
-        if (File.Exists(_testDbPath))
-        {
-            File.Delete(_testDbPath);
-        }
+        if (File.Exists(_testDbPath)) File.Delete(_testDbPath);
     }
 
     [Test]
@@ -139,8 +133,8 @@ public class LiteDbStorageServiceTests : IDisposable
     public async Task SaveSchemaAsync_ShouldCreateNewSchema()
     {
         // Arrange
-        var schema = new Schema 
-        { 
+        var schema = new Schema
+        {
             SourcePath = "test.puml",
             Content = "@startuml\nclass Test\n@enduml"
         };
@@ -158,8 +152,8 @@ public class LiteDbStorageServiceTests : IDisposable
     public async Task LoadSchemaAsync_ShouldReturnSchema()
     {
         // Arrange
-        var schema = new Schema 
-        { 
+        var schema = new Schema
+        {
             SourcePath = "test.puml",
             Content = "@startuml\nclass Test\n@enduml"
         };
@@ -179,8 +173,8 @@ public class LiteDbStorageServiceTests : IDisposable
     public async Task UpdateSchemaAsync_ShouldUpdateSchema()
     {
         // Arrange
-        var schema = new Schema 
-        { 
+        var schema = new Schema
+        {
             SourcePath = "original.puml",
             Content = "original content"
         };

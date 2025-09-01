@@ -8,15 +8,15 @@ namespace PumlSchemasManagerTester.Application;
 [TestFixture]
 public class ProjectServiceTests
 {
-    private ProjectService _projectService;
-    private Mock<IStorageService> _mockStorageService;
-
     [SetUp]
     public void Setup()
     {
         _mockStorageService = new Mock<IStorageService>();
         _projectService = new ProjectService(_mockStorageService.Object);
     }
+
+    private ProjectService _projectService;
+    private Mock<IStorageService> _mockStorageService;
 
     [Test]
     public async Task GetProjectAsync_WithValidId_ShouldReturnProject()
@@ -103,8 +103,8 @@ public class ProjectServiceTests
         // Arrange
         var projects = new List<Project>
         {
-            new Project { Id = ObjectId.NewObjectId(), Name = "Project 1" },
-            new Project { Id = ObjectId.NewObjectId(), Name = "Project 2" }
+            new() { Id = ObjectId.NewObjectId(), Name = "Project 1" },
+            new() { Id = ObjectId.NewObjectId(), Name = "Project 2" }
         };
 
         _mockStorageService.Setup(s => s.ListProjectsAsync())
@@ -128,9 +128,9 @@ public class ProjectServiceTests
         // Arrange
         var projects = new List<Project>
         {
-            new Project { Id = ObjectId.NewObjectId(), Name = "Test Project 1" },
-            new Project { Id = ObjectId.NewObjectId(), Name = "Another Project" },
-            new Project { Id = ObjectId.NewObjectId(), Name = "Test Project 2" }
+            new() { Id = ObjectId.NewObjectId(), Name = "Test Project 1" },
+            new() { Id = ObjectId.NewObjectId(), Name = "Another Project" },
+            new() { Id = ObjectId.NewObjectId(), Name = "Test Project 2" }
         };
 
         _mockStorageService.Setup(s => s.ListProjectsAsync())
@@ -154,8 +154,8 @@ public class ProjectServiceTests
         // Arrange
         var projects = new List<Project>
         {
-            new Project { Id = ObjectId.NewObjectId(), Name = "Project 1" },
-            new Project { Id = ObjectId.NewObjectId(), Name = "Project 2" }
+            new() { Id = ObjectId.NewObjectId(), Name = "Project 1" },
+            new() { Id = ObjectId.NewObjectId(), Name = "Project 2" }
         };
 
         _mockStorageService.Setup(s => s.ListProjectsAsync())
@@ -227,7 +227,7 @@ public class ProjectServiceTests
             .ReturnsAsync((Project?)null);
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentException>(() => 
+        Assert.ThrowsAsync<ArgumentException>(() =>
             _projectService.GetProjectStatisticsAsync(projectId));
 
         _mockStorageService.Verify(s => s.LoadProjectAsync(projectId), Times.Once);

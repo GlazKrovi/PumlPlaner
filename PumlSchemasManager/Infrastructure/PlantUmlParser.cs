@@ -4,7 +4,7 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Infrastructure;
 
 /// <summary>
-/// PlantUML parser implementation using PumlPlaner logic
+///     PlantUML parser implementation using PumlPlaner logic
 /// </summary>
 public class PlantUmlParser : IParser
 {
@@ -16,31 +16,28 @@ public class PlantUmlParser : IParser
             {
                 // Check for null or empty source
                 if (string.IsNullOrEmpty(source))
-                {
                     return new ParseResult
                     {
                         IsSuccess = false,
                         ErrorMessage = "Content does not contain PlantUML markers",
                         Warnings = []
                     };
-                }
 
                 // Basic validation - check if it contains PlantUML markers
                 if (!source.Contains("@startuml") && !source.Contains("@start"))
-                {
                     return new ParseResult
                     {
                         IsSuccess = false,
                         ErrorMessage = "Content does not contain PlantUML markers",
                         Warnings = []
                     };
-                }
 
                 // Use the original content (simplified approach without PumlPlaner AST)
                 var processedContent = source;
-                
-                Console.WriteLine($"Creating schema for content: {processedContent.Substring(0, Math.Min(50, processedContent.Length))}...");
-                
+
+                Console.WriteLine(
+                    $"Creating schema for content: {processedContent.Substring(0, Math.Min(50, processedContent.Length))}...");
+
                 // Create schema from processed content
                 string hash;
                 try
@@ -52,7 +49,7 @@ public class PlantUmlParser : IParser
                     Console.WriteLine($"Error computing hash: {hashEx.Message}");
                     hash = "error";
                 }
-                
+
                 var schema = new Schema
                 {
                     Content = processedContent,
@@ -62,18 +59,18 @@ public class PlantUmlParser : IParser
                         Hash = hash
                     }
                 };
-                
+
                 Console.WriteLine($"Schema created successfully: {schema != null}");
-                
+
                 var result = new ParseResult
                 {
                     IsSuccess = true,
                     Schema = schema,
                     Warnings = []
                 };
-                
+
                 Console.WriteLine($"ParseResult created: IsSuccess={result.IsSuccess}, Schema={result.Schema != null}");
-                
+
                 return result;
             }
             catch (Exception ex)
@@ -98,25 +95,21 @@ public class PlantUmlParser : IParser
             {
                 // Check for null or empty content
                 if (string.IsNullOrEmpty(content))
-                {
                     return new ValidationResult
                     {
                         IsValid = false,
                         Errors = ["Content does not contain PlantUML markers"],
                         Warnings = []
                     };
-                }
 
                 // Basic validation - check if it contains PlantUML markers
                 if (!content.Contains("@startuml") && !content.Contains("@start"))
-                {
                     return new ValidationResult
                     {
                         IsValid = false,
                         Errors = ["Content does not contain PlantUML markers"],
                         Warnings = []
                     };
-                }
 
                 // Simplified validation without PumlPlaner AST
                 return new ValidationResult

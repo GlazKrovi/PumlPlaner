@@ -4,7 +4,7 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Infrastructure;
 
 /// <summary>
-/// File system discovery service for PlantUML files
+///     File system discovery service for PlantUML files
 /// </summary>
 public class FileSystemDiscoveryService : IFileDiscoveryService
 {
@@ -21,11 +21,8 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
         return await Task.Run(async () =>
         {
             var schemas = new List<Schema>();
-            
-            if (!Directory.Exists(folderPath))
-            {
-                return [];
-            }
+
+            if (!Directory.Exists(folderPath)) return [];
 
             // Search for PlantUML files recursively
             var files = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories)
@@ -33,21 +30,16 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
                 .ToList();
 
             foreach (var file in files)
-            {
                 try
                 {
                     var schema = await ProcessFileAsync(file);
-                    if (schema != null)
-                    {
-                        schemas.Add(schema);
-                    }
+                    if (schema != null) schemas.Add(schema);
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error processing file {file}: {ex.Message}");
                     Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 }
-            }
 
             return schemas;
         });
@@ -98,7 +90,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
     }
 
     /// <summary>
-    /// Processes a single file and creates a schema
+    ///     Processes a single file and creates a schema
     /// </summary>
     /// <param name="filePath">Path to the file</param>
     /// <returns>Schema if valid, null otherwise</returns>
@@ -111,16 +103,17 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
                 return null;
 
             var content = await File.ReadAllTextAsync(filePath);
-            
+
             // Parse the content using PumlPlaner logic
-            Console.WriteLine($"Parsing content from {filePath}: {content.Substring(0, Math.Min(50, content.Length))}...");
-            
+            Console.WriteLine(
+                $"Parsing content from {filePath}: {content.Substring(0, Math.Min(50, content.Length))}...");
+
             if (_parser == null)
             {
                 Console.WriteLine($"Parser is null for {filePath}");
                 return null;
             }
-            
+
             ParseResult parseResult;
             try
             {
@@ -132,9 +125,9 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
                 Console.WriteLine($"Stack trace: {parseEx.StackTrace}");
                 return null;
             }
-            
+
             Console.WriteLine($"Parse result: IsSuccess={parseResult.IsSuccess}, Schema={parseResult.Schema != null}");
-            
+
             if (!parseResult.IsSuccess)
             {
                 Console.WriteLine($"Failed to parse {filePath}: {parseResult.ErrorMessage}");
@@ -149,7 +142,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
 
             var schema = parseResult.Schema;
             schema.SourcePath = filePath;
-            
+
             // Update metadata with file information
             schema.Metadata.OriginalPath = filePath;
             schema.Metadata.FileSize = fileInfo.Length;

@@ -8,12 +8,6 @@ namespace PumlSchemasManagerTester.Application;
 [TestFixture]
 public class SchemaManagerTests
 {
-    private SchemaManager _schemaManager;
-    private Mock<IStorageService> _mockStorageService;
-    private Mock<IParser> _mockParser;
-    private Mock<IRendererService> _mockRendererService;
-    private Mock<IFileDiscoveryService> _mockDiscoveryService;
-
     [SetUp]
     public void Setup()
     {
@@ -21,7 +15,7 @@ public class SchemaManagerTests
         _mockParser = new Mock<IParser>();
         _mockRendererService = new Mock<IRendererService>();
         _mockDiscoveryService = new Mock<IFileDiscoveryService>();
-        
+
         _schemaManager = new SchemaManager(
             _mockStorageService.Object,
             _mockDiscoveryService.Object,
@@ -29,6 +23,12 @@ public class SchemaManagerTests
             _mockParser.Object
         );
     }
+
+    private SchemaManager _schemaManager;
+    private Mock<IStorageService> _mockStorageService;
+    private Mock<IParser> _mockParser;
+    private Mock<IRendererService> _mockRendererService;
+    private Mock<IFileDiscoveryService> _mockDiscoveryService;
 
     [Test]
     public async Task CreateProjectAsync_WithValidName_ShouldCreateProject()
@@ -62,7 +62,7 @@ public class SchemaManagerTests
         var projectName = "";
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentException>(() => 
+        Assert.ThrowsAsync<ArgumentException>(() =>
             _schemaManager.CreateProjectAsync(projectName));
     }
 
@@ -79,13 +79,17 @@ public class SchemaManagerTests
         };
         var schemas = new List<Schema>
         {
-            new Schema { Content = "@startuml\nclass Test\n@enduml" }
+            new() { Content = "@startuml\nclass Test\n@enduml" }
         };
 
         _mockStorageService.Setup(s => s.LoadProjectAsync(projectId))
             .ReturnsAsync(project);
         _mockStorageService.Setup(s => s.SaveSchemaAsync(It.IsAny<Schema>()))
-            .ReturnsAsync((Schema s) => { s.Id = ObjectId.NewObjectId(); return s; });
+            .ReturnsAsync((Schema s) =>
+            {
+                s.Id = ObjectId.NewObjectId();
+                return s;
+            });
         _mockStorageService.Setup(s => s.UpdateProjectAsync(It.IsAny<Project>()))
             .Returns(Task.CompletedTask);
 
@@ -145,7 +149,8 @@ public class SchemaManagerTests
 
         _mockStorageService.Verify(s => s.LoadProjectAsync(projectId), Times.Once);
         _mockRendererService.Verify(r => r.RenderAsync(schema, It.IsAny<SchemaOutputFormat>()), Times.Exactly(2));
-        _mockStorageService.Verify(s => s.SaveGeneratedFileAsync(It.IsAny<byte[]>(), It.IsAny<FileMetadata>()), Times.Exactly(2));
+        _mockStorageService.Verify(s => s.SaveGeneratedFileAsync(It.IsAny<byte[]>(), It.IsAny<FileMetadata>()),
+            Times.Exactly(2));
     }
 
     [Test]
@@ -183,7 +188,8 @@ public class SchemaManagerTests
 
         _mockStorageService.Verify(s => s.LoadProjectAsync(projectId), Times.Once);
         _mockRendererService.Verify(r => r.RenderAsync(schema, It.IsAny<SchemaOutputFormat>()), Times.Once);
-        _mockStorageService.Verify(s => s.SaveGeneratedFileAsync(It.IsAny<byte[]>(), It.IsAny<FileMetadata>()), Times.Never);
+        _mockStorageService.Verify(s => s.SaveGeneratedFileAsync(It.IsAny<byte[]>(), It.IsAny<FileMetadata>()),
+            Times.Never);
     }
 
     [Test]
@@ -200,7 +206,7 @@ public class SchemaManagerTests
         };
         var discoveredSchemas = new List<Schema>
         {
-            new Schema { Content = "@startuml\nclass Test\n@enduml" }
+            new() { Content = "@startuml\nclass Test\n@enduml" }
         };
 
         _mockStorageService.Setup(s => s.LoadProjectAsync(projectId))
@@ -208,7 +214,11 @@ public class SchemaManagerTests
         _mockDiscoveryService.Setup(d => d.DiscoverSchemasAsync(folderPath))
             .ReturnsAsync(discoveredSchemas);
         _mockStorageService.Setup(s => s.SaveSchemaAsync(It.IsAny<Schema>()))
-            .ReturnsAsync((Schema s) => { s.Id = ObjectId.NewObjectId(); return s; });
+            .ReturnsAsync((Schema s) =>
+            {
+                s.Id = ObjectId.NewObjectId();
+                return s;
+            });
         _mockStorageService.Setup(s => s.UpdateProjectAsync(It.IsAny<Project>()))
             .Returns(Task.CompletedTask);
 
@@ -275,7 +285,7 @@ public class SchemaManagerTests
         var filePath = "nonexistent.puml";
 
         // Act & Assert
-        Assert.ThrowsAsync<FileNotFoundException>(() => 
+        Assert.ThrowsAsync<FileNotFoundException>(() =>
             _schemaManager.ParseFileAsync(filePath));
     }
 
@@ -285,8 +295,8 @@ public class SchemaManagerTests
         // Arrange
         var schemas = new List<Schema>
         {
-            new Schema { Content = "@startuml\nclass A\n@enduml" },
-            new Schema { Content = "@startuml\nclass B\n@enduml" }
+            new() { Content = "@startuml\nclass A\n@enduml" },
+            new() { Content = "@startuml\nclass B\n@enduml" }
         };
         var mergedSchema = new Schema
         {

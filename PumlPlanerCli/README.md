@@ -41,6 +41,7 @@ dotnet tool install -g --add-source ./nupkg PumlPlanerCli
 ## 📋 Commandes Disponibles
 
 ### `parse <file>`
+
 Parse et analyse un fichier PlantUML.
 
 ```bash
@@ -49,6 +50,7 @@ pumlplaner parse diagram.puml --verbose
 ```
 
 ### `discover <folder>`
+
 Découvre les fichiers PlantUML dans un dossier.
 
 ```bash
@@ -57,6 +59,7 @@ pumlplaner discover ./src --recursive --pattern "*.puml"
 ```
 
 ### `create-project <name>`
+
 Crée un nouveau projet PumlPlaner.
 
 ```bash
@@ -65,6 +68,7 @@ pumlplaner create-project "MonApplication" --description "Description du projet"
 ```
 
 ### `add-schemas <projectId> <schemas...>`
+
 Ajoute des schémas existants à un projet.
 
 ```bash
@@ -72,6 +76,7 @@ pumlplaner add-schemas abc123 schema1.puml schema2.puml
 ```
 
 ### `discover-add <projectId> <folder>`
+
 Découvre et ajoute automatiquement des schémas à un projet.
 
 ```bash
@@ -80,6 +85,7 @@ pumlplaner discover-add abc123 ./src --recursive
 ```
 
 ### `merge <schemas...>`
+
 Fusionne plusieurs schémas PlantUML.
 
 ```bash
@@ -88,6 +94,7 @@ pumlplaner merge schema1.puml schema2.puml --output merged.puml --format puml
 ```
 
 ### `generate <projectId> <formats...>`
+
 Génère des fichiers de sortie depuis un projet.
 
 ```bash

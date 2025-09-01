@@ -121,7 +121,7 @@ public class ModelsTests
         metadata.OriginalPath.Should().BeEmpty();
         metadata.Hash.Should().BeEmpty();
         metadata.FileSize.Should().Be(0);
-        metadata.LastModified.Should().Be(default(DateTime));
+        metadata.LastModified.Should().Be(default);
     }
 
     [Test]

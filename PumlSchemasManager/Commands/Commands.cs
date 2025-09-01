@@ -6,7 +6,7 @@ using PumlSchemasManager.Domain;
 namespace PumlSchemasManager.Commands;
 
 /// <summary>
-/// Command for parsing a single PlantUML file
+///     Command for parsing a single PlantUML file
 /// </summary>
 public class ParseCommand
 {
@@ -18,20 +18,18 @@ public class ParseCommand
     }
 
     /// <summary>
-    /// Executes the parse command
+    ///     Executes the parse command
     /// </summary>
     /// <param name="sourceFile">Path to the source file</param>
     /// <returns>Parse result</returns>
     public async Task<ParseResult> ExecuteAsync(string sourceFile)
     {
         if (!File.Exists(sourceFile))
-        {
             return new ParseResult
             {
                 IsSuccess = false,
                 ErrorMessage = $"File not found: {sourceFile}"
             };
-        }
 
         try
         {
@@ -50,7 +48,7 @@ public class ParseCommand
 }
 
 /// <summary>
-/// Command for merging multiple schemas
+///     Command for merging multiple schemas
 /// </summary>
 public class MergeCommand
 {
@@ -62,7 +60,7 @@ public class MergeCommand
     }
 
     /// <summary>
-    /// Executes the merge command
+    ///     Executes the merge command
     /// </summary>
     /// <param name="schemas">Schemas to merge</param>
     /// <returns>Merged schema</returns>
@@ -73,7 +71,7 @@ public class MergeCommand
 }
 
 /// <summary>
-/// Command for discovering PlantUML files in a folder
+///     Command for discovering PlantUML files in a folder
 /// </summary>
 public class DiscoverCommand
 {
@@ -85,7 +83,7 @@ public class DiscoverCommand
     }
 
     /// <summary>
-    /// Executes the discover command
+    ///     Executes the discover command
     /// </summary>
     /// <param name="folderPath">Folder path to search</param>
     /// <returns>List of discovered schemas</returns>
@@ -96,7 +94,7 @@ public class DiscoverCommand
 }
 
 /// <summary>
-/// Command for generating output files
+///     Command for generating output files
 /// </summary>
 public class GenerateCommand
 {
@@ -108,7 +106,7 @@ public class GenerateCommand
     }
 
     /// <summary>
-    /// Executes the generate command
+    ///     Executes the generate command
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="formats">Output formats to generate</param>
@@ -120,7 +118,7 @@ public class GenerateCommand
 }
 
 /// <summary>
-/// Command for creating a new project
+///     Command for creating a new project
 /// </summary>
 public class CreateProjectCommand
 {
@@ -132,7 +130,7 @@ public class CreateProjectCommand
     }
 
     /// <summary>
-    /// Executes the create project command
+    ///     Executes the create project command
     /// </summary>
     /// <param name="name">Project name</param>
     /// <returns>Created project</returns>
@@ -143,7 +141,7 @@ public class CreateProjectCommand
 }
 
 /// <summary>
-/// Command for adding schemas to a project
+///     Command for adding schemas to a project
 /// </summary>
 public class AddSchemasCommand
 {
@@ -155,7 +153,7 @@ public class AddSchemasCommand
     }
 
     /// <summary>
-    /// Executes the add schemas command
+    ///     Executes the add schemas command
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="schemas">Schemas to add</param>
@@ -167,7 +165,7 @@ public class AddSchemasCommand
 }
 
 /// <summary>
-/// Command for discovering and adding schemas to a project
+///     Command for discovering and adding schemas to a project
 /// </summary>
 public class DiscoverAndAddCommand
 {
@@ -179,7 +177,7 @@ public class DiscoverAndAddCommand
     }
 
     /// <summary>
-    /// Executes the discover and add command
+    ///     Executes the discover and add command
     /// </summary>
     /// <param name="projectId">Project ID</param>
     /// <param name="folderPath">Folder path to search</param>

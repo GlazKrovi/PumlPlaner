@@ -7,15 +7,11 @@ namespace PumlSchemasManagerTester.Infrastructure;
 [TestFixture]
 public class FileSystemDiscoveryServiceTests : IDisposable
 {
-    private FileSystemDiscoveryService _discoveryService;
-    private Mock<IParser> _mockParser;
-    private string _testDirectory;
-
     [SetUp]
     public void Setup()
     {
         _mockParser = new Mock<IParser>();
-        
+
         // Setup the mock parser to return successful results for PlantUML content
         _mockParser.Setup(p => p.ParseAsync(It.IsAny<string>()))
             .Returns<string>(content =>
@@ -31,7 +27,7 @@ public class FileSystemDiscoveryServiceTests : IDisposable
                             Hash = "test-hash"
                         }
                     };
-                    
+
                     return Task.FromResult(new ParseResult
                     {
                         IsSuccess = true,
@@ -47,7 +43,7 @@ public class FileSystemDiscoveryServiceTests : IDisposable
                     Warnings = []
                 });
             });
-        
+
         _discoveryService = new FileSystemDiscoveryService(_mockParser.Object);
         _testDirectory = Path.Combine(Path.GetTempPath(), $"test_discovery_{Guid.NewGuid()}");
         Directory.CreateDirectory(_testDirectory);
@@ -56,18 +52,16 @@ public class FileSystemDiscoveryServiceTests : IDisposable
     [TearDown]
     public void Cleanup()
     {
-        if (Directory.Exists(_testDirectory))
-        {
-            Directory.Delete(_testDirectory, true);
-        }
+        if (Directory.Exists(_testDirectory)) Directory.Delete(_testDirectory, true);
     }
+
+    private FileSystemDiscoveryService _discoveryService;
+    private Mock<IParser> _mockParser;
+    private string _testDirectory;
 
     public void Dispose()
     {
-        if (Directory.Exists(_testDirectory))
-        {
-            Directory.Delete(_testDirectory, true);
-        }
+        if (Directory.Exists(_testDirectory)) Directory.Delete(_testDirectory, true);
     }
 
     [Test]
@@ -77,7 +71,7 @@ public class FileSystemDiscoveryServiceTests : IDisposable
         var plantUmlContent = "@startuml\nclass Test\n@enduml";
         var filePath1 = Path.Combine(_testDirectory, "test1.puml");
         var filePath2 = Path.Combine(_testDirectory, "test2.puml");
-        
+
         await File.WriteAllTextAsync(filePath1, plantUmlContent);
         await File.WriteAllTextAsync(filePath2, plantUmlContent);
 
@@ -97,11 +91,11 @@ public class FileSystemDiscoveryServiceTests : IDisposable
         // Arrange
         var plantUmlContent = "@startuml\nclass Test\n@enduml";
         var otherContent = "This is not PlantUML";
-        
+
         var pumlFile = Path.Combine(_testDirectory, "test.puml");
         var txtFile = Path.Combine(_testDirectory, "test.txt");
         var otherFile = Path.Combine(_testDirectory, "test.other");
-        
+
         await File.WriteAllTextAsync(pumlFile, plantUmlContent);
         await File.WriteAllTextAsync(txtFile, otherContent);
         await File.WriteAllTextAsync(otherFile, otherContent);
@@ -120,11 +114,11 @@ public class FileSystemDiscoveryServiceTests : IDisposable
         // Arrange
         var subDir = Path.Combine(_testDirectory, "subdir");
         Directory.CreateDirectory(subDir);
-        
+
         var plantUmlContent = "@startuml\nclass Test\n@enduml";
         var filePath1 = Path.Combine(_testDirectory, "test1.puml");
         var filePath2 = Path.Combine(subDir, "test2.puml");
-        
+
         await File.WriteAllTextAsync(filePath1, plantUmlContent);
         await File.WriteAllTextAsync(filePath2, plantUmlContent);
 
@@ -274,9 +268,9 @@ public class FileSystemDiscoveryServiceTests : IDisposable
         // Arrange
         var plantUmlContent = "@startuml\nclass Test\n@enduml";
         var files = new List<string>();
-        
+
         // Create multiple files
-        for (int i = 0; i < 10; i++)
+        for (var i = 0; i < 10; i++)
         {
             var filePath = Path.Combine(_testDirectory, $"test{i}.puml");
             await File.WriteAllTextAsync(filePath, plantUmlContent);
@@ -285,11 +279,8 @@ public class FileSystemDiscoveryServiceTests : IDisposable
 
         // Act
         var tasks = new List<Task<List<Schema>>>();
-        for (int i = 0; i < 5; i++)
-        {
-            tasks.Add(_discoveryService.DiscoverSchemasAsync(_testDirectory));
-        }
-        
+        for (var i = 0; i < 5; i++) tasks.Add(_discoveryService.DiscoverSchemasAsync(_testDirectory));
+
         var results = await Task.WhenAll(tasks);
 
         // Assert

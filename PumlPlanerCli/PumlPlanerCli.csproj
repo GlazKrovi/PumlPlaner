@@ -5,7 +5,7 @@
         <TargetFramework>net9.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        
+
         <!-- Global Tool Configuration -->
         <PackAsTool>true</PackAsTool>
         <ToolCommandName>pumlplaner</ToolCommandName>
@@ -20,13 +20,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Spectre.Console" Version="0.50.0" />
-      <PackageReference Include="Spectre.Console.Cli" Version="0.50.0" />
-      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Spectre.Console" Version="0.50.0"/>
+        <PackageReference Include="Spectre.Console.Cli" Version="0.50.0"/>
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\PumlSchemasManager\PumlSchemasManager.csproj" />
+        <ProjectReference Include="..\PumlSchemasManager\PumlSchemasManager.csproj"/>
     </ItemGroup>
 
 </Project>
