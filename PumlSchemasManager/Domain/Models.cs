@@ -24,7 +24,7 @@ public class Schema
     /// <summary>
     /// Generated output files from this schema
     /// </summary>
-    public List<GeneratedFile> GeneratedFiles { get; set; } = new();
+    public List<GeneratedFile> GeneratedFiles { get; set; } = [];
     
     /// <summary>
     /// Metadata about the schema
@@ -54,7 +54,7 @@ public class Project
     /// <summary>
     /// Schemas contained in this project
     /// </summary>
-    public List<ObjectId> SchemaIds { get; set; } = new();
+    public List<ObjectId> SchemaIds { get; set; } = [];
     
     /// <summary>
     /// When the project was created
@@ -174,7 +174,7 @@ public class ParseResult
     /// <summary>
     /// Warnings during parsing
     /// </summary>
-    public List<string> Warnings { get; set; } = new();
+    public List<string> Warnings { get; set; } = [];
 }
 
 /// <summary>
@@ -190,12 +190,12 @@ public class ValidationResult
     /// <summary>
     /// Validation errors
     /// </summary>
-    public List<string> Errors { get; set; } = new();
+    public List<string> Errors { get; set; } = [];
     
     /// <summary>
     /// Validation warnings
     /// </summary>
-    public List<string> Warnings { get; set; } = new();
+    public List<string> Warnings { get; set; } = [];
 }
 
 /// <summary>

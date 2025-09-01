@@ -19,16 +19,16 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
+using System.CodeDom.Compiler;
 using Antlr4.Runtime.Misc;
 using IParseTreeListener = Antlr4.Runtime.Tree.IParseTreeListener;
-using IToken = Antlr4.Runtime.IToken;
 
 /// <summary>
 /// This interface defines a complete listener for a parse tree produced by
 /// <see cref="PumlgParser"/>.
 /// </summary>
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.13.1")]
-[System.CLSCompliant(false)]
+[GeneratedCode("ANTLR", "4.13.1")]
+[CLSCompliant(false)]
 public interface IPumlgListener : IParseTreeListener {
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PumlgParser.uml"/>.

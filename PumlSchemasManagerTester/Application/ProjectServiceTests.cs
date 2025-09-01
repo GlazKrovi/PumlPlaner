@@ -1,9 +1,7 @@
-using NUnit.Framework;
-using PumlSchemasManager.Application;
-using PumlSchemasManager.Domain;
-using PumlSchemasManager.Core;
-using Moq;
 using LiteDB;
+using PumlSchemasManager.Application;
+using PumlSchemasManager.Core;
+using PumlSchemasManager.Domain;
 
 namespace PumlSchemasManagerTester.Application;
 
@@ -183,18 +181,18 @@ public class ProjectServiceTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId> { schemaId },
+            SchemaIds = [schemaId],
             CreatedAt = DateTime.UtcNow.AddDays(-1),
             UpdatedAt = DateTime.UtcNow
         };
         var schema = new Schema
         {
             Id = schemaId,
-            GeneratedFiles = new List<GeneratedFile>
-            {
+            GeneratedFiles =
+            [
                 new GeneratedFile { FileSize = 1024 },
                 new GeneratedFile { FileSize = 2048 }
-            }
+            ]
         };
 
         _mockStorageService.Setup(s => s.LoadProjectAsync(projectId))
@@ -244,7 +242,7 @@ public class ProjectServiceTests
         {
             Id = projectId,
             Name = "Empty Project",
-            SchemaIds = new List<ObjectId>(),
+            SchemaIds = [],
             CreatedAt = DateTime.UtcNow.AddDays(-1),
             UpdatedAt = DateTime.UtcNow
         };

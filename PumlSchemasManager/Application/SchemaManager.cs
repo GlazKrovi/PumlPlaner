@@ -1,6 +1,6 @@
+using LiteDB;
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
-using LiteDB;
 
 namespace PumlSchemasManager.Application;
 
@@ -39,7 +39,7 @@ public class SchemaManager
         var project = new Project
         {
             Name = name.Trim(),
-            SchemaIds = new List<ObjectId>()
+            SchemaIds = []
         };
 
         return await _storageService.SaveProjectAsync(project);

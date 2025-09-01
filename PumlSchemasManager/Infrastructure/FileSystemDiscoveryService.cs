@@ -1,7 +1,5 @@
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
-using System.Security.Cryptography;
-using System.Text;
 
 namespace PumlSchemasManager.Infrastructure;
 
@@ -11,7 +9,7 @@ namespace PumlSchemasManager.Infrastructure;
 public class FileSystemDiscoveryService : IFileDiscoveryService
 {
     private readonly IParser _parser;
-    private readonly string[] _plantUmlExtensions = { ".puml", ".plantuml", ".uml" };
+    private readonly string[] _plantUmlExtensions = [".puml", ".plantuml", ".uml"];
 
     public FileSystemDiscoveryService(IParser parser)
     {
@@ -26,7 +24,7 @@ public class FileSystemDiscoveryService : IFileDiscoveryService
             
             if (!Directory.Exists(folderPath))
             {
-                return new List<Schema>();
+                return [];
             }
 
             // Search for PlantUML files recursively

@@ -1,9 +1,7 @@
-using NUnit.Framework;
-using PumlSchemasManager.Infrastructure;
-using PumlSchemasManager.Domain;
-using PumlSchemasManager.Core;
-using LiteDB;
 using System.Text;
+using LiteDB;
+using PumlSchemasManager.Domain;
+using PumlSchemasManager.Infrastructure;
 
 namespace PumlSchemasManagerTester.Infrastructure;
 

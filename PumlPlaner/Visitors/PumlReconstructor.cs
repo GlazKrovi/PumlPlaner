@@ -2,7 +2,6 @@
 using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
 using PumlPlaner.Helpers;
-using PumlPlaner.AST;
 
 namespace PumlPlaner.Visitors;
 
@@ -22,7 +21,7 @@ public class PumlReconstructionException : Exception
 
 public class PumlReconstructor : PumlgBaseVisitor<string>
 {
-    private readonly List<string> _errors = new();
+    private readonly List<string> _errors = [];
     private readonly bool _throwOnError;
     private readonly bool _ignoreNonFatalErrors;
 

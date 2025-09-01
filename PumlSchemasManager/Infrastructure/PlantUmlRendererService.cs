@@ -1,3 +1,4 @@
+using System.Text;
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
 
@@ -24,7 +25,7 @@ public class PlantUmlRendererService : IRendererService
             // For now, return a simple placeholder
             // In a real implementation, this would use PlantUml.Net or call PlantUML directly
             var placeholderText = $"Generated {format} for PlantUML content";
-            return System.Text.Encoding.UTF8.GetBytes(placeholderText);
+            return Encoding.UTF8.GetBytes(placeholderText);
         });
     }
 

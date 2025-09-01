@@ -20,10 +20,11 @@
 #pragma warning disable 419
 
 
+using System.CodeDom.Compiler;
+using System.Diagnostics;
 using Antlr4.Runtime.Misc;
 using IErrorNode = Antlr4.Runtime.Tree.IErrorNode;
 using ITerminalNode = Antlr4.Runtime.Tree.ITerminalNode;
-using IToken = Antlr4.Runtime.IToken;
 using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 
 /// <summary>
@@ -31,9 +32,9 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 /// which can be extended to create a listener which only needs to handle a subset
 /// of the available methods.
 /// </summary>
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.13.1")]
-[System.Diagnostics.DebuggerNonUserCode]
-[System.CLSCompliant(false)]
+[GeneratedCode("ANTLR", "4.13.1")]
+[DebuggerNonUserCode]
+[CLSCompliant(false)]
 public partial class PumlgBaseListener : IPumlgListener {
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="PumlgParser.uml"/>.

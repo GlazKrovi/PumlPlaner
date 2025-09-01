@@ -1,6 +1,5 @@
-using NUnit.Framework;
-using PumlSchemasManager.Domain;
 using LiteDB;
+using PumlSchemasManager.Domain;
 
 namespace PumlSchemasManagerTester.Domain;
 

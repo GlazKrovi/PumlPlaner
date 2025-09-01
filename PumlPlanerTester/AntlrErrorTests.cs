@@ -1,6 +1,5 @@
 ﻿using PumlPlaner.AST;
 using PumlPlaner.Visitors;
-using Antlr4.Runtime.Tree;
 
 namespace PumlPlanerTester;
 
@@ -23,7 +22,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(invalidPuml);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -78,7 +77,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(validPuml);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -149,7 +148,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithMissingMembers);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -186,7 +185,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidConnections);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -221,7 +220,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidEnum);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -249,7 +248,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidInheritance);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -279,7 +278,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidTemplate);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -308,7 +307,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidStereotype);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -338,7 +337,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidMethodArgs);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -370,7 +369,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidAttribute);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -401,7 +400,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidVisibility);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -432,7 +431,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidTypes);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -464,7 +463,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithInvalidHide);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -562,10 +561,10 @@ public class AntlrErrorTests
     public void Should_Handle_Null_Context_Gracefully()
     {
         // Arrange
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
 
         // Act & Assert
-        Assert.That(() => reconstructor.Visit((IParseTree)null), Throws.Nothing);
+        Assert.That(() => reconstructor.Visit(null), Throws.Nothing);
     }
 
     [Test]
@@ -580,7 +579,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(emptyPuml);
-        var reconstructor = new PumlReconstructor(false);
+        var reconstructor = new PumlReconstructor();
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>
@@ -609,7 +608,7 @@ public class AntlrErrorTests
 
         // Act
         var ast = new SchemeAst(pumlWithMinorErrors);
-        var reconstructor = new PumlReconstructor(false, true); // ignoreNonFatalErrors = true
+        var reconstructor = new PumlReconstructor(); // ignoreNonFatalErrors = true
         var result = reconstructor.Visit(ast.Tree);
 
         Assert.Multiple(() =>

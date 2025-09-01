@@ -19,19 +19,16 @@
 // Ambiguous reference in cref attribute
 #pragma warning disable 419
 
-using System;
-using System.IO;
-using System.Text;
+using System.CodeDom.Compiler;
 using System.Diagnostics;
-using System.Collections.Generic;
 using Antlr4.Runtime;
 using Antlr4.Runtime.Atn;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using DFA = Antlr4.Runtime.Dfa.DFA;
 
-[System.CodeDom.Compiler.GeneratedCode("ANTLR", "4.13.1")]
-[System.CLSCompliant(false)]
+[GeneratedCode("ANTLR", "4.13.1")]
+[CLSCompliant(false)]
 public partial class PumlgParser : Parser {
 	protected static DFA[] decisionToDFA;
 	protected static PredictionContextCache sharedContextCache = new PredictionContextCache();
@@ -110,8 +107,8 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class UmlContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public Class_diagramContext class_diagram() {
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
+		[DebuggerNonUserCode] public Class_diagramContext class_diagram() {
 			return GetRuleContext<Class_diagramContext>(0);
 		}
 		public UmlContext(ParserRuleContext parent, int invokingState)
@@ -119,17 +116,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_uml; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterUml(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitUml(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitUml(this);
@@ -178,32 +175,32 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Class_diagramContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Class_declarationContext[] class_declaration() {
+		[DebuggerNonUserCode] public Class_declarationContext[] class_declaration() {
 			return GetRuleContexts<Class_declarationContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Class_declarationContext class_declaration(int i) {
+		[DebuggerNonUserCode] public Class_declarationContext class_declaration(int i) {
 			return GetRuleContext<Class_declarationContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Enum_declarationContext[] enum_declaration() {
+		[DebuggerNonUserCode] public Enum_declarationContext[] enum_declaration() {
 			return GetRuleContexts<Enum_declarationContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Enum_declarationContext enum_declaration(int i) {
+		[DebuggerNonUserCode] public Enum_declarationContext enum_declaration(int i) {
 			return GetRuleContext<Enum_declarationContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ConnectionContext[] connection() {
+		[DebuggerNonUserCode] public ConnectionContext[] connection() {
 			return GetRuleContexts<ConnectionContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ConnectionContext connection(int i) {
+		[DebuggerNonUserCode] public ConnectionContext connection(int i) {
 			return GetRuleContext<ConnectionContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Hide_declarationContext[] hide_declaration() {
+		[DebuggerNonUserCode] public Hide_declarationContext[] hide_declaration() {
 			return GetRuleContexts<Hide_declarationContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Hide_declarationContext hide_declaration(int i) {
+		[DebuggerNonUserCode] public Hide_declarationContext hide_declaration(int i) {
 			return GetRuleContext<Hide_declarationContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
+		[DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
 			return GetToken(PumlgParser.NEWLINE, i);
 		}
 		public Class_diagramContext(ParserRuleContext parent, int invokingState)
@@ -211,17 +208,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_class_diagram; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterClass_diagram(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitClass_diagram(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitClass_diagram(this);
@@ -299,29 +296,29 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Class_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Class_typeContext class_type() {
+		[DebuggerNonUserCode] public Class_typeContext class_type() {
 			return GetRuleContext<Class_typeContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Template_parameter_listContext template_parameter_list() {
+		[DebuggerNonUserCode] public Template_parameter_listContext template_parameter_list() {
 			return GetRuleContext<Template_parameter_listContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public StereotypeContext stereotype() {
+		[DebuggerNonUserCode] public StereotypeContext stereotype() {
 			return GetRuleContext<StereotypeContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Inheritance_declarationContext inheritance_declaration() {
+		[DebuggerNonUserCode] public Inheritance_declarationContext inheritance_declaration() {
 			return GetRuleContext<Inheritance_declarationContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Class_memberContext[] class_member() {
+		[DebuggerNonUserCode] public Class_memberContext[] class_member() {
 			return GetRuleContexts<Class_memberContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Class_memberContext class_member(int i) {
+		[DebuggerNonUserCode] public Class_memberContext class_member(int i) {
 			return GetRuleContext<Class_memberContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
+		[DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
 			return GetToken(PumlgParser.NEWLINE, i);
 		}
 		public Class_declarationContext(ParserRuleContext parent, int invokingState)
@@ -329,17 +326,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_class_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterClass_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitClass_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitClass_declaration(this);
@@ -453,10 +450,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Inheritance_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Extends_declarationContext extends_declaration() {
+		[DebuggerNonUserCode] public Extends_declarationContext extends_declaration() {
 			return GetRuleContext<Extends_declarationContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Implements_declarationContext implements_declaration() {
+		[DebuggerNonUserCode] public Implements_declarationContext implements_declaration() {
 			return GetRuleContext<Implements_declarationContext>(0);
 		}
 		public Inheritance_declarationContext(ParserRuleContext parent, int invokingState)
@@ -464,17 +461,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_inheritance_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterInheritance_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitInheritance_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitInheritance_declaration(this);
@@ -531,7 +528,7 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Extends_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
 		public Extends_declarationContext(ParserRuleContext parent, int invokingState)
@@ -539,17 +536,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_extends_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterExtends_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitExtends_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitExtends_declaration(this);
@@ -582,10 +579,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Implements_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext[] ident() {
+		[DebuggerNonUserCode] public IdentContext[] ident() {
 			return GetRuleContexts<IdentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident(int i) {
+		[DebuggerNonUserCode] public IdentContext ident(int i) {
 			return GetRuleContext<IdentContext>(i);
 		}
 		public Implements_declarationContext(ParserRuleContext parent, int invokingState)
@@ -593,17 +590,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_implements_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterImplements_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitImplements_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitImplements_declaration(this);
@@ -653,10 +650,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Class_memberContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public AttributeContext attribute() {
+		[DebuggerNonUserCode] public AttributeContext attribute() {
 			return GetRuleContext<AttributeContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public MethodContext method() {
+		[DebuggerNonUserCode] public MethodContext method() {
 			return GetRuleContext<MethodContext>(0);
 		}
 		public Class_memberContext(ParserRuleContext parent, int invokingState)
@@ -664,17 +661,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_class_member; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterClass_member(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitClass_member(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitClass_member(this);
@@ -718,7 +715,7 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Hide_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
 		public Hide_declarationContext(ParserRuleContext parent, int invokingState)
@@ -726,17 +723,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_hide_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterHide_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitHide_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitHide_declaration(this);
@@ -769,17 +766,17 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class AttributeContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Type_declarationContext type_declaration() {
+		[DebuggerNonUserCode] public Type_declarationContext type_declaration() {
 			return GetRuleContext<Type_declarationContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public VisibilityContext visibility() {
+		[DebuggerNonUserCode] public VisibilityContext visibility() {
 			return GetRuleContext<VisibilityContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ModifiersContext modifiers() {
+		[DebuggerNonUserCode] public ModifiersContext modifiers() {
 			return GetRuleContext<ModifiersContext>(0);
 		}
 		public AttributeContext(ParserRuleContext parent, int invokingState)
@@ -787,17 +784,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_attribute; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterAttribute(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitAttribute(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitAttribute(this);
@@ -879,20 +876,20 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class MethodContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Type_declarationContext type_declaration() {
+		[DebuggerNonUserCode] public Type_declarationContext type_declaration() {
 			return GetRuleContext<Type_declarationContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public VisibilityContext visibility() {
+		[DebuggerNonUserCode] public VisibilityContext visibility() {
 			return GetRuleContext<VisibilityContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ModifiersContext modifiers() {
+		[DebuggerNonUserCode] public ModifiersContext modifiers() {
 			return GetRuleContext<ModifiersContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Function_argument_listContext function_argument_list() {
+		[DebuggerNonUserCode] public Function_argument_listContext function_argument_list() {
 			return GetRuleContext<Function_argument_listContext>(0);
 		}
 		public MethodContext(ParserRuleContext parent, int invokingState)
@@ -900,17 +897,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_method; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterMethod(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitMethod(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitMethod(this);
@@ -1023,13 +1020,13 @@ public partial class PumlgParser : Parser {
 		public IdentContext instance;
 		public IdentContext attrib;
 		public MultiplicityContext mult;
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext[] ident() {
+		[DebuggerNonUserCode] public IdentContext[] ident() {
 			return GetRuleContexts<IdentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident(int i) {
+		[DebuggerNonUserCode] public IdentContext ident(int i) {
 			return GetRuleContext<IdentContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public MultiplicityContext multiplicity() {
+		[DebuggerNonUserCode] public MultiplicityContext multiplicity() {
 			return GetRuleContext<MultiplicityContext>(0);
 		}
 		public Connection_leftContext(ParserRuleContext parent, int invokingState)
@@ -1037,17 +1034,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_connection_left; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterConnection_left(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitConnection_left(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConnection_left(this);
@@ -1106,13 +1103,13 @@ public partial class PumlgParser : Parser {
 		public IdentContext attrib;
 		public MultiplicityContext mult;
 		public IdentContext instance;
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext[] ident() {
+		[DebuggerNonUserCode] public IdentContext[] ident() {
 			return GetRuleContexts<IdentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident(int i) {
+		[DebuggerNonUserCode] public IdentContext ident(int i) {
 			return GetRuleContext<IdentContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public MultiplicityContext multiplicity() {
+		[DebuggerNonUserCode] public MultiplicityContext multiplicity() {
 			return GetRuleContext<MultiplicityContext>(0);
 		}
 		public Connection_rightContext(ParserRuleContext parent, int invokingState)
@@ -1120,17 +1117,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_connection_right; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterConnection_right(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitConnection_right(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConnection_right(this);
@@ -1188,15 +1185,15 @@ public partial class PumlgParser : Parser {
 	public partial class ConnectionContext : ParserRuleContext {
 		public Connection_leftContext left;
 		public Connection_rightContext right;
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode CONNECTOR() { return GetToken(PumlgParser.CONNECTOR, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public Connection_leftContext connection_left() {
+		[DebuggerNonUserCode] public ITerminalNode CONNECTOR() { return GetToken(PumlgParser.CONNECTOR, 0); }
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
+		[DebuggerNonUserCode] public Connection_leftContext connection_left() {
 			return GetRuleContext<Connection_leftContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Connection_rightContext connection_right() {
+		[DebuggerNonUserCode] public Connection_rightContext connection_right() {
 			return GetRuleContext<Connection_rightContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public StereotypeContext stereotype() {
+		[DebuggerNonUserCode] public StereotypeContext stereotype() {
 			return GetRuleContext<StereotypeContext>(0);
 		}
 		public ConnectionContext(ParserRuleContext parent, int invokingState)
@@ -1204,17 +1201,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_connection; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterConnection(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitConnection(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitConnection(this);
@@ -1269,17 +1266,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_multiplicity; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterMultiplicity(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitMultiplicity(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitMultiplicity(this);
@@ -1331,17 +1328,17 @@ public partial class PumlgParser : Parser {
 	}
 	public partial class Visibility_publicContext : VisibilityContext {
 		public Visibility_publicContext(VisibilityContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterVisibility_public(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitVisibility_public(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitVisibility_public(this);
@@ -1350,17 +1347,17 @@ public partial class PumlgParser : Parser {
 	}
 	public partial class Visibility_privateContext : VisibilityContext {
 		public Visibility_privateContext(VisibilityContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterVisibility_private(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitVisibility_private(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitVisibility_private(this);
@@ -1369,17 +1366,17 @@ public partial class PumlgParser : Parser {
 	}
 	public partial class Visibility_protectedContext : VisibilityContext {
 		public Visibility_protectedContext(VisibilityContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterVisibility_protected(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitVisibility_protected(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitVisibility_protected(this);
@@ -1435,10 +1432,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Function_argumentContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Type_declarationContext type_declaration() {
+		[DebuggerNonUserCode] public Type_declarationContext type_declaration() {
 			return GetRuleContext<Type_declarationContext>(0);
 		}
 		public Function_argumentContext(ParserRuleContext parent, int invokingState)
@@ -1446,17 +1443,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_function_argument; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterFunction_argument(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitFunction_argument(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitFunction_argument(this);
@@ -1497,10 +1494,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Function_argument_listContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Function_argumentContext[] function_argument() {
+		[DebuggerNonUserCode] public Function_argumentContext[] function_argument() {
 			return GetRuleContexts<Function_argumentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Function_argumentContext function_argument(int i) {
+		[DebuggerNonUserCode] public Function_argumentContext function_argument(int i) {
 			return GetRuleContext<Function_argumentContext>(i);
 		}
 		public Function_argument_listContext(ParserRuleContext parent, int invokingState)
@@ -1508,17 +1505,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_function_argument_list; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterFunction_argument_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitFunction_argument_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitFunction_argument_list(this);
@@ -1566,7 +1563,7 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Template_argumentContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Type_declarationContext type_declaration() {
+		[DebuggerNonUserCode] public Type_declarationContext type_declaration() {
 			return GetRuleContext<Type_declarationContext>(0);
 		}
 		public Template_argumentContext(ParserRuleContext parent, int invokingState)
@@ -1574,17 +1571,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_template_argument; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterTemplate_argument(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitTemplate_argument(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitTemplate_argument(this);
@@ -1615,10 +1612,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Template_argument_listContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Template_argumentContext[] template_argument() {
+		[DebuggerNonUserCode] public Template_argumentContext[] template_argument() {
 			return GetRuleContexts<Template_argumentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Template_argumentContext template_argument(int i) {
+		[DebuggerNonUserCode] public Template_argumentContext template_argument(int i) {
 			return GetRuleContext<Template_argumentContext>(i);
 		}
 		public Template_argument_listContext(ParserRuleContext parent, int invokingState)
@@ -1626,17 +1623,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_template_argument_list; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterTemplate_argument_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitTemplate_argument_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitTemplate_argument_list(this);
@@ -1684,10 +1681,10 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Template_parameter_listContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Template_parameterContext[] template_parameter() {
+		[DebuggerNonUserCode] public Template_parameterContext[] template_parameter() {
 			return GetRuleContexts<Template_parameterContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Template_parameterContext template_parameter(int i) {
+		[DebuggerNonUserCode] public Template_parameterContext template_parameter(int i) {
 			return GetRuleContext<Template_parameterContext>(i);
 		}
 		public Template_parameter_listContext(ParserRuleContext parent, int invokingState)
@@ -1695,17 +1692,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_template_parameter_list; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterTemplate_parameter_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitTemplate_parameter_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitTemplate_parameter_list(this);
@@ -1757,7 +1754,7 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Template_parameterContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
 		public Template_parameterContext(ParserRuleContext parent, int invokingState)
@@ -1765,17 +1762,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_template_parameter; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterTemplate_parameter(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitTemplate_parameter(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitTemplate_parameter(this);
@@ -1806,23 +1803,23 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class IdentContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode IDENT() { return GetToken(PumlgParser.IDENT, 0); }
+		[DebuggerNonUserCode] public ITerminalNode IDENT() { return GetToken(PumlgParser.IDENT, 0); }
 		public IdentContext(ParserRuleContext parent, int invokingState)
 			: base(parent, invokingState)
 		{
 		}
 		public override int RuleIndex { get { return RULE_ident; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterIdent(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitIdent(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitIdent(this);
@@ -1865,17 +1862,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_modifiers; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterModifiers(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitModifiers(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitModifiers(this);
@@ -1959,10 +1956,10 @@ public partial class PumlgParser : Parser {
 		public IdentContext name;
 		public IdentContext _ident;
 		public IList<IdentContext> _args = new List<IdentContext>();
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext[] ident() {
+		[DebuggerNonUserCode] public IdentContext[] ident() {
 			return GetRuleContexts<IdentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident(int i) {
+		[DebuggerNonUserCode] public IdentContext ident(int i) {
 			return GetRuleContext<IdentContext>(i);
 		}
 		public StereotypeContext(ParserRuleContext parent, int invokingState)
@@ -1970,17 +1967,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_stereotype; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterStereotype(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitStereotype(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitStereotype(this);
@@ -2043,23 +2040,23 @@ public partial class PumlgParser : Parser {
 		}
 	}
 	public partial class List_typeContext : Type_declarationContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LBRACKET() { return GetToken(PumlgParser.LBRACKET, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RBRACKET() { return GetToken(PumlgParser.RBRACKET, 0); }
+		[DebuggerNonUserCode] public ITerminalNode LBRACKET() { return GetToken(PumlgParser.LBRACKET, 0); }
+		[DebuggerNonUserCode] public ITerminalNode RBRACKET() { return GetToken(PumlgParser.RBRACKET, 0); }
 		public List_typeContext(Type_declarationContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterList_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitList_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitList_type(this);
@@ -2067,21 +2064,21 @@ public partial class PumlgParser : Parser {
 		}
 	}
 	public partial class Generic_simple_typeContext : Type_declarationContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Template_parameterContext template_parameter() {
+		[DebuggerNonUserCode] public Template_parameterContext template_parameter() {
 			return GetRuleContext<Template_parameterContext>(0);
 		}
 		public Generic_simple_typeContext(Type_declarationContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterGeneric_simple_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitGeneric_simple_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitGeneric_simple_type(this);
@@ -2089,21 +2086,21 @@ public partial class PumlgParser : Parser {
 		}
 	}
 	public partial class Simple_typeContext : Type_declarationContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
 		public Simple_typeContext(Type_declarationContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterSimple_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitSimple_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitSimple_type(this);
@@ -2111,24 +2108,24 @@ public partial class PumlgParser : Parser {
 		}
 	}
 	public partial class Template_typeContext : Type_declarationContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public Template_argument_listContext template_argument_list() {
+		[DebuggerNonUserCode] public Template_argument_listContext template_argument_list() {
 			return GetRuleContext<Template_argument_listContext>(0);
 		}
 		public Template_typeContext(Type_declarationContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterTemplate_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitTemplate_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitTemplate_type(this);
@@ -2136,23 +2133,23 @@ public partial class PumlgParser : Parser {
 		}
 	}
 	public partial class Generic_list_typeContext : Type_declarationContext {
-		[System.Diagnostics.DebuggerNonUserCode] public Template_parameterContext template_parameter() {
+		[DebuggerNonUserCode] public Template_parameterContext template_parameter() {
 			return GetRuleContext<Template_parameterContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode LBRACKET() { return GetToken(PumlgParser.LBRACKET, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode RBRACKET() { return GetToken(PumlgParser.RBRACKET, 0); }
+		[DebuggerNonUserCode] public ITerminalNode LBRACKET() { return GetToken(PumlgParser.LBRACKET, 0); }
+		[DebuggerNonUserCode] public ITerminalNode RBRACKET() { return GetToken(PumlgParser.RBRACKET, 0); }
 		public Generic_list_typeContext(Type_declarationContext context) { CopyFrom(context); }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterGeneric_list_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitGeneric_list_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitGeneric_list_type(this);
@@ -2250,17 +2247,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_class_type; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterClass_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitClass_type(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitClass_type(this);
@@ -2334,14 +2331,14 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Item_listContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext[] ident() {
+		[DebuggerNonUserCode] public IdentContext[] ident() {
 			return GetRuleContexts<IdentContext>();
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident(int i) {
+		[DebuggerNonUserCode] public IdentContext ident(int i) {
 			return GetRuleContext<IdentContext>(i);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
+		[DebuggerNonUserCode] public ITerminalNode[] NEWLINE() { return GetTokens(PumlgParser.NEWLINE); }
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE(int i) {
 			return GetToken(PumlgParser.NEWLINE, i);
 		}
 		public Item_listContext(ParserRuleContext parent, int invokingState)
@@ -2349,17 +2346,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_item_list; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterItem_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitItem_list(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitItem_list(this);
@@ -2405,11 +2402,11 @@ public partial class PumlgParser : Parser {
 	}
 
 	public partial class Enum_declarationContext : ParserRuleContext {
-		[System.Diagnostics.DebuggerNonUserCode] public IdentContext ident() {
+		[DebuggerNonUserCode] public IdentContext ident() {
 			return GetRuleContext<IdentContext>(0);
 		}
-		[System.Diagnostics.DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
-		[System.Diagnostics.DebuggerNonUserCode] public Item_listContext item_list() {
+		[DebuggerNonUserCode] public ITerminalNode NEWLINE() { return GetToken(PumlgParser.NEWLINE, 0); }
+		[DebuggerNonUserCode] public Item_listContext item_list() {
 			return GetRuleContext<Item_listContext>(0);
 		}
 		public Enum_declarationContext(ParserRuleContext parent, int invokingState)
@@ -2417,17 +2414,17 @@ public partial class PumlgParser : Parser {
 		{
 		}
 		public override int RuleIndex { get { return RULE_enum_declaration; } }
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void EnterRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.EnterEnum_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override void ExitRule(IParseTreeListener listener) {
 			IPumlgListener typedListener = listener as IPumlgListener;
 			if (typedListener != null) typedListener.ExitEnum_declaration(this);
 		}
-		[System.Diagnostics.DebuggerNonUserCode]
+		[DebuggerNonUserCode]
 		public override TResult Accept<TResult>(IParseTreeVisitor<TResult> visitor) {
 			IPumlgVisitor<TResult> typedVisitor = visitor as IPumlgVisitor<TResult>;
 			if (typedVisitor != null) return typedVisitor.VisitEnum_declaration(this);

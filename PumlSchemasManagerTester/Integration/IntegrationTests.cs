@@ -1,8 +1,7 @@
-using NUnit.Framework;
-using PumlSchemasManager.Application;
-using PumlSchemasManager.Infrastructure;
-using PumlSchemasManager.Domain;
 using System.Text;
+using PumlSchemasManager.Application;
+using PumlSchemasManager.Domain;
+using PumlSchemasManager.Infrastructure;
 
 namespace PumlSchemasManagerTester.Integration;
 
@@ -164,15 +163,15 @@ public class IntegrationTests : IDisposable
         var schema = new Schema
         {
             Content = "@startuml\nclass Test\n@enduml",
-            GeneratedFiles = new List<GeneratedFile>
-            {
+            GeneratedFiles =
+            [
                 new GeneratedFile { FileSize = 1024 },
                 new GeneratedFile { FileSize = 2048 }
-            }
+            ]
         };
 
         // Act
-        await _schemaManager.AddSchemasToProjectAsync(project.Id, new List<Schema> { schema });
+        await _schemaManager.AddSchemasToProjectAsync(project.Id, [schema]);
         var stats = await _projectService.GetProjectStatisticsAsync(project.Id);
 
         // Assert

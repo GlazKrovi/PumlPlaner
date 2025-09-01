@@ -1,8 +1,6 @@
-using NUnit.Framework;
-using PumlSchemasManager.Infrastructure;
-using PumlSchemasManager.Domain;
 using PumlSchemasManager.Core;
-using Moq;
+using PumlSchemasManager.Domain;
+using PumlSchemasManager.Infrastructure;
 
 namespace PumlSchemasManagerTester.Infrastructure;
 
@@ -38,18 +36,16 @@ public class FileSystemDiscoveryServiceTests : IDisposable
                     {
                         IsSuccess = true,
                         Schema = schema,
-                        Warnings = new List<string>()
+                        Warnings = []
                     });
                 }
-                else
+
+                return Task.FromResult(new ParseResult
                 {
-                    return Task.FromResult(new ParseResult
-                    {
-                        IsSuccess = false,
-                        ErrorMessage = "Content does not contain PlantUML markers",
-                        Warnings = new List<string>()
-                    });
-                }
+                    IsSuccess = false,
+                    ErrorMessage = "Content does not contain PlantUML markers",
+                    Warnings = []
+                });
             });
         
         _discoveryService = new FileSystemDiscoveryService(_mockParser.Object);

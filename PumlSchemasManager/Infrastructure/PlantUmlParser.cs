@@ -1,5 +1,3 @@
-using PumlPlaner.AST;
-using PumlPlaner.Visitors;
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
 
@@ -23,7 +21,7 @@ public class PlantUmlParser : IParser
                     {
                         IsSuccess = false,
                         ErrorMessage = "Content does not contain PlantUML markers",
-                        Warnings = new List<string>()
+                        Warnings = []
                     };
                 }
 
@@ -34,7 +32,7 @@ public class PlantUmlParser : IParser
                     {
                         IsSuccess = false,
                         ErrorMessage = "Content does not contain PlantUML markers",
-                        Warnings = new List<string>()
+                        Warnings = []
                     };
                 }
 
@@ -71,7 +69,7 @@ public class PlantUmlParser : IParser
                 {
                     IsSuccess = true,
                     Schema = schema,
-                    Warnings = new List<string>()
+                    Warnings = []
                 };
                 
                 Console.WriteLine($"ParseResult created: IsSuccess={result.IsSuccess}, Schema={result.Schema != null}");
@@ -86,7 +84,7 @@ public class PlantUmlParser : IParser
                 {
                     IsSuccess = false,
                     ErrorMessage = $"Failed to parse PlantUML: {ex.Message}",
-                    Warnings = new List<string>()
+                    Warnings = []
                 };
             }
         });
@@ -104,8 +102,8 @@ public class PlantUmlParser : IParser
                     return new ValidationResult
                     {
                         IsValid = false,
-                        Errors = new List<string> { "Content does not contain PlantUML markers" },
-                        Warnings = new List<string>()
+                        Errors = ["Content does not contain PlantUML markers"],
+                        Warnings = []
                     };
                 }
 
@@ -115,8 +113,8 @@ public class PlantUmlParser : IParser
                     return new ValidationResult
                     {
                         IsValid = false,
-                        Errors = new List<string> { "Content does not contain PlantUML markers" },
-                        Warnings = new List<string>()
+                        Errors = ["Content does not contain PlantUML markers"],
+                        Warnings = []
                     };
                 }
 
@@ -124,8 +122,8 @@ public class PlantUmlParser : IParser
                 return new ValidationResult
                 {
                     IsValid = true,
-                    Errors = new List<string>(),
-                    Warnings = new List<string>()
+                    Errors = [],
+                    Warnings = []
                 };
             }
             catch (Exception ex)
@@ -133,8 +131,8 @@ public class PlantUmlParser : IParser
                 return new ValidationResult
                 {
                     IsValid = false,
-                    Errors = new List<string> { ex.Message },
-                    Warnings = new List<string>()
+                    Errors = [ex.Message],
+                    Warnings = []
                 };
             }
         });

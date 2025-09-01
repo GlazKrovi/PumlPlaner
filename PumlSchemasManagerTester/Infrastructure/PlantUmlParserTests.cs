@@ -1,6 +1,4 @@
-using NUnit.Framework;
 using PumlSchemasManager.Infrastructure;
-using PumlSchemasManager.Domain;
 
 namespace PumlSchemasManagerTester.Infrastructure;
 

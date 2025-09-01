@@ -1,6 +1,5 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace PumlPlanerCli;
 
@@ -22,41 +21,38 @@ public class Program
             
             config.AddCommand<ParseCommand>("parse")
                 .WithDescription("Parse and analyze a single PlantUML file")
-                .WithExample(new[] { "parse", "path/to/file.puml" });
+                .WithExample("parse", "path/to/file.puml");
                 
             config.AddCommand<DiscoverCommand>("discover")
                 .WithDescription("Find all PlantUML files in a specified directory")
-                .WithExample(new[] { "discover", "path/to/folder" });
+                .WithExample("discover", "path/to/folder");
                 
             config.AddCommand<CreateProjectCommand>("create-project")
                 .WithDescription("Create a new PumlPlaner project")
-                .WithExample(new[] { "create-project", "MyProject" });
+                .WithExample("create-project", "MyProject");
                 
             config.AddCommand<AddSchemasCommand>("add-schemas")
                 .WithDescription("Add existing schemas to a project")
-                .WithExample(new[] { "add-schemas", "projectId", "schema1.puml", "schema2.puml" });
+                .WithExample("add-schemas", "projectId", "schema1.puml", "schema2.puml");
                 
             config.AddCommand<DiscoverAndAddCommand>("discover-add")
                 .WithDescription("Discover PlantUML files and add them to a project")
-                .WithExample(new[] { "discover-add", "projectId", "path/to/folder" });
+                .WithExample("discover-add", "projectId", "path/to/folder");
                 
             config.AddCommand<MergeCommand>("merge")
                 .WithDescription("Merge multiple PlantUML schemas into one")
-                .WithExample(new[] { "merge", "schema1.puml", "schema2.puml" });
+                .WithExample("merge", "schema1.puml", "schema2.puml");
                 
             config.AddCommand<GenerateCommand>("generate")
                 .WithDescription("Generate output files from a project")
-                .WithExample(new[] { "generate", "projectId", "png", "svg" });
+                .WithExample("generate", "projectId", "png", "svg");
         });
         
         // Show welcome message if no arguments
-        if (args.Length == 0)
-        {
-            ShowWelcomeMessage();
-            return await app.RunAsync(new[] { "--help" });
-        }
-        
-        return await app.RunAsync(args);
+        if (args.Length != 0) return await app.RunAsync(args);
+        ShowWelcomeMessage();
+        return await app.RunAsync(["--help"]);
+
     }
     
     /// <summary>
@@ -145,22 +141,20 @@ public class ParseCommand : AsyncCommand<ParseCommandSettings>
             await Task.Delay(1000);
             
             AnsiConsole.MarkupLine("[bold green]✓[/] File parsed successfully!");
-            
-            if (settings.Verbose)
+
+            if (!settings.Verbose) return 0;
+            var fileInfo = new FileInfo(settings.FilePath);
+            var panel = new Panel(
+                $"[bold blue]File:[/] {settings.FilePath}\n" +
+                $"[bold blue]Size:[/] {fileInfo.Length} bytes\n" +
+                $"[bold blue]Last Modified:[/] {fileInfo.LastWriteTime}"
+            )
             {
-                var fileInfo = new FileInfo(settings.FilePath);
-                var panel = new Panel(
-                    $"[bold blue]File:[/] {settings.FilePath}\n" +
-                    $"[bold blue]Size:[/] {fileInfo.Length} bytes\n" +
-                    $"[bold blue]Last Modified:[/] {fileInfo.LastWriteTime}"
-                )
-                {
-                    Border = BoxBorder.Rounded,
-                    Padding = new Padding(1, 1)
-                };
-                AnsiConsole.Write(panel);
-            }
-            
+                Border = BoxBorder.Rounded,
+                Padding = new Padding(1, 1)
+            };
+            AnsiConsole.Write(panel);
+
             return 0;
         }
         catch (Exception ex)
@@ -269,7 +263,7 @@ public class CreateProjectCommand : AsyncCommand<CreateProjectCommandSettings>
             
             var projectId = Guid.NewGuid().ToString("N")[..8];
             
-            AnsiConsole.MarkupLine($"[bold green]✓[/] Project created successfully!");
+            AnsiConsole.MarkupLine("[bold green]✓[/] Project created successfully!");
             
             var panel = new Panel(
                 $"[bold blue]Project ID:[/] {projectId}\n" +
@@ -303,7 +297,7 @@ public class AddSchemasCommandSettings : CommandSettings
     public string ProjectId { get; set; } = string.Empty;
     
     [CommandArgument(1, "<schemas...>")]
-    public string[] SchemaFiles { get; set; } = Array.Empty<string>();
+    public string[] SchemaFiles { get; set; } = [];
 }
 
 /// <summary>
@@ -413,7 +407,7 @@ public class DiscoverAndAddCommand : AsyncCommand<DiscoverAndAddCommandSettings>
 public class MergeCommandSettings : CommandSettings
 {
     [CommandArgument(0, "<schemas...>")]
-    public string[] SchemaFiles { get; set; } = Array.Empty<string>();
+    public string[] SchemaFiles { get; set; } = [];
     
     [CommandOption("--output|-o")]
     public string OutputFile { get; set; } = "merged.puml";
@@ -437,7 +431,7 @@ public class MergeCommand : AsyncCommand<MergeCommandSettings>
             var missingFiles = settings.SchemaFiles.Where(f => !File.Exists(f)).ToArray();
             if (missingFiles.Any())
             {
-                AnsiConsole.MarkupLine($"[bold red]✗[/] Some files not found:");
+                AnsiConsole.MarkupLine("[bold red]✗[/] Some files not found:");
                 foreach (var file in missingFiles)
                 {
                     AnsiConsole.MarkupLine($"  - {file}");
@@ -448,7 +442,7 @@ public class MergeCommand : AsyncCommand<MergeCommandSettings>
             // Simulate merging logic
             await Task.Delay(1200);
             
-            AnsiConsole.MarkupLine($"[bold green]✓[/] Schemas merged successfully!");
+            AnsiConsole.MarkupLine("[bold green]✓[/] Schemas merged successfully!");
             
             var panel = new Panel(
                 $"[bold blue]Output File:[/] {settings.OutputFile}\n" +
@@ -481,7 +475,7 @@ public class GenerateCommandSettings : CommandSettings
     public string ProjectId { get; set; } = string.Empty;
     
     [CommandArgument(1, "<formats...>")]
-    public string[] Formats { get; set; } = Array.Empty<string>();
+    public string[] Formats { get; set; } = [];
     
     [CommandOption("--output|-o")]
     public string OutputPath { get; set; } = "./output";
@@ -504,7 +498,7 @@ public class GenerateCommand : AsyncCommand<GenerateCommandSettings>
             // Simulate generation logic
             await Task.Delay(1500);
             
-            AnsiConsole.MarkupLine($"[bold green]✓[/] Output files generated successfully!");
+            AnsiConsole.MarkupLine("[bold green]✓[/] Output files generated successfully!");
             
             var table = new Table()
                 .AddColumn("[bold blue]Format[/]")

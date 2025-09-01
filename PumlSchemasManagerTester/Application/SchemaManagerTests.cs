@@ -1,9 +1,7 @@
-using NUnit.Framework;
-using PumlSchemasManager.Application;
-using PumlSchemasManager.Domain;
-using PumlSchemasManager.Core;
-using Moq;
 using LiteDB;
+using PumlSchemasManager.Application;
+using PumlSchemasManager.Core;
+using PumlSchemasManager.Domain;
 
 namespace PumlSchemasManagerTester.Application;
 
@@ -77,7 +75,7 @@ public class SchemaManagerTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId>()
+            SchemaIds = []
         };
         var schemas = new List<Schema>
         {
@@ -113,7 +111,7 @@ public class SchemaManagerTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId> { schemaId }
+            SchemaIds = [schemaId]
         };
         var schema = new Schema
         {
@@ -160,7 +158,7 @@ public class SchemaManagerTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId> { schemaId }
+            SchemaIds = [schemaId]
         };
         var schema = new Schema
         {
@@ -198,7 +196,7 @@ public class SchemaManagerTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId>()
+            SchemaIds = []
         };
         var discoveredSchemas = new List<Schema>
         {
@@ -326,7 +324,7 @@ public class SchemaManagerTests
         {
             Id = projectId,
             Name = "Test Project",
-            SchemaIds = new List<ObjectId> { schemaId }
+            SchemaIds = [schemaId]
         };
         var schema = new Schema
         {

@@ -1,7 +1,7 @@
+using LiteDB;
 using PumlSchemasManager.Application;
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
-using LiteDB;
 
 namespace PumlSchemasManager.Commands;
 
