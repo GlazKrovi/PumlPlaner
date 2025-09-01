@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using LiteDB;
+using PumlSchemasManager.Core;
 
 namespace PumlSchemasManager.Domain;
 
@@ -172,6 +173,31 @@ public class ParseResult
     ///     Warnings during parsing
     /// </summary>
     public List<string> Warnings { get; set; } = [];
+    
+    /// <summary>
+    ///     The parsed content (for compatibility with parser architecture)
+    /// </summary>
+    public string? Content { get; set; }
+    
+    /// <summary>
+    ///     Success or error message (for compatibility with parser architecture)
+    /// </summary>
+    public string? Message { get; set; }
+    
+    /// <summary>
+    ///     The parsing mode used
+    /// </summary>
+    public ParsingMode ParsingMode { get; set; }
+    
+    /// <summary>
+    ///     Generated image bytes (if applicable)
+    /// </summary>
+    public byte[]? ImageBytes { get; set; }
+    
+    /// <summary>
+    ///     Output format of the generated image
+    /// </summary>
+    public string? OutputFormat { get; set; }
 }
 
 /// <summary>
@@ -193,6 +219,11 @@ public class ValidationResult
     ///     Validation warnings
     /// </summary>
     public List<string> Warnings { get; set; } = [];
+    
+    /// <summary>
+    ///     Validation message (for compatibility with parser architecture)
+    /// </summary>
+    public string? Message { get; set; }
 }
 
 /// <summary>

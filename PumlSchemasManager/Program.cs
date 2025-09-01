@@ -24,7 +24,8 @@ public class Program
             var projectService = new ProjectService(storageService);
 
             // Initialize commands
-            var parseCommand = new ParseCommand(parser);
+            var parserFactory = new ParserFactory();
+            var parseCommand = new ParseCommand(parserFactory);
             var mergeCommand = new MergeCommand(schemaManager);
             var discoverCommand = new DiscoverCommand(discoveryService);
             var generateCommand = new GenerateCommand(schemaManager);

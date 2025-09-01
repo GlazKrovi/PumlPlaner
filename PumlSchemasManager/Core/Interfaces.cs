@@ -21,6 +21,16 @@ public interface IParser
     /// <param name="content">Content to validate</param>
     /// <returns>Validation result</returns>
     Task<ValidationResult> ValidateAsync(string content);
+    
+    /// <summary>
+    ///     Gets the current parsing mode
+    /// </summary>
+    ParsingMode Mode { get; }
+    
+    /// <summary>
+    ///     Gets parser capabilities
+    /// </summary>
+    ParserCapabilities Capabilities { get; }
 }
 
 /// <summary>
@@ -179,4 +189,56 @@ public interface IRendererService
     /// <param name="format">Output format</param>
     /// <returns>File extension (without dot)</returns>
     string GetFileExtension(SchemaOutputFormat format);
+}
+
+/// <summary>
+/// Parsing modes available
+/// </summary>
+public enum ParsingMode
+{
+    /// <summary>
+    /// Parse using PlantUML online service
+    /// </summary>
+    Remote,
+    
+    /// <summary>
+    /// Parse using local PlantUML installation
+    /// </summary>
+    Local,
+    
+    /// <summary>
+    /// Parse using embedded PlantUML
+    /// </summary>
+    Embedded
+}
+
+/// <summary>
+/// Parser capabilities
+/// </summary>
+public class ParserCapabilities
+{
+    /// <summary>
+    /// Whether the parser can generate images
+    /// </summary>
+    public bool CanGenerateImages { get; set; }
+    
+    /// <summary>
+    /// Whether the parser can validate syntax
+    /// </summary>
+    public bool CanValidateSyntax { get; set; }
+    
+    /// <summary>
+    /// Whether the parser requires internet connection
+    /// </summary>
+    public bool RequiresInternet { get; set; }
+    
+    /// <summary>
+    /// Supported output formats
+    /// </summary>
+    public List<string> SupportedFormats { get; set; } = new();
+    
+    /// <summary>
+    /// Whether the parser is available
+    /// </summary>
+    public bool IsAvailable { get; set; }
 }

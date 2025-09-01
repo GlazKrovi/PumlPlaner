@@ -14,21 +14,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a772007-c64a-4ed1-9ffe-105ada61c06b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/AddSchemasCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/AddSchemasCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/CreateProjectCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/CreateProjectCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverAndAddCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverAndAddCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/DiscoverCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/GenerateCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/GenerateCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/MergeCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/MergeCommandSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/ParseCommand.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/PumlPlanerCli/ParseCommandSettings.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.PumlPlaner/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlPlanerCli/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Commands/Commands.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Commands/Commands.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Core/Interfaces.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Core/Interfaces.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Domain/Models.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Domain/Models.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Infrastructure/PlantUmlParser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Infrastructure/PlantUmlParser.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PumlSchemasManager/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/PumlSchemasManager/Program.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,9 +68,11 @@
     "99b563f9-5647-4b27-bf17-57d2e635cebd.executor": "Debug",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Publish to folder.Publish PumlPlaner to folder.executor": "Run",
+    "Publish to folder.Publish PumlPlanerCli to folder.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "master",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -90,14 +84,6 @@
   }
 }]]></component>
   <component name="RunManager" selected=".NET Project.PumlPlanerCli">
-    <configuration name="Publish PumlPlaner to folder" type="DotNetFolderPublish" factoryName="Publish to folder">
-      <riderPublish configuration="Release" platform="Any CPU" produce_single_file="true" ready_to_run="true" target_folder="$PROJECT_DIR$/PumlPlanerTester/bin/Release/net9.0/win-x86/publish" target_framework="net9.0" uuid_high="7983440645151672802" uuid_low="-8544527743854849856">
-        <runtimes>
-          <item value="win-x86" />
-        </runtimes>
-      </riderPublish>
-      <method v="2" />
-    </configuration>
     <configuration name="PumlPlanerCli" type="DotNetProject" factoryName=".NET Project">
       <option name="EXE_PATH" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
@@ -147,15 +133,7 @@
       <workItem from="1756045164801" duration="107000" />
       <workItem from="1756045341933" duration="756000" />
       <workItem from="1756239886403" duration="935000" />
-      <workItem from="1756738489405" duration="4459000" />
-    </task>
-    <task id="LOCAL-00001" summary="init project">
-      <option name="closed" value="true" />
-      <created>1754767888025</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1754767888025</updated>
+      <workItem from="1756738489405" duration="6784000" />
     </task>
     <task id="LOCAL-00002" summary="regenerate vocabulary with a visitor and use it to rebuild the initial schema">
       <option name="closed" value="true" />
@@ -509,7 +487,47 @@
       <option name="project" value="LOCAL" />
       <updated>1756743085530</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="refactor spectre console's configuration to multiple files">
+      <option name="closed" value="true" />
+      <created>1756743242615</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743242615</updated>
+    </task>
+    <task id="LOCAL-00047" summary="remove useless script">
+      <option name="closed" value="true" />
+      <created>1756743258025</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743258025</updated>
+    </task>
+    <task id="LOCAL-00048" summary="make main class static">
+      <option name="closed" value="true" />
+      <created>1756743340319</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743340319</updated>
+    </task>
+    <task id="LOCAL-00049" summary="ignore nugget package builds">
+      <option name="closed" value="true" />
+      <created>1756743400613</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743400613</updated>
+    </task>
+    <task id="LOCAL-00050" summary="sort files">
+      <option name="closed" value="true" />
+      <created>1756743436339</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1756743436339</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,11 +548,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix namespaces" />
-    <MESSAGE value="cleanup code, according to rider ide" />
-    <MESSAGE value="manage complex schemas" />
-    <MESSAGE value="handle enum correctly" />
-    <MESSAGE value="rename tests project to PumlPlanerTester" />
     <MESSAGE value="tmp" />
     <MESSAGE value="fix test" />
     <MESSAGE value="format result" />
@@ -555,7 +568,12 @@
     <MESSAGE value="the CLI is fully functional" />
     <MESSAGE value="clean up code via rider" />
     <MESSAGE value="reformat code" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat code" />
+    <MESSAGE value="refactor spectre console's configuration to multiple files" />
+    <MESSAGE value="remove useless script" />
+    <MESSAGE value="make main class static" />
+    <MESSAGE value="ignore nugget package builds" />
+    <MESSAGE value="sort files" />
+    <option name="LAST_COMMIT_MESSAGE" value="sort files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -8,6 +8,17 @@ namespace PumlSchemasManager.Infrastructure;
 /// </summary>
 public class PlantUmlParser : IParser
 {
+    public ParsingMode Mode => ParsingMode.Embedded;
+    
+    public ParserCapabilities Capabilities => new()
+    {
+        CanGenerateImages = false,
+        CanValidateSyntax = true,
+        RequiresInternet = false,
+        SupportedFormats = new List<string> { "puml" },
+        IsAvailable = true
+    };
+    
     public async Task<ParseResult> ParseAsync(string source)
     {
         return await Task.Run(() =>

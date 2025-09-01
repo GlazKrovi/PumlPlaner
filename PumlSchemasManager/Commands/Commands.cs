@@ -2,6 +2,7 @@ using LiteDB;
 using PumlSchemasManager.Application;
 using PumlSchemasManager.Core;
 using PumlSchemasManager.Domain;
+using PumlSchemasManager.Infrastructure;
 
 namespace PumlSchemasManager.Commands;
 
@@ -10,19 +11,20 @@ namespace PumlSchemasManager.Commands;
 /// </summary>
 public class ParseCommand
 {
-    private readonly IParser _parser;
+    private readonly ParserFactory _parserFactory;
 
-    public ParseCommand(IParser parser)
+    public ParseCommand(ParserFactory parserFactory)
     {
-        _parser = parser;
+        _parserFactory = parserFactory;
     }
 
     /// <summary>
     ///     Executes the parse command
     /// </summary>
     /// <param name="sourceFile">Path to the source file</param>
+    /// <param name="mode">Parsing mode to use (optional)</param>
     /// <returns>Parse result</returns>
-    public async Task<ParseResult> ExecuteAsync(string sourceFile)
+    public async Task<ParseResult> ExecuteAsync(string sourceFile, ParsingMode? mode = null)
     {
         if (!File.Exists(sourceFile))
             return new ParseResult
@@ -34,7 +36,8 @@ public class ParseCommand
         try
         {
             var content = await File.ReadAllTextAsync(sourceFile);
-            return await _parser.ParseAsync(content);
+            var parser = mode.HasValue ? _parserFactory.GetParser(mode.Value) : _parserFactory.GetDefaultParser();
+            return await parser.ParseAsync(content);
         }
         catch (Exception ex)
         {

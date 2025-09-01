@@ -1,5 +1,6 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
+using PumlPlanerCli.Commands;
 
 namespace PumlPlanerCli;
 
@@ -22,6 +23,10 @@ public static class Program
             config.AddCommand<ParseCommand>("parse")
                 .WithDescription("Parse and analyze a single PlantUML file")
                 .WithExample("parse", "path/to/file.puml");
+                
+            config.AddCommand<ConfigCommand>("config")
+                .WithDescription("Configure parser settings and test parsers")
+                .WithExample("config", "--show");
 
             config.AddCommand<DiscoverCommand>("discover")
                 .WithDescription("Find all PlantUML files in a specified directory")
