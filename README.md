@@ -104,5 +104,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Built with [ANTLR4](https://www.antlr.org/) for powerful parsing capabilities
 - Inspired by the PlantUML community 🌱
-- Thanks to all futur contributors who make this project better! 💚
+- Thanks to all future contributors who will make this project better! 💚
 
