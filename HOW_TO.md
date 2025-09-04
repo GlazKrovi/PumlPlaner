@@ -1,3 +1,3 @@
-# Publish to nugget
+# Publish to nuget
 
-dotnet pack -c Release
+Into PumlPlanerCli/ run `dotnet pack`
