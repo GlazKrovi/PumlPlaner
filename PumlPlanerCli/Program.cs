@@ -1,6 +1,7 @@
 ﻿using Spectre.Console;
 using Spectre.Console.Cli;
 using PumlPlanerCli.Commands;
+using System.Globalization;
 
 namespace PumlPlanerCli;
 
@@ -11,6 +12,10 @@ public static class Program
 {
     public static async Task<int> Main(string[] args)
     {
+        // Force English culture for Spectre.Console
+        CultureInfo.CurrentCulture = new CultureInfo("en-US");
+        CultureInfo.CurrentUICulture = new CultureInfo("en-US");
+        
         // Create command app
         var app = new CommandApp();
 
